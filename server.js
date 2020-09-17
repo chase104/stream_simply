@@ -1,7 +1,11 @@
 const express = require('express');
 const request = require('request');
 const app = express();
-
+const favicon = require('express-favicon');
+const path = require('path');
+app.use(favicon(__dirname + '/client/build/favicon.ico'));
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
 
 app.get('/getFeaturedMovie', (req, res) => {
