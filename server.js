@@ -1,19 +1,13 @@
 const express = require('express');
 const request = require('request');
-const app = express();
 const favicon = require('express-favicon');
 const path = require('path');
+const port = process.env.PORT || 5000;
+const app = express();
+
 app.use(favicon(__dirname + '/client/build/favicon.ico'));
 
-if (process.env.NODE_ENV === 'production') {
-// Exprees will serve up production assets
-app.use(express.static('client/build'));
-
-// Express serve up index.html file if it doesn't recognize route
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-});
-}
+app.use(express.static(path.join(__dirname, 'client'))
 
 app.get('/getFeaturedMovie', (req, res) => {
 
@@ -38,6 +32,5 @@ request(options, function (error, response, body) {
 
   })
 
-const port = process.env.PORT || 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`))
