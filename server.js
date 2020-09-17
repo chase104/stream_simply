@@ -4,9 +4,16 @@ const app = express();
 const favicon = require('express-favicon');
 const path = require('path');
 app.use(favicon(__dirname + '/client/build/favicon.ico'));
-app.use(express.static(__dirname));
-app.use(express.static(path.join(__dirname, '/client/build')));
 
+if (process.env.NODE_ENV === 'production') {
+// Exprees will serve up production assets
+app.use(express.static('client/build'));
+
+// Express serve up index.html file if it doesn't recognize route
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
+}
 
 app.get('/getFeaturedMovie', (req, res) => {
 
