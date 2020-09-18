@@ -35,5 +35,4 @@ app.use("/api/movie", movie);
 app.use("/api/people", persons);
 
 //        --SERVER--
-const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`server running on port ${port}`));
