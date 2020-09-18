@@ -16,8 +16,6 @@ app.use(bodyParser.json());
 // TODO add passport middleware
 
 //        --ROUTE LOGIC--
-const movie = require("./routes/movie");
-const persons = require("./routes/persons");
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {
@@ -31,8 +29,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 //        --ROUTES--
-app.use("/api/movie", movie);
-app.use("/api/people", persons);
 
 //        --SERVER--
 app.listen(port, () => console.log(`server running on port ${port}`));
