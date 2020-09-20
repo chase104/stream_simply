@@ -1,0 +1,253 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #181b24
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.title-logo{
+  font-family: 'Momcake', serif;
+  src: local('Momcake-bold');
+  font-size: 4em !important;
+  white-space: nowrap;
+}
+.title-header{
+    display: flex;
+    align-items: center;
+}
+.arrow-icon{
+  margin-top: 1.5vh !important;
+  margin-left: 10px
+}
+.search-icon{
+  margin-top: 1.5vh ;
+}
+.search-button-icon{
+  font-size: 3em !important
+}
+.search-icon-dashboard{
+  margin-top: 1vh;
+  text: blue;
+  cursor: pointer;
+}
+.search-h5 {
+  margin-left: 10px;
+
+}
+.nav-wrapper{
+  background-color: 	#27383e !important
+}
+
+.dashboard-button{
+  padding-left: 20vh;
+  padding-right: 20vh;
+  background-color: #cb861a;
+}
+
+.dashboard-container{
+  padding-top: 30vh
+}
+
+#search-div{
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-radius: 30px !important;
+  margin-top: 10vh
+}
+#dashboard-search{
+  border: 0px;
+  margin-top: 1vh;
+  margin-left: 2vh;
+  font-size: 1.5em;
+  border-radius:
+}
+
+#dashboard-search:focus{
+  border: 0px !important;
+  box-shadow: none
+}
+#dashboard-search::placeholder{
+  color:grey;
+  font-size: 1.5em
+}
+.signup-btn{
+  background-color:  	#cb861a
+}
+
+.padding-top{
+  padding-top: 20px;
+}
+
+.featured-movie{
+  margin-top: 20px;
+  margin-bottom: 500px
+}
+.featured-title{
+  font-size: 4em;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.featured-media-title{
+  font-size: 3vw;
+}
+.featured-movie-block{
+  display: flex;
+  background-color: #27383e;
+  border-radius: .1em;
+  padding: 5vh
+}
+.featuredImg{
+  border-radius: 1em;
+}
+
+.genres-div{
+
+  height: 14vw;
+  margin-top: 2.5vw;
+  border-radius: 2px;
+}
+.genres-div ul{
+}
+.featured-media-genres-title{
+  color: #cb861a;
+
+}
+
+.title-and-joint-holder{
+  padding-left: 3vw
+}
+
+.joint-holder{
+  display: flex;
+  flex-direction: row;
+}
+
+.available-on-div{
+  margin-top: 2.5vw;
+  margin-left: 2vw;
+}
+
+.account-button{
+  background-color: 	#cb861a;
+}
+.cog-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+}
+.settings-cog{
+  margin-top: .5vw
+}
+.settings-container{
+  margin-top: 2vw;
+}
+.account-button-big{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 10vw;
+  width: 20vw;
+  height: 20vw;
+  min-width: 200px;
+  min-height: 200px;
+  background-color: #cb861a;
+}
+
+.edit-icon{
+  margin-left: 1vw;
+  font-size: 2vw;
+  cursor: pointer;
+}
+.account-block{
+    display: flex;
+    background-color: #27383e;
+    border-radius: .1em;
+    padding: 5vh
+}
+.info-holder{
+  display: flex;
+  flex-direction: column;
+  margin-left: 3vw
+}
+.settings-titles{
+  color: 	#cb861a;
+  font-size: 2vw
+}
+.account-info-holder{
+  display: flex
+}
+.email-field{
+  margin-top: 2.5vh;
+  margin-left: 1vw;
+  font-size: 1.5vw
+}
+.extra-info{
+    margin-top: 2.5vh;
+    color: white;
+    border: 1px solid grey;
+    border-radius: 200px;
+    padding-bottom: 1.5vw;
+
+    font-size: 1vw;
+    height: .6vw;
+    width: 1.2vw;
+    margin-left: .3vw;
+}
+.change-password{
+  display: inline-block;
+  border-bottom: 2px solid;
+  border-color: white;
+  color: white;
+  cursor: pointer;
+  margin-top: 1vw;
+}
+
+.field-icon{
+  font-size: 1.5vw;
+  margin-top: 2.5vh
+}
+
+.country-explainer{
+  height: 2vw;
+  position: fixed;
+  margin-left: 12vw;
+  font-size: 1.5vw;
+  background-color: 	#ffdb84;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
+}
+.change-color{
+  position: fixed;
+}
+.form-container{
+  background-color: white;
+  width: 30vw;
+  height: 18vh;
+  padding: 10px
+}
+
+.red-color{
+  background-color: #460b0b
+}
+.yellow-color{
+  background-color: #cb861a
+}
+.light-color{
+  background-color: 	#ffdb84;
+}
+.save-color{
+  margin-top: 5px;
+
+}
+.close-icon{
+  cursor:pointer;
+}
