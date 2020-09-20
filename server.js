@@ -1,26 +1,15 @@
 const express = require('express');
 const request = require('request');
-const path = require('path');
 
 
-const port = process.env.PORT || 5000;
 const app = express();
 
-if (process.env.NODE_ENV === 'production') {
-// Exprees will serve up production assets
-app.use(express.static('client/build'));
 
-// Express serve up index.html file if it doesn't recognize route
-
-app.get('*', (req, res) => {
- res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-}
 
 
 app.get('/getFeaturedMovie', (req, res) => {
 
-var options = {
+  var options = {
   method: 'GET',
   url: 'https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/lookup',
   qs: {term: 'bojack', country: 'us'},
@@ -31,14 +20,16 @@ var options = {
   }
 };
 
-request(options, function (error, response, body) {
-	 if (!error && response.statusCode == 200) {
-     res.send(body)
-
-   }
-
-});
+    request(options, function (error, response, body) {
+    	 if (!error && response.statusCode == 200) {
+         res.send(body)
+       }
+    })
   })
 
+
+
+
+const port = 5000;
 
 app.listen(port, () => console.log(`Server started on port ${port}`))
