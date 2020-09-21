@@ -12,7 +12,9 @@ app.use(express.urlencoded( { extended: false }))
 // Set Static Folders
 app.use(express.static(path.join(__dirname, 'client', 'build')))
 
-
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 // app.get('/', (req, res) => {
 //   res.sendFild(path.join(__dirname, 'client', 'build', 'index.html'))
 // })
