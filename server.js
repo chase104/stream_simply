@@ -13,9 +13,11 @@ app.use(express.urlencoded( { extended: false }))
 app.use(express.static(path.join(__dirname, 'client', 'build')))
 
 
-app.get('/', (req, res) => {
-  res.sendFild(path.join(__dirname, 'client', 'build', 'index.html'))
-})
+// app.get('/', (req, res) => {
+//   res.sendFild(path.join(__dirname, 'client', 'build', 'index.html'))
+// })
+
+
 // app.use(express.static())
 app.get('/getFeaturedMovie', (req, res) => {
 
