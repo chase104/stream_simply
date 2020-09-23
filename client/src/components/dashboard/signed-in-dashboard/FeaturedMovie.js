@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import Axios from 'axios'
+import axios from 'axios'
 
 const FeaturedMovie = () => {
 
@@ -11,8 +11,9 @@ const FeaturedMovie = () => {
 
 
         async function getApi() {
-          const axiosRes = await Axios.get('/getFeaturedMovie').then(response => {
+          const axiosRes = await axios.get('/getFeaturedMovie').then(response => {
             return response.data.results[0]
+            console.log(response)
           })
           setFeaturedMedia(axiosRes)
           console.log(axiosRes);
