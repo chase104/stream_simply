@@ -1,17 +1,11 @@
 const express = require('express');
 const request = require('request');
 const path = require('path')
-const { Client } = require('pg');
 
 const app = express();
 
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+
 
 
 // Initialize Body Parser
@@ -19,10 +13,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 
-client.connect(function(error) {
-  console.log("connected to db");
-
-});
 
 const featuredMovie = require('./routes/api/featured_movie')
 // Get featuredMovie Route
@@ -37,7 +27,10 @@ app.get("*", function(req, res) {
 // app.get('/', (req, res) => {
 //   res.sendFild(path.join(__dirname, 'client', 'build', 'index.html'))
 // })
+app.post("/signup", function (req, res) {
+  console.log(req);
 
+})
 
 
 
