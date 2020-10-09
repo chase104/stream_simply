@@ -14,7 +14,7 @@ function App() {
       <Navbar />
       <Route exact path="/" component={Dashboard} />
       <Route  path="/signup" component={SignUp} />
-      <Route path='/signin' component={SignIn} />
+      <Route path='/login' component={SignIn} />
       <Route path='/settings' component={Settings} />
     </div>
   </BrowserRouter>

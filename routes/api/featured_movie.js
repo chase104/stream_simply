@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     qs: {term: 'bojack', country: 'us'},
     headers: {
       'x-rapidapi-host': 'utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com',
-      'x-rapidapi-key': '12e1e06344mshbbfb57c2be00fdfp16c653jsnc7ee0c0aab1d',
+      'x-rapidapi-key': process.env.REACT_APP_UTELLY_API_KEY,
       'Accept': 'application/json',
       'Content-Type': 'application/json',
       useQueryString: true

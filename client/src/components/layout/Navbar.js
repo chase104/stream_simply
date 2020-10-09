@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import SignedInLinks from './SignedInLinks'
+import SignedOutLinks from './SignedOutLinks'
 import Popcorn from '../../popcorn.png'
 
 const Navbar = () => {
@@ -11,7 +12,7 @@ const Navbar = () => {
           <Link className="brand-logo title-logo primary-brand" to="/">Stream Simplyy</Link>
         </div>
 
-
+        <SignedOutLinks className="right " />
         <SignedInLinks className="right" />
     </nav>
   )

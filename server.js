@@ -24,7 +24,9 @@ client.connect(function(error) {
   console.log("connected to db");
 });
 
-
+// app.post('/registeruser', function(req, res) => {
+//
+// })
 
 // Get featuredMovie Route
 const featuredMovie = require('./routes/api/featured_movie')
@@ -35,13 +37,10 @@ app.use(express.static(path.join(__dirname, 'client', 'build')))
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-
-
 });
 //Get user db route
 app.post('/signup', function(req, res){
   client.query('SELECT * FROM users;', (err, result) => {
-
       res.json(result)
     client.end();
   });

@@ -10,17 +10,26 @@ const SignUp = () => {
   let getState = (signupState) => {
     return signUpState
   }
+
+
   const handleSubmit = (e) => {
     e.preventDefault()
     if (signUpState.password === signUpState.confirmpassword && signUpState.email) {
       console.log(signUpState);
       console.log(e);
-      axios.post()
+      axios({
+        method: "POST",
+        data: {
+          ...signUpState
+        },
+        withCredentials: true,
+        url: "/signup"
+      })
     } else {
       console.log('password error');
     }
   }
-  console.log(signUpState);
+
 
   const handleChange = (e) => {
     let id = e.target.id
