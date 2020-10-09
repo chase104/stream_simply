@@ -13,16 +13,35 @@ code {
     monospace;
 }
 
+
+
+
 .title-logo{
   font-family: 'Momcake', serif;
   src: local('Momcake-bold');
   font-size: 4em !important;
   white-space: nowrap;
 }
+.logo-holder{
+  width: 30%;
+  min-width: 400px;
+  margin: 0 auto;
+  align-items: center;
+  overflow: visible;
+}
+.popcorn-img{
+  height: 8vh;
+  width: 5vw;
+  margin-right: -15px;
+}
+
+
 .title-header{
     display: flex;
     align-items: center;
 }
+
+
 .arrow-icon{
   margin-top: 1.5vh !important;
   margin-left: 10px

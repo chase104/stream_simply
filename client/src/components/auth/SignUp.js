@@ -1,6 +1,6 @@
-import React, { Component, useState } from 'react'
-import AlreadyHave from './AlreadyHave'
-
+import React, { Component, useState } from 'react';
+import AlreadyHave from './AlreadyHave';
+import axios from 'axios';
 
 const SignUp = () => {
 
@@ -12,9 +12,10 @@ const SignUp = () => {
   }
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (signUpState.password === signUpState.confirmpassword) {
+    if (signUpState.password === signUpState.confirmpassword && signUpState.email) {
       console.log(signUpState);
       console.log(e);
+      axios.post()
     } else {
       console.log('password error');
     }
@@ -23,8 +24,6 @@ const SignUp = () => {
 
   const handleChange = (e) => {
     let id = e.target.id
-    let state = getState()
-    console.log(state.id);
     console.log(id);
     setSignUpState({
       ...signUpState,
