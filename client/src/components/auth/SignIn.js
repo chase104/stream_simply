@@ -11,7 +11,7 @@ const SignIn = () => {
   }
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (signUpState.password === signUpState.confirmpassword) {
+    if (signUpState.password) {
       console.log(signUpState);
       await axios({
         method: 'POST',
