@@ -9,11 +9,18 @@ const SignIn = () => {
   let getState = (signupState) => {
     return signUpState
   }
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (signUpState.password === signUpState.confirmpassword) {
       console.log(signUpState);
-      console.log(e);
+      await axios({
+        method: 'POST',
+        data: {
+          ...signUpState
+        },
+        withCredentials: true,
+        url: '/'
+      }).then((res) => {console.log(res);})
     } else {
       console.log('password error');
     }
