@@ -1,10 +1,10 @@
 const express = require('express');
 const request = require('request');
 const path = require('path')
-const { Client } = require('pg')
 const bcrypt = require('bcrypt')
 require('dotenv').config();
-
+const initializePassport = require('./passport-config');
+const client = require('./db')
 const app = express();
 
 
@@ -15,20 +15,9 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
 
-client.connect(function(error) {
-  console.log("connected to db");
-});
 
-// app.post('/registeruser', function(req, res) => {
-//
-// })
+
 
 // Get featuredMovie Route
 const featuredMovie = require('./routes/api/featured_movie')
