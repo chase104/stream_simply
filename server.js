@@ -41,7 +41,8 @@ app.get("*", function(req, res) {
 //Get user db route
 app.post('/signup', function(req, res){
   console.log(req);
-  client.query('SELECT * FROM users WHERE email = $1;', [req.email], (err, result) => {
+  let email = 'chase.vanhalen88@gmail.com'
+  client.query(`SELECT * FROM users WHERE email = ${email};`;, (err, result) => {
       res.json(result)
     client.end();
   });
