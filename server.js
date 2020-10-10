@@ -39,13 +39,13 @@ app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 //Get user db route
-app.post('/signup', function(req, res){
+app.post('/signup', async function(req, res){
   console.log(req);
   let email = 'chase.vanhalen88@gmail.com'
-  client.query(("SELECT * FROM users WHERE email = '$1'", [email]), (err, result) => {
-      res.json(result)
+  const getEmail = await client.query("SELECT * FROM users WHERE email = $1", [email])
+
+      res.json(getEmail)
     client.end();
-  });
 })
 
 
