@@ -23,7 +23,10 @@ const SignUp = () => {
         },
         withCredentials: true,
         url: "/signup"
-      }).then((res) => {console.log(res);})
+      }).then((res) => {
+        console.log(res);
+        window.location='/login'
+      })
     } else {
       console.log('password error');
     }
