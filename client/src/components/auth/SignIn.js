@@ -30,7 +30,6 @@ const SignIn = () => {
   const handleChange = (e) => {
     let id = e.target.id
     let state = getState()
-    console.log(state.id);
     console.log(id);
     setSignUpState({
       ...signUpState,
