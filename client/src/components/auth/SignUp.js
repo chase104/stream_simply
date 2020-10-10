@@ -54,6 +54,14 @@ const SignUp = () => {
           </div>
 
           <div className="input-field">
+            <label for="firstname">First Name</label>
+            <input className="white-text" type="text" id="firstname" onChange={handleChange}/>
+          </div>
+          <div className="input-field">
+            <label for="lastname">Last Name</label>
+            <input className="white-text" type="text" id="lastname" onChange={handleChange}/>
+          </div>
+          <div className="input-field">
             <label for="email">Email</label>
             <input className="white-text" type="email" id="email" onChange={handleChange}/>
           </div>
