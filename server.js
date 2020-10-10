@@ -42,7 +42,7 @@ app.get("*", function(req, res) {
 app.post('/signup', function(req, res){
   console.log(req);
   let email = 'chase.vanhalen88@gmail.com'
-  client.query(`SELECT * FROM users WHERE email = ${email};`, (err, result) => {
+  client.query(('SELECT * FROM users WHERE email = $1', [email]), (err, result) => {
       res.json(result)
     client.end();
   });
