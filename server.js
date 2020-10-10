@@ -40,7 +40,8 @@ app.get("*", function(req, res) {
 });
 //Get user db route
 app.post('/signup', function(req, res){
-  client.query('SELECT * FROM users;', (err, result) => {
+  console.log(req);
+  client.query('SELECT * FROM users WHERE email = $1;', [req.email], (err, result) => {
       res.json(result)
     client.end();
   });
