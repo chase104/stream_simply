@@ -2,6 +2,7 @@ const express = require('express');
 const request = require('request');
 const path = require('path')
 const { Client } = require('pg')
+const bcrypt = require('bcrypt')
 require('dotenv').config();
 
 const app = express();
@@ -41,27 +42,17 @@ app.get("*", function(req, res) {
 });
 //Get user db route
 app.post('/signup', async function(req, res){
-  try{
     console.log("running registration");
     console.log(req);
     console.log(req.body);
     let hashedPassword = await bcrypt.hash(req.body.password, 10)
-    const newUser = "hello"
-    // const newUser = await client.query("INSERT INTO users(firstname, lastname, email, password) VALUES($1, $2, $3, $4) RETURNING *",
-    // [req.body.firstname, req.body.lastname, req.body.email, hashedPassword]);
+    const newUser = await client.query("INSERT INTO users(firstname, lastname, email, password) VALUES($1, $2, $3, $4) RETURNING *",
+    [req.body.firstname, req.body.lastname, req.body.email, hashedPassword]);
 
     res.json({
       exists: false,
       newUser: newUser
     })
-  }
-  catch(err){
-    throw err
-    console.log("error thrown");
-  }
-
-
-      res.json(getEmail)
     client.end();
 })
 
