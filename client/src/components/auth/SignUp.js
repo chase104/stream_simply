@@ -12,12 +12,11 @@ const SignUp = () => {
   }
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     if (signUpState.password === signUpState.confirmpassword && signUpState.email) {
       console.log(signUpState);
-      console.log(e);
-      axios({
+      await axios({
         method: "POST",
         data: {
           ...signUpState
@@ -68,7 +67,7 @@ const SignUp = () => {
           <div className="input-field">
             <label for="password">Password</label>
             <input className="white-text" type="password" id="password" onChange={handleChange}/>
-          </div> 
+          </div>
           <div className="input-field">
             <label for="confirmpassword">Confirm Password</label>
             <input className="white-text" type="password" id="confirmpassword" onChange={handleChange}/>
