@@ -46,8 +46,9 @@ app.post('/signup', async function(req, res){
     console.log(req);
     console.log(req.body);
     let hashedPassword = await bcrypt.hash(req.body.password, 10)
-    const newUser = await client.query("INSERT INTO users(firstname, lastname, email, password) VALUES($1, $2, $3, $4) RETURNING *",
-    [req.body.firstname, req.body.lastname, req.body.email, hashedPassword]);
+    const newUser = "hello"
+    // const newUser = await client.query("INSERT INTO users(firstname, lastname, email, password) VALUES($1, $2, $3, $4) RETURNING *",
+    // [req.body.firstname, req.body.lastname, req.body.email, hashedPassword]);
 
     res.json({
       exists: false,
@@ -66,13 +67,6 @@ app.post('/signup', async function(req, res){
 
 
 
-
-
-
-
-// app.get('/', (req, res) => {
-//   res.sendFild(path.join(__dirname, 'client', 'build', 'index.html'))
-// })
 app.get("/signup", function (req, res) {
   console.log('here');
 })
