@@ -68,7 +68,7 @@ const SignUp = () => {
           <div className="input-field">
             <label for="password">Password</label>
             <input className="white-text" type="password" id="password" onChange={handleChange}/>
-          </div>
+          </div> 
           <div className="input-field">
             <label for="confirmpassword">Confirm Password</label>
             <input className="white-text" type="password" id="confirmpassword" onChange={handleChange}/>
