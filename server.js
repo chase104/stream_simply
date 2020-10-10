@@ -1,14 +1,28 @@
+require('dotenv').config()
 const express = require('express');
 const request = require('request');
-const path = require('path')
-const bcrypt = require('bcrypt')
-require('dotenv').config();
+const path = require('path');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const session = require('express-session');
+const router = express.Router();
 const initializePassport = require('./passport-config');
-const client = require('./db')
+const client = require('./db');
 const app = express();
+const cookieParser = require('cookie-parser')
 
-
-
+initializePassport(passport,
+     async email =>  {
+     const findUser = await client.query('SELECT * FROM users WHERE email = $1', [email])
+     console.log(findUser)
+     return findUser
+     },
+     async id =>  {
+     const findUser = await client.query('SELECT * FROM users WHERE user_id = $1', [id])
+     console.log(findUser)
+     return findUser
+   }
+)
 
 
 // Initialize Body Parser
@@ -16,6 +30,14 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 
+app.use(session({
+  secret: process.env.SECRET_SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(cookieParser(process.env.SECRET_SECRET));
+app.use(passport.initialize())
+app.use(passport.session())
 
 
 
@@ -49,6 +71,22 @@ app.post('/signup', async function(req, res){
 
 app.get("/signup", function (req, res) {
   console.log('here');
+})
+
+app.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    console.log("info coming");
+    console.log(info);
+    if (err) throw err
+    if (!user) res.send("no user with this email")
+    else {
+      req.logIn(user, err =>{
+        if (err) console.log(err)
+        res.send("successfully authenticated");
+        console.log(req.user)
+      })
+    }
+  })(req, res, next);
 })
 
 

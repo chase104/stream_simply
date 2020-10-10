@@ -19,7 +19,7 @@ const SignIn = () => {
           ...signUpState
         },
         withCredentials: true,
-        url: '/'
+        url: '/login'
       }).then((res) => {console.log(res);})
     } else {
       console.log('password error');
