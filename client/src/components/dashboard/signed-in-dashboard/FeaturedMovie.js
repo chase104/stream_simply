@@ -36,8 +36,8 @@ const FeaturedMovie = () => {
   function renderShow(){
     if (!featuredMedia) return <p className="white-text">'Loading media...'</p>
     return (
-      <div className="featured-movie-block">
-        <img className="featuredImg" src={featuredMedia.picture} style={{width: '50vh', height: '40vh'}} />
+      <div className="featured-movie-block center">
+        <img className="featuredImg" src={featuredMedia.picture} style={{width: '40vh', height: '30vh'}} />
         <div className="title-and-joint-holder">
           <h6 className="white-text featured-media-title center">{featuredMedia.name}</h6>
           <div className="joint-holder">

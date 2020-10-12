@@ -121,10 +121,15 @@ code {
   display: flex;
   background-color: #27383e;
   border-radius: .1em;
-  padding: 5vh
+  padding: 5vh;
+  width: 100%;
+  max-height: 300px;
+  justify-content: center;
+  height: auto;
 }
 .featuredImg{
   border-radius: 1em;
+  width:1vw;
 }
 
 .genres-div{

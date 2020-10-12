@@ -3,6 +3,8 @@ const express = require('express');
 const request = require('request');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const cors = require("cors");
+
 const passport = require('passport');
 const session = require('express-session');
 const router = express.Router();
@@ -25,10 +27,16 @@ initializePassport(passport,
 )
 
 
+
 // Initialize Body Parser
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
+
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true
+}));
 
 app.use(session({
   secret: process.env.SECRET_SECRET,
@@ -55,6 +63,13 @@ if (req.user) {
     loggedIn: false
   })
 }
+})
+
+//get user
+app.get('/getuser', (req, res) => {
+  console.log(req.body);
+  console.log(req.user);
+  res.json(req.user)
 })
 
 
