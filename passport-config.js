@@ -25,7 +25,7 @@ module.exports = function(passport) {
     cb(null, user.id);
   })
   passport.deserializeUser((id, cb) => {
-    client.query('SELECT * FROM users WHERE user_id = $1', [id], (err, result) => {
+    client.query('SELECT * FROM users WHERE id = $1', [id], (err, result) => {
       if (err) throw err
       return cb(null, result.rows[0])
     })

@@ -6,7 +6,7 @@ import axios from 'axios'
 
  const ProtectedRoute = ({component: Component, ...rest}) => {
 
-   const [finished, setFinished] = useState(true)
+   const [finished, setFinished] = useState(false)
    const [check, setCheck] = useState(true)
 
 

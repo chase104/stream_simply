@@ -20,7 +20,7 @@ initializePassport(passport,
      return findUser
      },
      async id =>  {
-     const findUser = await client.query('SELECT * FROM users WHERE user_id = $1', [id])
+     const findUser = await client.query('SELECT * FROM users WHERE id = $1', [id])
      console.log(findUser)
      return findUser
    }
