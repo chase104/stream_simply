@@ -12,7 +12,7 @@ const User = () => {
       axios({
         method: "GET",
         withCredentials: true,
-        url: "http://localhost:5000/getuser"
+        url: "/getuser"
       }).then((res) => {
         setData(res.data)
         console.log(res.data);
