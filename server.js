@@ -53,7 +53,7 @@ app.use(passport.session())
 
 //check if user is logged in
 app.get('/checkuser', function(req,res) {
-  console.log(req.body);
+  console.log("checking user");
 if (req.user) {
   res.json({
     loggedIn: true
