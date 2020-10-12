@@ -40,6 +40,23 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 
+//----------------------------------------END OF MIDDLEWARE ----------------------------------//
+
+
+//check if user is logged in
+app.get('/checkuser', function(req,res) {
+  console.log(req.body);
+if (req.user) {
+  res.json({
+    loggedIn: true
+  })
+} else {
+  res.json({
+    loggedIn: false
+  })
+}
+})
+
 
 // Get featuredMovie Route
 const featuredMovie = require('./routes/api/featured_movie')

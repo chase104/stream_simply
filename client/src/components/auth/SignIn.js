@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react'
 import axios from 'axios'
-
+import User from '../user'
 const SignIn = () => {
 
 
@@ -63,6 +63,8 @@ const SignIn = () => {
             <button className="btn z-depth-0 signup-btn">Continue</button>
           </div>
         </form>
+        <User />
+
       </div>
     )
   }

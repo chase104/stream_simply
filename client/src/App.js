@@ -5,6 +5,7 @@ import Dashboard from './components/dashboard/Dashboard'
 import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import Settings from './components/auth/settings'
+import ProtectedRoute from './protected.route'
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Route exact path="/" component={Dashboard} />
       <Route  path="/signup" component={SignUp} />
       <Route path='/login' component={SignIn} />
-      <Route path='/settings' component={Settings} />
+      <ProtectedRoute path='/settings' component={Settings} />
     </div>
   </BrowserRouter>
   );
