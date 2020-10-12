@@ -22,7 +22,7 @@ module.exports = function(passport) {
     })
   )
   passport.serializeUser((user, cb) => {
-    cb(null, user.user_id);
+    cb(null, user.id);
   })
   passport.deserializeUser((id, cb) => {
     client.query('SELECT * FROM users WHERE user_id = $1', [id], (err, result) => {
