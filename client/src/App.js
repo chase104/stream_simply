@@ -5,18 +5,19 @@ import Dashboard from './components/dashboard/Dashboard'
 import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import Settings from './components/auth/settings'
-import ProtectedRoute from './protected.route'
-
+import LoggedInRoute from './logged.in.route'
+import LoggedOutRoute from './logged.out.route'
+import NavBar from './components/layout/Appbar'
 function App() {
   return (
 
   <BrowserRouter>
     <div className="App">
-      <Navbar />
+      <NavBar />
       <Route exact path="/" component={Dashboard} />
-      <Route  path="/signup" component={SignUp} />
-      <Route path='/login' component={SignIn} />
-      <ProtectedRoute path='/settings' component={Settings} />
+      <LoggedOutRoute  path="/signup" component={SignUp} />
+      <LoggedOutRoute path='/login' component={SignIn} />
+      <LoggedInRoute path='/settings' component={Settings} />
     </div>
   </BrowserRouter>
   );

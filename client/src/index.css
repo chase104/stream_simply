@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #181b24
+  background-color: #e6e6e6
 }
 
 code {
@@ -14,13 +14,40 @@ code {
 }
 
 
+.MuiAppBar-colorPrimary{
+  background-color: rgb(109, 184, 102) !important;
+}
 
-
+.toolbar{
+  padding-left: 0px !important;
+  width: 100%
+}
+.navbaricon{
+  margin-right: 0 !important
+}
 .title-logo{
   font-family: 'Momcake', serif;
   src: local('Momcake-bold');
-  font-size: 4em !important;
+  font-size: 7vh !important;
   white-space: nowrap;
+  margin-top:
+}
+
+.navbar-ul {
+  display: flex;
+  flex: 1;
+  flex-direction: row-reverse;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  height: 100%
+}
+
+.navbar-ul li {
+  color: white !important;
+  margin-right: 1.5vw;
+}
+.links{
+  margin-right: 20px;
 }
 .logo-holder{
   width: 30%;
@@ -41,7 +68,9 @@ code {
     align-items: center;
 }
 
-
+.nav-wrapper{
+  height: 9vh;
+}
 .arrow-icon{
   margin-top: 1.5vh !important;
   margin-left: 10px
@@ -50,21 +79,60 @@ code {
   margin-top: 1.5vh ;
 }
 .search-button-icon{
-  font-size: 3em !important
+  font-size: 4vw !important;
+  max-width: 50%;
+
 }
 .search-icon-dashboard{
   margin-top: 1vh;
-  text: blue;
   cursor: pointer;
+  height: auto
 }
 .search-h5 {
   margin-left: 10px;
+}
+.icon-holder-search{
+  display: flex;
+align-items: stretch;
+border-radius: 0 30px 30px 0 !important;
+cursor: pointer;
+}
 
+.vertical-align-container{
+  display: flex;
+  align-items: stretch;
+  height:100%
+}
+
+.vertical-align-holder{
+  display: flex;
+align-items: center;
+justify-content: center;
+}
+.inner-holder{
+  display: flex;
+align-items: center;
+justify-content: center;
+background: rgb(109, 184, 102)
 }
 .nav-wrapper{
   background-color: 	#27383e !important
 }
+.sidebar{
+  width: 300px;
 
+}
+.standard-li-height a button{
+  height: 9vh
+}
+
+.li-height{
+  height: 9vh
+}
+.li-height div{
+  font-size: 2vw;
+  color: white
+}
 .dashboard-button{
   padding-left: 20vh;
   padding-right: 20vh;
@@ -77,16 +145,27 @@ code {
 
 #search-div{
   display: flex;
-  background-color: rgba(255, 255, 255, 0.7) !important;
+  background-color: rgba(255, 255, 255, 0.7) ;
   border-radius: 30px !important;
-  margin-top: 10vh
+  margin-top: 10vh;
+  min-width: 50vw
 }
+
+.main-search{
+}
+
+#search-div input{
+  min-height: 2vw;
+  font-size: 2vw;
+  display: flex;
+  color: black
+}
+
 #dashboard-search{
   border: 0px;
-  margin-top: 1vh;
   margin-left: 2vh;
-  font-size: 1.5em;
-  border-radius:
+  margin-top: 2.5vh;
+  font-size: 1em;
 }
 
 #dashboard-search:focus{
@@ -95,8 +174,9 @@ code {
 }
 #dashboard-search::placeholder{
   color:grey;
-  font-size: 1.5em
+  font-size: 1.2em
 }
+
 .signup-btn{
   background-color:  	#cb861a
 }
@@ -110,7 +190,7 @@ code {
   margin-bottom: 500px
 }
 .featured-title{
-  font-size: 4em;
+  font-size: 4vw;
   margin-top: 10px;
   margin-bottom: 10px;
 }
@@ -123,9 +203,8 @@ code {
   border-radius: .1em;
   padding: 5vh;
   width: 100%;
-  max-height: 300px;
-  justify-content: center;
   height: auto;
+  justify-content: center;
 }
 .featuredImg{
   border-radius: 1em;
@@ -134,14 +213,16 @@ code {
 
 .genres-div{
 
-  height: 14vw;
-  margin-top: 2.5vw;
+  height: auto;
+  margin-top: .5vw;
   border-radius: 2px;
 }
 .genres-div ul{
+  font-size: 1.5vw
 }
 .featured-media-genres-title{
   color: #cb861a;
+  font-size: 3vw;
 
 }
 
@@ -155,8 +236,13 @@ code {
 }
 
 .available-on-div{
-  margin-top: 2.5vw;
+  margin-top: .5vw;
   margin-left: 2vw;
+}
+
+.available-on-div img{
+  height: 5vw;
+  width: 8vw
 }
 
 .account-button{
@@ -274,4 +360,7 @@ code {
 }
 .close-icon{
   cursor:pointer;
+}
+
+input[type=text]:not(.browser-default) {
 }

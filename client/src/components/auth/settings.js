@@ -1,16 +1,33 @@
 import React, { useState, useEffect} from 'react'
-
+import axios from 'axios'
 
 const Settings = () => {
 
   const [accountState, setAccountState] = useState({
-    firstName: "Chase",
-    lastName: "Van Halen",
-    email: "chase.vanhalen88@gmail.com",
+    firstname: "",
+    lastname: "",
+    email: "",
     subscriptions: ['Netflix', 'Amazon', 'Hulu'],
     country: 'US'
   })
+ 
 
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: '/userinfo',
+      withCredentials: true,
+
+    }).then((res) => {
+      console.log(res)
+      let initials = res.data.firstname.charAt(0).toUpperCase() + res.data.lastname.charAt(0).toUpperCase()
+      setAccountState({
+        ...accountState,
+        ...res.data,
+        initials: initials
+      })
+    })
+  }, [])
   console.log(accountState);
 
 
@@ -54,7 +71,7 @@ const Settings = () => {
   return(
     <div className="container settings-container">
     <div className="account-block">
-      <div className="btn btn-floating lighten-1 account-button-big" onClick={handleColorClick}>CV</div>
+      <div className="btn btn-floating lighten-1 account-button-big" onClick={handleColorClick}>{accountState.initials}</div>
       <div className="info-holder">
         <form id="change-color" className="change-color hide" onSubmit={handleSubmit}>
           <div className="form-container">
@@ -70,7 +87,7 @@ const Settings = () => {
           </div>
 
         </form>
-          <h6 className="white-text featured-media-title">{accountState.firstName} {accountState.lastName}
+          <h6 className="white-text featured-media-title">{accountState.firstname} {accountState.lastname}
               <i class="material-icons edit-icon" onClick={handleEditClick}>edit</i>
           </h6>
           <div className="account-info-holder">

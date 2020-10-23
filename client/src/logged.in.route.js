@@ -4,7 +4,7 @@ import axios from 'axios'
 
 
 
- const ProtectedRoute = ({component: Component, ...rest}) => {
+ const LoggedInRoute = ({component: Component, ...rest}) => {
 
    const [finished, setFinished] = useState(false)
    const [check, setCheck] = useState(true)
@@ -19,13 +19,11 @@ import axios from 'axios'
         url: "/checkUser"
       })
 
-      console.log(axiosCheck);
       if (axiosCheck.data.loggedIn === true){
         setCheck(true)
       } else{
         setCheck(false)
       }
-      console.log(check);
       setFinished(true)
   }
   checker()
@@ -53,4 +51,4 @@ import axios from 'axios'
  }
 
 
-export default ProtectedRoute
+export default LoggedInRoute

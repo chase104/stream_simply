@@ -50,19 +50,20 @@ app.use(passport.session())
 
 //----------------------------------------END OF MIDDLEWARE ----------------------------------//
 
+//----------------------------------------START OF ROUTES------------------------------------//
 
 //check if user is logged in
-app.get('/checkuser', function(req,res) {
+app.get('/checkUser', function(req,res) {
   console.log("checking user");
-if (req.user) {
-  res.json({
-    loggedIn: true
-  })
-} else {
-  res.json({
-    loggedIn: false
-  })
-}
+  if(req.user) {
+    res.json({
+      loggedIn: true
+    })
+  } else {
+    res.json({
+      loggedIn: false
+    })
+  }
 })
 
 //get user
@@ -73,6 +74,14 @@ app.get('/getuser', (req, res) => {
 })
 
 
+app.get('/userinfo', (req, res) => {
+  console.log("req:", req);
+  console.log("user:", req.user);
+  res.json({
+    ...req.user,
+  })
+})
+
 // Get featuredMovie Route
 const featuredMovie = require('./routes/api/featured_movie')
 app.use('/getFeaturedMovie', featuredMovie);
@@ -80,9 +89,7 @@ app.use('/getFeaturedMovie', featuredMovie);
 // Set Static Folders
 app.use(express.static(path.join(__dirname, 'client', 'build')))
 
-app.get("*", function(req, res) {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+
 //Get user db route
 app.post('/signup', async function(req, res){
     console.log("running registration");
@@ -101,20 +108,24 @@ app.post('/signup', async function(req, res){
 
 
 
-app.get("/signup", function (req, res) {
-  console.log('here');
-})
+
 
 app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
     console.log("info coming");
     console.log(info);
     if (err) throw err
-    if (!user) res.send("no user with this email")
+    if (!user) res.json({
+      message: "no user with that email",
+      loggedIn: false
+    })
     else {
       req.logIn(user, err =>{
         if (err) console.log(err)
-        res.send("successfully authenticated");
+        res.json({
+          message: "successfully Authenticated",
+          loggedIn: true
+        });
         console.log(req.user)
       })
     }
@@ -122,6 +133,17 @@ app.post("/login", (req, res, next) => {
 })
 
 
+
+app.get('/logout', function(req,res) {
+  console.log("logging out");
+  req.logOut();
+  res.send("logged out")
+})
+
+app.get("*", function(req, res) {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+//-------------------------------------END OF ROUTES-------------------------------//
 
 
 

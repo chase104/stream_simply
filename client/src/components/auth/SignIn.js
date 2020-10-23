@@ -20,7 +20,12 @@ const SignIn = () => {
         },
         withCredentials: true,
         url: '/login'
-      }).then((res) => {console.log(res);})
+      }).then((res) => {
+        console.log(res);
+        if (res.data.loggedIn == true) {
+          window.location = "/"
+        }
+      })
     } else {
       console.log('password error');
     }
@@ -43,8 +48,8 @@ const SignIn = () => {
       <div className="container">
         <form onSubmit={handleSubmit} className="signup">
           <div className="title-header">
-            <h5 className="white-text text-darken-1">Login</h5>
-            <i class="material-icons white-text arrow-icon">arrow_forward</i>
+            <h5 className="grey-text text-darken-1">Login</h5>
+            <i class="material-icons grey-text arrow-icon">arrow_forward</i>
             <h5 className="grey-text text-darken-1 search-h5">Search</h5>
             <i class="material-icons grey-text search-icon">search</i>
 
@@ -52,11 +57,11 @@ const SignIn = () => {
 
           <div className="input-field">
             <label for="email">Email</label>
-            <input className="white-text" type="email" id="email" onChange={handleChange}/>
+            <input className="grey-text" type="email" id="email" onChange={handleChange}/>
           </div>
           <div className="input-field">
             <label for="password">Password</label>
-            <input className="white-text" type="password" id="password" onChange={handleChange}/>
+            <input className="grey-text" type="password" id="password" onChange={handleChange}/>
           </div>
 
           <div className="input-field">

@@ -48,8 +48,8 @@ const SignUp = () => {
       <div className="container">
         <form onSubmit={handleSubmit} className="signup">
           <div className="title-header">
-            <h5 className="white-text text-darken-1">Sign Up</h5>
-            <i class="material-icons white-text arrow-icon">arrow_forward</i>
+            <h5 className="black-text text-darken-1">Sign Up</h5>
+            <i class="material-icons black-text arrow-icon">arrow_forward</i>
             <h5 className="grey-text text-darken-1 search-h5">Search</h5>
             <i class="material-icons grey-text search-icon">search</i>
 
@@ -57,23 +57,23 @@ const SignUp = () => {
 
           <div className="input-field">
             <label for="firstname">First Name</label>
-            <input className="white-text" type="text" id="firstname" onChange={handleChange}/>
+            <input className="black-text" type="text" id="firstname" onChange={handleChange}/>
           </div>
           <div className="input-field">
             <label for="lastname">Last Name</label>
-            <input className="white-text" type="text" id="lastname" onChange={handleChange}/>
+            <input className="black-text" type="text" id="lastname" onChange={handleChange}/>
           </div>
           <div className="input-field">
             <label for="email">Email</label>
-            <input className="white-text" type="email" id="email" onChange={handleChange}/>
+            <input className="black-text" type="email" id="email" onChange={handleChange}/>
           </div>
           <div className="input-field">
             <label for="password">Password</label>
-            <input className="white-text" type="password" id="password" onChange={handleChange}/>
+            <input className="black-text" type="password" id="password" onChange={handleChange}/>
           </div>
           <div className="input-field">
             <label for="confirmpassword">Confirm Password</label>
-            <input className="white-text" type="password" id="confirmpassword" onChange={handleChange}/>
+            <input className="black-text" type="password" id="confirmpassword" onChange={handleChange}/>
           </div>
           <div className="input-field">
             <button className="btn z-depth-0 signup-btn">Continue</button>

@@ -28,13 +28,13 @@ const FeaturedMovie = () => {
 
   return(
     <div className="featured-movie">
-      <p className="white-text center featured-title">Featured Show</p>
+      <p className="black-text center featured-title">Featured Show</p>
       {renderShow()}
     </div>
   )
 
   function renderShow(){
-    if (!featuredMedia) return <p className="white-text">'Loading media...'</p>
+    if (!featuredMedia) return <p className="black-text">'Loading media...'</p>
     return (
       <div className="featured-movie-block center">
         <img className="featuredImg" src={featuredMedia.picture} style={{width: '40vh', height: '30vh'}} />
