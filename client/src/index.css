@@ -20,6 +20,19 @@ code {
 .check-circle{
   color: #66b8aa;
 }
+.appbar-button{
+  background-color: rgb(109, 184, 102) !important;
+  border: 0px !important;
+  font-family: 'Quicksand', sans-serif !important;
+  color: white !important;
+  text-transform: none !important;
+  font-size: 1.5rem !important;
+  box-shadow: none !important;
+}
+.appbar-button:hover{
+  filter: brightness(105%)
+}
+
 .modal-style{
   height: auto;
   background: white;
@@ -56,7 +69,7 @@ code {
   height: 2.5vw !important;
 }
 .edit-personal-button{
-  
+
 }
 .toolbar{
   padding-left: 0px !important;
@@ -105,6 +118,7 @@ code {
   width: 4vw;
   height: 4vw;
   margin-top: 7px !important;
+  margin-bottom: 5px !important;
 }
 
 .title-header{

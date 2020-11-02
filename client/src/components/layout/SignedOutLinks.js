@@ -10,7 +10,7 @@ const SignedOutLinks = () => {
       <NavLink to="/signup" className="li-height">
         <div className="vertical-align-container">
           <div className="vertical-align-holder">
-              <div>sign up</div>
+              <Button variant='contained' className='appbar-button'>Sign up</Button>
           </div>
         </div>
       </NavLink>
@@ -22,7 +22,7 @@ const SignedOutLinks = () => {
         <NavLink to="/login" className="li-height">
           <div className="vertical-align-container">
             <div className="vertical-align-holder">
-              <Button variant='contained' color='inherit'>login</Button>
+              <Button variant='contained' className='appbar-button'>Login</Button>
             </div>
           </div>
         </NavLink>
