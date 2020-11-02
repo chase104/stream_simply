@@ -6,23 +6,23 @@ const FeaturedMovie = () => {
 
     let [featuredMedia, setFeaturedMedia] = useState(false)
 
-      useEffect(() => {
-        console.log('Running FM fetch...')
-
-
-        async function getApi() {
-          const axiosRes = await axios.get('/getFeaturedMovie').then(response => {
-            return response.data.results[0]
-            console.log(response)
-          })
-          setFeaturedMedia(axiosRes)
-          console.log(axiosRes);
-        }
-
-        getApi();
-
-
-      }, [])
+      // useEffect(() => {
+      //   console.log('Running FM fetch...')
+      //
+      //
+      //   async function getApi() {
+      //     const axiosRes = await axios.get('/getFeaturedMovie').then(response => {
+      //       return response.data.results[0]
+      //       console.log(response)
+      //     })
+      //     setFeaturedMedia(axiosRes)
+      //     console.log(axiosRes);
+      //   }
+      //
+      //   getApi();
+      //
+      //
+      // }, [])
 
 
 

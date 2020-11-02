@@ -17,7 +17,47 @@ code {
 .MuiAppBar-colorPrimary{
   background-color: rgb(109, 184, 102) !important;
 }
+.check-circle{
+  color: #66b8aa;
+}
+.modal-style{
+  height: auto;
+  background: white;
+  width: 35vw;
+  margin: auto;
+  margin-top: 16%;
+  padding: 15px
+}
 
+#simple-modal-title{
+  margin-top: 0px;
+}
+.edit-holder{
+  display: flex;
+}
+.display-personal{
+  min-width: 45%;
+  flex-direction: column;
+}
+.edit-labels{
+  margin-left: 10px;
+  font-size: 1.5rem
+}
+.personal-icons{
+  height: 100%;
+    width: 2.5vw;
+}
+.personal-info-holder{
+  display: flex;
+  align-items: center;
+  height: 3vw
+}
+.text-input-edit{
+  height: 2.5vw !important;
+}
+.edit-personal-button{
+  
+}
 .toolbar{
   padding-left: 0px !important;
   width: 100%
@@ -61,7 +101,11 @@ code {
   width: 5vw;
   margin-right: -15px;
 }
-
+.sidebar-button{
+  width: 4vw;
+  height: 4vw;
+  margin-top: 7px !important;
+}
 
 .title-header{
     display: flex;
@@ -119,7 +163,7 @@ background: rgb(109, 184, 102)
   background-color: 	#27383e !important
 }
 .sidebar{
-  width: 300px;
+  width: auto;
 
 }
 .standard-li-height a button{
@@ -263,11 +307,11 @@ background: rgb(109, 184, 102)
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 10vw;
-  width: 20vw;
-  height: 20vw;
-  min-width: 200px;
-  min-height: 200px;
+  font-size: 6rem;
+  min-width: 15vw;
+  height: auto;
+  min-width: 16vw;
+  min-height: 16vw;
   background-color: #cb861a;
 }
 

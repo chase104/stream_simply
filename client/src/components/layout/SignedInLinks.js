@@ -15,10 +15,27 @@ import SideBar from './sideBar'
 const SignedInLinks = ({classes}) => {
 
 
+const [user, setUser] = useState(null)
 
+  const getUserInfo = async () => {
+    try{
+      axios({
+        method: "GET",
+        withCredentials: true,
+        url: "/userinfo"
+      }).then((res) => {
+        console.log(res);
+        setUser(res.data)
+      })
+    }catch (err) {
+      console.log(err.message);
+    }
+  }
 
+  useEffect(() => {
+      getUserInfo()
 
-
+    }, [])
 
 
   const handleClick = () => {
@@ -42,8 +59,9 @@ const SignedInLinks = ({classes}) => {
       <li>
       <div className="vertical-align-container">
         <div className="vertical-align-holder">
-      <IconButton edge="start" color="inherit" aria-label="menu">
-        <SideBar />
+      <IconButton className="sidebar-button" edge="start" color="inherit" aria-label="menu" >
+        { user ?  <SideBar user={user} className="sidebar-button" /> : null}
+
       </IconButton>
       </div>
     </div>

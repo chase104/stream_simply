@@ -56,8 +56,10 @@ app.use(passport.session())
 app.get('/checkUser', function(req,res) {
   console.log("checking user");
   if(req.user) {
+    console.log(req.user);
     res.json({
-      loggedIn: true
+      loggedIn: true,
+      user: req.user
     })
   } else {
     res.json({
@@ -77,8 +79,10 @@ app.get('/getuser', (req, res) => {
 app.get('/userinfo', (req, res) => {
   console.log("req:", req);
   console.log("user:", req.user);
+  let initials = req.user.firstname.charAt(0).toUpperCase() + req.user.lastname.charAt(0).toUpperCase()
   res.json({
     ...req.user,
+    initials: initials
   })
 })
 
