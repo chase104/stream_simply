@@ -35,7 +35,7 @@ const FeaturedMovie = () => {
   function renderShow() {
     if (!featuredMedia) return <p className="black-text">'Loading media...'</p>;
     return (
-      <Carousel>
+      <Carousel interval="3000">
         {featuredMedia.map(show => {
           return (
             <React.Fragment>
