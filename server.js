@@ -59,11 +59,15 @@ app.use(passport.session());
 //----------------------------------------START OF ROUTES------------------------------------//
 
 //check if user is logged in
-app.get("/checkUser", function(req, res) {
-  if (req.user) {
+app.get('/checkUser', function(req,res) {
+  console.log("checking user");
+  if(req.user) {
+    console.log(req.user);
     res.json({
-      loggedIn: true
-    });
+      loggedIn: true,
+      user: req.user
+    })
+
   } else {
     res.json({
       loggedIn: false
@@ -81,10 +85,13 @@ app.get("/getuser", (req, res) => {
 app.get("/userinfo", (req, res) => {
   console.log("req:", req);
   console.log("user:", req.user);
+  let initials = req.user.firstname.charAt(0).toUpperCase() + req.user.lastname.charAt(0).toUpperCase()
   res.json({
-    ...req.user
-  });
-});
+    ...req.user,
+    initials: initials
+  })
+})
+
 
 // Get featuredMovie Route
 const featuredMovie = require("./routes/api/featured_movie");

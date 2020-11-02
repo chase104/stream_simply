@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
 
 
 const SignedOutLinks = () => {
@@ -9,7 +10,7 @@ const SignedOutLinks = () => {
       <NavLink to="/signup" className="li-height">
         <div className="vertical-align-container">
           <div className="vertical-align-holder">
-              <div>sign up</div>
+              <Button variant='contained' className='appbar-button'>Sign up</Button>
           </div>
         </div>
       </NavLink>
@@ -21,7 +22,7 @@ const SignedOutLinks = () => {
         <NavLink to="/login" className="li-height">
           <div className="vertical-align-container">
             <div className="vertical-align-holder">
-              <div>login</div>
+              <Button variant='contained' className='appbar-button'>Login</Button>
             </div>
           </div>
         </NavLink>

@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import Modal from './ModalCheck'
-import IconButton from '@material-ui/core/IconButton';
+import {IconButton, Button} from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -15,10 +15,27 @@ import SideBar from './sideBar'
 const SignedInLinks = ({classes}) => {
 
 
+const [user, setUser] = useState(null)
 
+  const getUserInfo = async () => {
+    try{
+      axios({
+        method: "GET",
+        withCredentials: true,
+        url: "/userinfo"
+      }).then((res) => {
+        console.log(res);
+        setUser(res.data)
+      })
+    }catch (err) {
+      console.log(err.message);
+    }
+  }
 
+  useEffect(() => {
+      getUserInfo()
 
-
+    }, [])
 
 
   const handleClick = () => {
@@ -42,8 +59,9 @@ const SignedInLinks = ({classes}) => {
       <li>
       <div className="vertical-align-container">
         <div className="vertical-align-holder">
-      <IconButton edge="start" color="inherit" aria-label="menu">
-        <SideBar />
+      <IconButton className="sidebar-button" edge="start" color="inherit" aria-label="menu" >
+        { user ?  <SideBar user={user} className="sidebar-button" /> : null}
+
       </IconButton>
       </div>
     </div>
@@ -53,7 +71,7 @@ const SignedInLinks = ({classes}) => {
       <NavLink to="" className="li-height" onClick={() => handleClick()}>
         <div className="vertical-align-container">
           <div className="vertical-align-holder">
-            <div>Logout</div>
+          <Button variant='contained' className='appbar-button'>Logout</Button>
           </div>
         </div>
       </NavLink>

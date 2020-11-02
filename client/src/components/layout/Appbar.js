@@ -24,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: '0px !important',
   },
   title:{
-    fontSize: '3vw'
+    fontSize: '3vw',
+    textAlign: 'center',
+    marginTop: '5px',
+    marginBottom: '5px',
+    fontFamily: "'Quicksand', sans-serif"
   }
 }));
 
@@ -32,6 +36,8 @@ export default function NavBar() {
   const classes = useStyles();
 
   const [loggedIn, setLoggedIn] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+
 
   const getStatus = async () => {
     try{
@@ -40,7 +46,6 @@ export default function NavBar() {
         withCredentials: true,
         url: "/checkUser"
       }).then((res) => {
-        console.log(res);
         setLoggedIn(res.data.loggedIn)
       })
     }catch (err) {
@@ -51,7 +56,7 @@ export default function NavBar() {
   useEffect(() => {
       getStatus()
       console.log(loggedIn);
-    })
+    }, [])
 
   return (
     <div className={classes.root}>
@@ -61,14 +66,14 @@ export default function NavBar() {
             <Grid item xs={4}>
             </Grid>
             <Grid item xs={4}>
-              <Typography variant="h3" className={classes.title}  style={{textAlign: 'center', marginTop: '10px'}}>
+              <Typography variant="h3" className={classes.title} >
                 <NavLink to="/" style={{color: 'white', textAlign: 'center'}}>
                 Stream Simply
                 </NavLink>
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              {loggedIn != null ? loggedIn == true ? <SignedInLinks classes={classes} /> : <SignedOutLinks /> : null  }
+              {loggedIn != null ? loggedIn == true ? <SignedInLinks classes={classes} user={userInfo}/> : <SignedOutLinks /> : null  }
 
             </Grid>
           </Grid>
