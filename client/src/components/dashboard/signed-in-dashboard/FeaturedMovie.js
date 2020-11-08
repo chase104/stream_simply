@@ -38,7 +38,7 @@ const FeaturedMovie = () => {
       <Carousel interval="3000">
         {featuredMedia.map(show => {
           return (
-            <React.Fragment>
+            <div>
               <div
                 style={{
                   width: "100%",
@@ -61,7 +61,7 @@ const FeaturedMovie = () => {
                 ></div>
               </div>
               <h5 style={{ textAlign: "center" }}>{_.get(show, "name", "")}</h5>
-            </React.Fragment>
+            </div>
           );
         })}
       </Carousel>
