@@ -10,7 +10,7 @@ const SignedOutLinks = () => {
       <NavLink to="/signup" className="li-height">
         <div className="vertical-align-container">
           <div className="vertical-align-holder">
-              <Button variant='contained' className='appbar-button'>Sign up</Button>
+              <Button variant='contained' className='appbar-button' style={{marginRight: "1.5vw"}}>Sign up</Button>
           </div>
         </div>
       </NavLink>
