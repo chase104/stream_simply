@@ -69,6 +69,7 @@ app.get('/checkUser', function(req,res) {
     })
 
   } else {
+    console.log("finished");
     res.json({
       loggedIn: false
     });
@@ -117,6 +118,55 @@ app.post("/signup", async function(req, res) {
   });
   client.end();
 });
+
+app.put("/servicesupdate", async function(req, res){
+  console.log("running services update...");
+  console.log(req.body);
+  console.log(req.user);
+  const servicesUpdate = await client.query(
+    "UPDATE users SET services = $1 WHERE id = $2", [req.body.services, req.user.id]
+  )
+  res.json({
+    update: servicesUpdate
+  })
+})
+
+
+
+
+app.put("/personalupdate", async function(req, res){
+  console.log("running personal update...");
+  const format = require('pg-format')
+
+  const columnStatements = []
+
+  const infoStatements = []
+
+
+    for (var prop in req.body) {
+      try {
+        const sqlStatement = format('UPDATE users SET %I = %L where id = %L', `${prop}`, `${req.body[prop]}`, `${req.user.id}`)
+        console.log(sqlStatement);
+         const query = await client.query(
+           sqlStatement
+         )
+        res.json({
+          update: query
+        })
+      } catch (error) {
+        console.log(error);
+      }
+
+    }
+
+
+
+
+
+})
+
+
+
 
 app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {

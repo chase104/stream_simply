@@ -25,22 +25,74 @@ code {
   font-family: 'Quicksand', sans-serif !important;
   color: white !important;
   text-transform: none !important;
-  font-size: 1.5rem !important;
+  font-size: 100% !important;
   box-shadow: none !important;
+  padding: 6px 16px !important;
 }
 .appbar-button:hover{
   filter: brightness(105%)
 }
+.edit-personal-button:hover{
+  filter: brightness(105%)
+}
 
+.MuiDrawer-paper{
+  width: 20vw !important;
+}
+
+
+.service-button{
+  padding: 10px;
+  background-color: grey;
+  border-radius: 5px;
+  margin: 0 5px 0 5px;
+  width: 6vw
+}
+
+.sidebar-list-item{
+  padding-left: 5px !important;
+}
+.MuiListItemIcon-root{
+  min-width: 40px !important;
+}
+
+.MuiTypography-body1{
+  font-size: 1.5rem !important;
+}
+
+.on-hover{
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+.on-hover:hover{
+  cursor: pointer;
+  filter: brightness(95%)
+}
+.mousedown{
+  filter: brightness(90%) !important;
+}
+.button-on{
+  border: 2px solid green !important;
+  background-color: #90EE90 !important;
+}
+.check-circle{
+  color: #419f38 !important;
+  position: absolute !important;
+  pointer-events: none;
+}
 .modal-style{
   height: auto;
   background: white;
-  width: 35vw;
+  width: 50vw;
   margin: auto;
-  margin-top: 16%;
+  margin-top: 8%;
   padding: 15px
 }
+.services-modal-style{
+  width: 50vw !important;
 
+}
 #simple-modal-title{
   margin-top: 0px;
 }
@@ -48,7 +100,7 @@ code {
   display: flex;
 }
 .display-personal{
-  min-width: 45%;
+  min-width: 35%;
   flex-direction: column;
 }
 .edit-labels{
@@ -67,8 +119,20 @@ code {
 .text-input-edit{
   height: 2.5vw !important;
 }
+.edit-personal{
+  width: 20vw
+}
 .edit-personal-button{
-
+  color: #fff !important;
+  background-color: #3f51b5 !important;
+  padding: 7px 10px !important;
+  border-radius: 5px !important;
+}
+.modal-button-container{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 5%;
+    margin-right: 5%;
 }
 .toolbar {
   padding-left: 0px !important;
@@ -96,7 +160,6 @@ code {
 
 .navbar-ul li {
   color: white !important;
-  margin-right: 1.5vw;
 }
 .links {
   margin-right: 20px;
@@ -114,10 +177,11 @@ code {
   margin-right: -15px;
 }
 .sidebar-button{
-  width: 4vw;
-  height: 4vw;
+  width: 4vw !important;
+  height: 4vw !important;
   margin-top: 7px !important;
   margin-bottom: 5px !important;
+  margin-left: 0px !important;
 }
 
 .title-header{
