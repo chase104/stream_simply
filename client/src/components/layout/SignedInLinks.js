@@ -16,21 +16,30 @@ const SignedInLinks = ({classes}) => {
 
 
 const [user, setUser] = useState(null)
+const [functionSwitch, setFunctionSwitch] = useState(true)
+  const checkUser = () => {
+    console.log(user);
+  }
 
-  const getUserInfo = async () => {
+  const getUserInfo = async (sent) => {
     try{
+      console.log("axios request");
       axios({
         method: "GET",
         withCredentials: true,
         url: "/userinfo"
       }).then((res) => {
-        console.log(res);
-        setUser(res.data)
-      })
-    }catch (err) {
+          console.log(" rerender");
+          setUser(null)
+          setUser(res.data)
+
+        })
+      }
+    catch (err) {
       console.log(err.message);
     }
   }
+
 
   useEffect(() => {
       getUserInfo()
@@ -52,15 +61,20 @@ const [user, setUser] = useState(null)
       })
   }
 
-
+  const callUserRerender = (sent) => {
+    console.log("rerendering!");
+    getUserInfo(sent)
+  }
 
   return(
     <ul className="right navbar-ul">
-      <li>
+
+
+      <li style={{marginRight: "1.5vw", marginLeft: "1vw"}}>
       <div className="vertical-align-container">
         <div className="vertical-align-holder">
       <IconButton className="sidebar-button" edge="start" color="inherit" aria-label="menu" >
-        { user ?  <SideBar user={user} className="sidebar-button" /> : null}
+        { user ?  <SideBar user={user} className="sidebar-button" rerender={(sent) => callUserRerender(sent)}/> : null}
 
       </IconButton>
       </div>
