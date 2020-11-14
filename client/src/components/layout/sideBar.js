@@ -79,7 +79,7 @@ const SideBar = ({user, rerender}) => {
 
 
   const [personalModalContent, setPersonalModalContent] = useState({
-    country: country,
+    country: null,
     firstname: null,
     lastname: null,
     email: null
@@ -195,20 +195,27 @@ const SideBar = ({user, rerender}) => {
         })}
 
       </div>
+
       <FormControl  className="edit-personal">
         {["firstname", "lastname", "email"].map((item) => {
           return (
-            <input type="text" placeholder={item} id={item} className="text-input-edit" value={personalModalContent.item} onChange={handlePersonalChange}/>
+            <input type="text"
+              placeholder={item}
+              id={item}
+              className="text-input-edit"
+              value={personalModalContent.item}
+              onChange={handlePersonalChange}/>
 
           )
         })}
 
+
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={personalModalContent.country}
+          value={personalModalContent.country ? personalModalContent.country : null }
           onChange={handlePersonalChange}
-          style={{marginTop: "0px !important"}}
+          style={{marginTop: "0px !important", height: "3vw", marginBottom: "0px !important"}}
           >
           <MenuItem value={user.country}>
           </MenuItem>
@@ -350,7 +357,7 @@ const SideBar = ({user, rerender}) => {
             </ListItem>
             <ListItem button key={user.country} onClick={openModal} className="sidebar-list-item">
               <ListItemIcon><Public /></ListItemIcon>
-              <ListItemText primary={user.country}  classname="sidebar-text"/>
+              <ListItemText primary={countryCipher[user.country]}  classname="sidebar-text"/>
             </ListItem>
         </List>
         <Divider />

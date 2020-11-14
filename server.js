@@ -98,6 +98,11 @@ app.get("/userinfo", (req, res) => {
 const featuredMovie = require("./routes/api/featured_movie");
 app.use("/getFeaturedMovie", featuredMovie);
 
+
+const getTmbd = require("./routes/api/get_tmbd")
+app.use("/getTmbd", getTmbd)
+
+
 // Set Static Folders
 app.use(express.static(path.join(__dirname, "client", "build")));
 

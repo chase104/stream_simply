@@ -11,7 +11,6 @@ const FeaturedMovie = () => {
   useEffect(() => {
     async function getApi() {
       const axiosRes = await axios.get("/getFeaturedMovie").then(response => {
-        console.log({ response });
         return response.data.results;
       });
       setFeaturedMedia(axiosRes);
@@ -22,12 +21,7 @@ const FeaturedMovie = () => {
 
   return (
     <div className="featured-movie">
-      <p
-        className="black-text center featured-title"
-        style={{ fontSize: "3rem" }}
-      >
-        Featured Shows
-      </p>
+
       {renderShow()}
     </div>
   );
@@ -35,7 +29,7 @@ const FeaturedMovie = () => {
   function renderShow() {
     if (!featuredMedia) return <p className="black-text">'Loading media...'</p>;
     return (
-      <Carousel interval="3000">
+      <Carousel interval="300000">
         {featuredMedia.map(show => {
           return (
             <div>
@@ -48,8 +42,8 @@ const FeaturedMovie = () => {
               >
                 <div
                   style={{
-                    height: 500,
-                    width: 800,
+                    height: "29vw",
+                    width: "52vw",
                     backgroundImage: `url('https://image.tmdb.org/t/p/original${_.get(
                       show,
                       "backdrop_path",
@@ -60,7 +54,7 @@ const FeaturedMovie = () => {
                   }}
                 ></div>
               </div>
-              <h5 style={{ textAlign: "center" }}>{_.get(show, "name", "")}</h5>
+              <h5 style={{ textAlign: "center", fontSize: "2.64rem", maxWidth: "50vw"}}>{show.title}</h5>
             </div>
           );
         })}
