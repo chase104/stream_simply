@@ -29,13 +29,33 @@ const CarouselOne = () => {
     {width: 1500, itemsToShow: 6}
   ]
 
-
+  const genreCypher = {
+    28: "Action",
+    12: "Adventure",
+    16: "Animation",
+    35: "Comedy",
+    80: "Crime",
+    99: "Documentary",
+    18: "Drama",
+    10751: "Family",
+    14: "Fantasy",
+    36: "History",
+    27: "Horror",
+    10402: "Music",
+    9648: "Mystery",
+    10749: "Romance",
+    878: "Science Fiction",
+    10770: "TV Movie",
+    53: "Thriller",
+    10752: "War",
+    37: "Western",
+  }
 
 
 
   return (
     <div>
-      <h2 style={{marginLeft: "4vw"}}>Popular movies</h2>
+      <h2  className="carousel-title">Popular movies</h2>
       <Carousel breakPoints={breakPoints}>
         {
           !carouselMedia ? fillerMedia.map((item) => {
@@ -45,7 +65,7 @@ const CarouselOne = () => {
           })
           : carouselMedia.map((item) => {
             return (
-              <Card valid={true} number="2" content={item}/>
+              <Card valid={true} number="2" content={item} />
             )
           })
         }

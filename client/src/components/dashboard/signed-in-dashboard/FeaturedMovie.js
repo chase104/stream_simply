@@ -54,7 +54,7 @@ const FeaturedMovie = () => {
                   }}
                 ></div>
               </div>
-              <h5 style={{ textAlign: "center", fontSize: "2.64rem", maxWidth: "50vw"}}>{show.title}</h5>
+              <h5 style={{ textAlign: "center", fontSize: "2.64rem", maxWidth: "50vw", color: "white"}}>{show.title}</h5>
             </div>
           );
         })}

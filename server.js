@@ -4,7 +4,7 @@ const request = require("request");
 const path = require("path");
 const bcrypt = require("bcrypt");
 const cors = require("cors");
-
+const axios = require('axios')
 const passport = require("passport");
 const session = require("express-session");
 const router = express.Router();
@@ -102,6 +102,33 @@ app.use("/getFeaturedMovie", featuredMovie);
 const getTmbd = require("./routes/api/get_tmbd")
 app.use("/getTmbd", getTmbd)
 
+
+app.post("/getMovieAvailability", function (req, res) {
+  console.log("id?", req.body.movieId);
+  const options = {
+    method: "GET",
+    url: 'https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup',
+    params: {source_id: req.body.movieId, source: 'tmdb', country: 'us'},
+    headers: {
+    'x-rapidapi-key': '12e1e06344mshbbfb57c2be00fdfp16c653jsnc7ee0c0aab1d',
+    'x-rapidapi-host': 'utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com'
+  }
+}
+console.log("options set");
+      axios.request(options).then(function (response) {
+      	console.log(response.data);
+        res.json({
+          response: response.data
+        })
+      }).catch(function (error) {
+      	console.error(error);
+      });
+  })
+
+app.post("/search", function (req, res) {
+  console.log("running search");
+  res.send("search results")
+})
 
 // Set Static Folders
 app.use(express.static(path.join(__dirname, "client", "build")));

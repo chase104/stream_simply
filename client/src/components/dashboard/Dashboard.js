@@ -2,13 +2,13 @@ import React from 'react'
 import SignedOutDashboard from './SignedOutDashboard'
 import SignedInDashboard from './signed-in-dashboard/SignedInDashboard'
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   const signedIn = true
   let dashboard
   if (signedIn === true) {
     dashboard = () => {
       return (
-        <SignedInDashboard />
+        <SignedInDashboard props={props}/>
       )
     }
   } else {

@@ -57,7 +57,7 @@ const SignIn = () => {
 
           <div className="input-field">
             <label for="email">Email</label>
-            <input className="grey-text" type="email" id="email" onChange={handleChange}/>
+            <input style={{marginTop: "3px"}} className="grey-text" type="email" id="email" onChange={handleChange}/>
           </div>
           <div className="input-field">
             <label for="password">Password</label>

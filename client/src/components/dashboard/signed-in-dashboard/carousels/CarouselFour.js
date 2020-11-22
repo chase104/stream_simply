@@ -4,7 +4,7 @@ import {Paper, Button} from '@material-ui/core';
 import Card from './Card.js'
 import axios from "axios";
 
-const CarouselTwo = () => {
+const CarouselFour = () => {
 
   const [carouselMedia, setCarouselMedia] = useState(null)
   const [fillerMedia, setFillerMedia] = useState([1,2,3,4,5,6])
@@ -12,7 +12,7 @@ const CarouselTwo = () => {
 
   useEffect(() => {
     async function getApi() {
-      const axiosRes = await axios.get("/getTmbd/carousel_two").then(response => {
+      const axiosRes = await axios.get("/getTmbd/carousel_four").then(response => {
         console.log({ response });
         return response.data.results;
       });
@@ -52,15 +52,14 @@ const CarouselTwo = () => {
   }
 
 
-
   return (
     <div>
-      <h2 className="carousel-title">Now Playing</h2>
+      <h2 className="carousel-title">Top Rated</h2>
       <Carousel breakPoints={breakPoints}>
         {
           !carouselMedia ? fillerMedia.map((item) => {
             return (
-              <Card valid={false} number="1" />
+              <Card valid={false} number="1"  />
             )
           })
           : carouselMedia.map((item) => {
@@ -75,4 +74,4 @@ const CarouselTwo = () => {
   )
 }
 
-export default CarouselTwo
+export default CarouselFour

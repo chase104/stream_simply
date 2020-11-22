@@ -5,7 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #e6e6e6;
+  background-color: #27383e;
 }
 
 code {
@@ -14,13 +14,13 @@ code {
 }
 
 .MuiAppBar-colorPrimary {
-  background-color: rgb(109, 184, 102) !important;
+  background-color: rgb(24,27,36) !important;
 }
 .check-circle{
   color: #66b8aa;
 }
 .appbar-button{
-  background-color: rgb(109, 184, 102) !important;
+  background-color: rgb(24,27,36) !important;
   border: 0px !important;
   font-family: 'Quicksand', sans-serif !important;
   color: white !important;
@@ -93,17 +93,59 @@ code {
 .modal-style{
   height: auto;
   background: white;
-  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  width: auto;
+  max-width: 55vw;
   margin: auto;
   margin-top: 8%;
-  padding: 15px
+  padding: 15px;
+  background-color: #27383e;
+}
+.carousel-title{
+  color: white;
+  margin-left: 4vw;
+}
+.containerflex{
+  display: flex;
+}
+.modal-img{
+  height: 24vw;
+  width: 15vw;
+}
+.genres-li{
+  margin-left: 10px;
+  font-size: 1.5rem;
+  display: inline-block;
+}
+.genres-title{
+  align-items: center;
+    text-align: center;
+    display: flex;
+    font-weight: bold;
+}
+.divider{
+  border: 1px solid black;
+  width: 100%;
+  max-height: 1px;
+  background-color: #cb861a;
+  border-color: #cb861a;
+}
+.filler-div-icon{
+  background-color: grey;
+  height: 30px;
+  width: 80px;
+  margin-left: 15px;
 }
 .services-modal-style{
   width: 50vw !important;
 
 }
-#simple-modal-title{
+.simple-modal-title{
   margin-top: 0px;
+}
+.title-holder{
+  display: flex
 }
 .edit-holder{
   display: flex;
@@ -252,11 +294,11 @@ code {
   background: rgb(109, 184, 102);
   border-radius: 34px !important;
   border: solid 0px !important;
-  box-shadow: none;
+  box-shadow: none !important;
 
 }
 .nav-wrapper {
-  background-color: #27383e !important;
+  background-color: rgb(24,27,36) !important;
 }
 .sidebar{
   width: auto;
@@ -489,10 +531,13 @@ code {
   height: 18vh;
   padding: 10px;
 }
-
+.search-card{
+  margin-top: 15px !important;
+}
 .card{
   display:flex;
   width: 100%;
+  max-width: 15vw;
   height: 350px;
   background: #333;
   font-size: 12rem;
@@ -500,6 +545,9 @@ code {
   justify-content: center;
   color: white;
   text-align: center
+}
+.card:hover{
+  cursor: pointer;
 }
 .loading-card{
   background-color: green !important;
@@ -512,6 +560,49 @@ code {
   width: 15vw !important;
 }
 
+.Carousel-next-11 {
+  float: right;
+}
+.closed-menu{
+  height: 2.5vw;
+  margin-top: 20px;
+  background-color: #cb861a;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  border-radius: 3px;
+}
+.expand-icon{
+  width: 2.5rem !important;
+    height: 2.5rem !important;
+    margin-right: 20px;
+}
+.search-title{
+  font-size: 1.5rem;
+    font-weight: bold;
+}
+.search-card-holder{
+  margin: 3vw 5vw;
+
+}
+.inner-search-card-holder{
+  display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+}
+.menu{
+  height: 200px;
+  display: inline-block;
+}
+.DIuaA{
+  height: 15px !important;
+  width: 15px !important;
+}
+.gUWalH{
+  height: 15px !important;
+  width: 15px !important;
+}
 .red-color {
   background-color: #460b0b;
 }
@@ -524,9 +615,7 @@ code {
 .save-color {
   margin-top: 5px;
 }
+
 .close-icon {
   cursor: pointer;
-}
-
-input[type="text"]:not(.browser-default) {
 }

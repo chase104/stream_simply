@@ -55,17 +55,12 @@ buttonOff: {
 const SideBar = ({user, rerender}) => {
   const classes = useStyles();
 
-
-
-
-
   const countryCipher = {
     es: "Spain",
     us: "USA",
     fr: "France",
     uk: "United Kingdom"
   }
-
 
   const [sidebarState, setSidebarState] = useState(false)
   const [open, setOpen] = useState(false)
