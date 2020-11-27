@@ -9,16 +9,51 @@ const omdbApi = require("../../config/keys").omdbApi;
 
 
 router.post("/makeSearch", (req, res) => {
+  console.log(req.body);
+  let options
+  if (req.body.data == undefined || null) {
+     options = {
+      method: "GET",
+      url: "https://api.themoviedb.org/3/movie/popular?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=2"
+    }
+  } else {
+    console.log("it's valid");
+     options = {
+      method: "GET",
+      url: `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.data}&page=1&include_adult=false`
+    }
+  }
+
+  request(options, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.send(body);
+    }
+  });
+})
+
+router.post("/makeCategorySearch", (req, res) => {
+  let options
   console.log("Req.body:", req.body);
-  const options = {
-    method: "GET",
-    url: `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.data}&page=1&include_adult=false`
+  if (req.body.include_genres) {
+    let addGenres = req.body.genres.join()
+    console.log("addGenres: ", addGenres);
+    options = {
+      method: "GET",
+      url: `https://api.themoviedb.org/3/movie/popular?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=2&with_genres=${addGenres}`
+    }
+  } else  {
+    let addGenres = req.body.genres.join('|')
+    options = {
+      method: "GET",
+      url: `https://api.themoviedb.org/3/movie/popular?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=2&with_genres=${addGenres}`
+    }
   }
   request(options, function(error, response, body) {
     if (!error && response.statusCode == 200) {
       res.send(body);
     }
   });
+
 })
 
 

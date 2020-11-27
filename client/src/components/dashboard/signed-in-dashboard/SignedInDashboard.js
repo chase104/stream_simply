@@ -39,8 +39,8 @@ const SignedInDashboard = (props) => {
   return (
     <div>
 
-        <Search props={props}/>
         <FeaturedMovie />
+        <Search props={props}/>
 
       <CarouselsHolder />
     </div>

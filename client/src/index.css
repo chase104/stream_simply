@@ -257,7 +257,7 @@ code {
   margin-top: 1.5vh;
 }
 .search-button-icon {
-  font-size: 4vw !important;
+  font-size: 3.5vw !important;
   max-width: 50%;
   width: 6vw !important;
 }
@@ -354,7 +354,8 @@ code {
 }
 .input-search-container{
   display: flex;
-  width: 100%
+  width: 100%;
+  max-height: 3.5vw
 }
 #dashboard-search:focus {
   border: 0px !important;
@@ -378,6 +379,9 @@ code {
   margin-bottom: 30px;
   display: flex;
   justify-content: center;
+}
+.main-carousel:hover{
+  cursor: pointer;
 }
 .featured-title {
   font-size: 4vw;
@@ -498,6 +502,7 @@ code {
   width: 1.2vw;
   margin-left: 0.3vw;
 }
+
 .change-password {
   display: inline-block;
   border-bottom: 2px solid;
@@ -556,21 +561,37 @@ code {
   background-size: 100% 100%;
 }
 
-.Carousel-buttonWrapper-5{
-  width: 15vw !important;
-}
+
 
 .Carousel-next-11 {
   float: right;
 }
-.closed-menu{
-  height: 2.5vw;
+.menu-container{
+  height: auto;
   margin-top: 20px;
   background-color: #cb861a;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: column;
   align-items: center;
   border-radius: 3px;
+}
+.search-dashboard{
+  display: flex;
+  flex-direction: column;
+}
+.closed-menu{
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  background-color: #cb861a
+}
+.closed-menu:hover{
+  cursor: pointer;
+  filter: brightness(105%) !important;
+
 }
 .expand-icon{
   width: 2.5rem !important;
@@ -578,12 +599,78 @@ code {
     margin-right: 20px;
 }
 .search-title{
-  font-size: 1.5rem;
+  font-size: 95%;
     font-weight: bold;
+}
+.search-settings{
+  min-height: 200px;
+  background-color: #cb861a;
+  width: 100%
+}
+.search-settings-hidden{
+  display: none
 }
 .search-card-holder{
   margin: 3vw 5vw;
 
+}
+.browse-button-holder{
+  display: flex;
+justify-content: center;
+margin-top: 10px;
+}
+.form-containerr{
+  margin: 0 10%
+}
+.form-all-container{
+  display: flex;
+}
+.form-left-container{
+}
+.genre-button-holder{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.Carousel-indicator-3 {
+  width: 2vw !important;
+  height: 2vw !important;
+}
+.genre-button{
+  margin: 5px 10px;
+  padding: 5px 15px;
+  background-color: 	#27383e;
+  color: white;
+  border-radius: 10px;
+  font-size: 20px;
+  border: 3px solid #cb861a
+}
+.genre-button:hover{
+  filter: brightness(105%);
+  cursor: pointer
+}
+.search-submit-button{
+  background-color: 	#ffdb84 !important;
+  border-radius: 10px !important;
+  padding: 10px 15px !important;
+  margin: 10px 0 !important;
+
+}
+.submit-button-holder{
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.genre-border{
+  border: 3px solid white;
+  background-color: #3b555e
+}
+.form-right-container{
+    margin-left: 5vw;
+}
+
+#settings-input{
+  width: 100%
 }
 .inner-search-card-holder{
   display: flex;
