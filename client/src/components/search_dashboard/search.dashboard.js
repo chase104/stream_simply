@@ -4,17 +4,18 @@ import { PrimaryContext } from '../../PrimaryContext'
 import axios from 'axios'
 import Search from '../layout/Search'
 import {ExpandMore, ExpandLess} from '@material-ui/icons';
-
+import SearchSettings from './search.settings.js'
 const SearchDashboard = (props) => {
 
 
     const [searchResults, setSearchResults] = useState(null)
     const [searchState, setSearchState] = useState(false)
-
+    const [menuIsOpen, setMenuIsOpen] = useState(false)
 
     const context = useContext(PrimaryContext)
-    console.log(context);
-    console.log(context.searchData);
+
+
+
   const axiosCall = async (context) => {
     console.log(context.searchData);
     await axios({
@@ -29,6 +30,12 @@ const SearchDashboard = (props) => {
       setSearchResults(res.data.results)
     })
   }
+
+  const passResults = (information) => {
+    console.log("passed information: ", information);
+    setSearchResults(information)
+  }
+
   useEffect(() => {
     let mounted = true;
     console.log(context);
@@ -44,13 +51,38 @@ const searchFunction = (boolean) => {
   }
 }
 
+let element = document.getElementById("search-settings")
+
+const handleMenuClick = (e) => {
+  console.log("menu clicked")
+  console.log(e.target);
+  console.log(e.target.parentNode);
+  console.log(element);
+  if (element.classList.contains('search-settings-hidden')){
+    element.classList.remove('search-settings-hidden')
+    setMenuIsOpen(true)
+  } else {
+    element.classList.add('search-settings-hidden')
+    setMenuIsOpen(false)
+  }
+}
+
   return (
-    <div style={{marginTop: "2rem"}}>
+    <div style={{marginTop: "2rem"}} className="search-dashboard">
       <Search props={props} searchFunction={() => searchFunction()}/>
       <div className="container">
-        <div className="closed-menu">
-          <ExpandMore className="expand-icon"/>
-          <div className="search-title">Search Settings</div>
+        <div className="menu-container">
+          <div className="closed-menu" onClick={(e) => handleMenuClick(e)}>
+            {!menuIsOpen ? <ExpandMore className="expand-icon"/>
+            : <ExpandLess className="expand-icon" />
+}
+            <div className="search-title">Search Settings</div>
+          </div>
+          <div className="search-settings search-settings-hidden" id="search-settings">
+            <SearchSettings searchData={context.searchData} passResults={(res) => passResults(res)}/>
+          </div>
+
+
         </div>
       </div>
       <SearchFilter results={searchResults} searchState={searchState}/>

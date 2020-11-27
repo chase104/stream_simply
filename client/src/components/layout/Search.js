@@ -5,12 +5,19 @@ import Button from "@material-ui/core/Button";
 import axios from 'axios'
 
 const Search = ({props, searchFunction, searchState}) => {
+
   const [searchContents, setSearchContents] = useState(null)
+
   const context = useContext(PrimaryContext)
+  
   console.log(context);
   const handleChange = (e) => {
     console.log(e.target.value);
     setSearchContents(e.target.value)
+  }
+
+  const handleBrowseClick = () => {
+    window.location = '/search'
   }
   const handleSearch = async (e) => {
     e.preventDefault()
@@ -67,6 +74,9 @@ const Search = ({props, searchFunction, searchState}) => {
           </div>
         </div>
       </form>
+      <div className="container browse-button-holder">
+      <Button size="large" style={{padding: "10px", backgroundColor: "#cb861a"}} onClick={handleBrowseClick}>Browse By Category</Button>
+      </div>
     </div>
   )
 }
