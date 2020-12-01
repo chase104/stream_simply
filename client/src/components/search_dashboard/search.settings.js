@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { PrimaryContext } from '../../PrimaryContext'
 import axios from 'axios'
 
-const SearchSettings = ({searchData, passResults}) => {
+const SearchSettings = ({searchData, passResults, previousSearch}) => {
 
 
   const [search, setSearch] = useState(searchData)
@@ -16,9 +16,9 @@ const SearchSettings = ({searchData, passResults}) => {
 
   const context = useContext(PrimaryContext)
 
-console.log("inclue: ",includePrevious);
+console.log("include previous: ",includePrevious);
 console.log("genres: ",genresCheckbox);
-
+console.log("previous search: ", previousSearch);
   const genreCypher = {
     28: "Action",
     12: "Adventure",
@@ -70,25 +70,32 @@ console.log("genres: ",genresCheckbox);
 
   const submitSearch = async (e) => {
     e.preventDefault()
+    console.log(genresCheckbox);
+      await axios({
+        method: 'POST',
+        data: {
+          genres: selectedGenres.map(x => +x),
+          imdb: scoreImdb,
+          years: years,
+          include_previous: includePrevious,
+          include_genres: genresCheckbox,
+          previous_search: previousSearch,
+        },
+        withCredentials: true,
+        url: '/getTmbd/makeCategorySearch'
+      }).then((res) => {
+        console.log(res);
+        if (res.data.results) {
+          passResults(res.data.results)
 
-    await axios({
-      method: 'POST',
-      data: {
-        genres: selectedGenres,
-        imdb: scoreImdb,
-        years: years,
-        include_previous: includePrevious,
-        include_genres: genresCheckbox,
-        previous_search: searchData,
-      },
-      withCredentials: true,
-      url: '/getTmbd/makeCategorySearch'
-    }).then((res) => {
-      console.log(res);
-      passResults(res.data.results)
+        } else {
+          passResults(res.data)
+        }
 
-    })
+      })
   }
+
+
 
   const handleSliderChange = (event, newValue) => {
     setYears(newValue)
@@ -116,8 +123,9 @@ console.log("genres: ",genresCheckbox);
   }
 
 
+const searchLabel = previousSearch ? `Include Last Search ("${previousSearch}")` : null
 
-
+ const previousDisplay = previousSearch ? "inline-flex" : "none"
 
   return (
     <div className="form-containerr">
@@ -176,11 +184,12 @@ console.log("genres: ",genresCheckbox);
           <Button className="search-submit-button" onClick={submitSearch}>Submit</Button>
 
           <FormControlLabel
-          style={{color: 	"#ffdb84", marginRight: "15px"}}
+
+          style={{color: 	"#ffdb84", marginRight: "15px", display: previousDisplay}}
           value="start"
 
           control={<Checkbox  id="include-previous-checkbox"  checked={includePrevious} onClick={(e) => handleCheckbox(e)}/>}
-          label="Include Previous Search Term"
+          label={searchLabel}
           labelPlacement="start"
           />
           <FormControlLabel

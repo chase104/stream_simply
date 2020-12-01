@@ -4,12 +4,12 @@ import Button from "@material-ui/core/Button";
 
 import axios from 'axios'
 
-const Search = ({props, searchFunction, searchState}) => {
+const Search = ({props, searchFunction, searchState, fromSearch}) => {
 
   const [searchContents, setSearchContents] = useState(null)
-
+  console.log("search dashboard? ",fromSearch);
   const context = useContext(PrimaryContext)
-  
+
   console.log(context);
   const handleChange = (e) => {
     console.log(e.target.value);

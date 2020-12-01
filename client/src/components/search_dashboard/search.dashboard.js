@@ -68,8 +68,8 @@ const handleMenuClick = (e) => {
 }
 
   return (
-    <div style={{marginTop: "2rem"}} className="search-dashboard">
-      <Search props={props} searchFunction={() => searchFunction()}/>
+    <div style={{marginTop: "2rem", marginBottom: "10vw"}} className="search-dashboard">
+      <Search props={props} searchFunction={() => searchFunction()} fromSearch={true}/>
       <div className="container">
         <div className="menu-container">
           <div className="closed-menu" onClick={(e) => handleMenuClick(e)}>
@@ -79,7 +79,7 @@ const handleMenuClick = (e) => {
             <div className="search-title">Search Settings</div>
           </div>
           <div className="search-settings search-settings-hidden" id="search-settings">
-            <SearchSettings searchData={context.searchData} passResults={(res) => passResults(res)}/>
+            <SearchSettings searchData={context.searchData} passResults={(res) => passResults(res)} previousSearch={context.searchData}/>
           </div>
 
 
