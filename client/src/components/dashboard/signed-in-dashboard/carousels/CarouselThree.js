@@ -4,7 +4,7 @@ import {Paper, Button} from '@material-ui/core';
 import Card from './Card.js'
 import axios from "axios";
 
-const CarouselThree = () => {
+const CarouselThree = ({user}) => {
 
   const [carouselMedia, setCarouselMedia] = useState(null)
   const [fillerMedia, setFillerMedia] = useState([1,2,3,4,5,6])
@@ -13,7 +13,6 @@ const CarouselThree = () => {
   useEffect(() => {
     async function getApi() {
       const axiosRes = await axios.get("/getTmbd/carousel_three").then(response => {
-        console.log({ response });
         return response.data.results;
       });
       setCarouselMedia(axiosRes);
@@ -59,12 +58,12 @@ const CarouselThree = () => {
         {
           !carouselMedia ? fillerMedia.map((item) => {
             return (
-              <Card valid={false} number="1"  />
+              <Card valid={false} number="1"  key={"filler"+item}/>
             )
           })
           : carouselMedia.map((item) => {
             return (
-              <Card valid={true} number="2" content={item}/>
+              <Card valid={true} number="2" content={item} user={user} key={"media"+item.id}/>
             )
           })
         }

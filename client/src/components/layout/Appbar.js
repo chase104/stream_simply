@@ -55,7 +55,7 @@ export default function NavBar() {
 
   useEffect(() => {
       getStatus()
-      console.log(loggedIn);
+      console.log("logged in?", loggedIn);
     }, [])
 
   return (
@@ -73,7 +73,7 @@ export default function NavBar() {
               </Typography>
             </Grid>
             <Grid item xs={4}>
-              {loggedIn != null ? loggedIn == true ? <SignedInLinks classes={classes} user={userInfo}/> : <SignedOutLinks /> : null  }
+              {loggedIn != null ? loggedIn == true ? <SignedInLinks classes={classes} user={userInfo} /> : <SignedOutLinks /> : null  }
 
             </Grid>
           </Grid>

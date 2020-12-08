@@ -143,9 +143,48 @@ code {
 }
 .simple-modal-title{
   margin-top: 0px;
+  font-size: 3rem;
+}
+.favorite-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 10px;
+}
+.favorite:hover{
+  filter: brightness(100%) !important;
+  cursor: pointer;
+}
+.favorite-option{
+  color: grey;
+  width: 2vw;
+  height: 2vw;
+}
+.favorite-option:hover{
+  filter: brightness(150%) !important;
+  cursor: pointer;
+
+}
+.favorite{
+  width: 2vw;
+  height: 2vw;
+  color: red
+}
+.favorite-bookmark{
+  width: 2vw;
+  height: 2vw;
+  color: #cb861a
+}
+.favorite-bookmark:hover{
+  filter: brightness(150%) !important;
+  cursor: pointer;
+
 }
 .title-holder{
   display: flex
+}
+.serviceImg:hover{
+  filter: brightness(150%);
 }
 .edit-holder{
   display: flex;
@@ -668,7 +707,18 @@ margin-top: 10px;
 .form-right-container{
     margin-left: 5vw;
 }
-
+.favorite-card-holder{
+  display: flex;
+  flex-direction: row;
+}
+.favorites-title{
+  font-size: 40px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  background-color: #cb861a
+}
 #settings-input{
   width: 100%
 }

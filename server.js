@@ -86,11 +86,16 @@ app.get("/getuser", (req, res) => {
 app.get("/userinfo", (req, res) => {
   console.log("req:", req);
   console.log("user:", req.user);
-  let initials = req.user.firstname.charAt(0).toUpperCase() + req.user.lastname.charAt(0).toUpperCase()
-  res.json({
-    ...req.user,
-    initials: initials
-  })
+  if (!req.user){
+    res.json(false)
+  } else {
+    let initials = req.user.firstname.charAt(0).toUpperCase() + req.user.lastname.charAt(0).toUpperCase()
+    res.json({
+      ...req.user,
+      initials: initials
+    })
+  }
+
 })
 
 
@@ -169,12 +174,8 @@ app.put("/servicesupdate", async function(req, res){
 app.put("/personalupdate", async function(req, res){
   console.log("running personal update...");
   const format = require('pg-format')
-
   const columnStatements = []
-
   const infoStatements = []
-
-
     for (var prop in req.body) {
       try {
         const sqlStatement = format('UPDATE users SET %I = %L where id = %L', `${prop}`, `${req.body[prop]}`, `${req.user.id}`)
@@ -188,17 +189,152 @@ app.put("/personalupdate", async function(req, res){
       } catch (error) {
         console.log(error);
       }
-
     }
+})
+app.put("/setfavorite", async function(req, res){
+  console.log("running favorite update...");
+  console.log(req.body);
+  console.log(req.user);
+  const format = require('pg-format')
+   if (req.body.typeOf == "ADD") {
 
-
-
-
-
+      console.log("have user");
+      console.log("type of ADD");
+      const sqlStatement = format('UPDATE users SET %I = %s WHERE id = %L', "favorites", `favorites || '{${req.body.movieId}}'`, `${req.user.id}`)
+      console.log(sqlStatement);
+      try {
+        const favoritesUpdate = await client.query(
+          sqlStatement
+        )
+        res.json({
+          update: favoritesUpdate
+        })
+      } catch (error) {
+        console.log("have error");
+        console.log(error);
+      }
+    } else if (req.body.typeOf == "REMOVE"){
+      console.log("have user");
+      console.log("type of REMOVE");
+      const sqlStatement = format('UPDATE users SET %I = %s WHERE id = %L', "favorites", `array_remove(favorites, ${req.body.movieId})`, `${req.user.id}`)
+      console.log(sqlStatement);
+      try {
+        const favoritesUpdate = await client.query(
+          sqlStatement
+        )
+        res.json({
+          update: favoritesUpdate
+        })
+      } catch (error) {
+        console.log("have error");
+        console.log(error);
+      }
+    }
 })
 
+app.put("/setbookmark", async function(req, res){
+  console.log("running bookmark update...");
+  console.log(req.body);
+  console.log(req.user);
+  const format = require('pg-format')
+   if (req.body.typeOf == "ADD") {
 
+      console.log("have user");
+      console.log("type of ADD");
+      const sqlStatement = format('UPDATE users SET %I = %s WHERE id = %L', "watchlist", `watchlist || '{${req.body.movieId}}'`, `${req.user.id}`)
+      console.log(sqlStatement);
+      try {
+        const watchlistUpdate = await client.query(
+          sqlStatement
+        )
+        res.json({
+          update: watchlistUpdate
+        })
+      } catch (error) {
+        console.log("have error");
+        console.log(error);
+      }
+    } else if (req.body.typeOf == "REMOVE"){
+      console.log("have user");
+      console.log("type of REMOVE");
+      const sqlStatement = format('UPDATE users SET %I = %s WHERE id = %L', "watchlist", `array_remove(watchlist, ${req.body.movieId})`, `${req.user.id}`)
+      console.log(sqlStatement);
+      try {
+        const watchlistUpdate = await client.query(
+          sqlStatement
+        )
+        res.json({
+          update: watchlistUpdate
+        })
+      } catch (error) {
+        console.log("have error");
+        console.log(error);
+      }
+    }
+})
 
+app.get("/getFavorites", function (req, res) {
+  let favoritesArr = req.user.favorites
+  console.log("favorites: ", favoritesArr);
+  let foundMoviesArr = []
+  //reach out and get movies by ID
+  let arrLength = favoritesArr.length
+  let counter = 0
+  console.log("arrLength:", arrLength);
+  for (var i=0; i<favoritesArr.length; i++){
+    let options = {
+      method: "GET",
+      url: `https://api.themoviedb.org/3/movie/${favoritesArr[i]}?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US`
+    }
+    console.log(options);
+    request(options, function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log("body.id: ",body.id);
+        foundMoviesArr.push(JSON.parse(body))
+        counter++
+        console.log("counter:", counter, "arrLength", arrLength);
+        if (counter === arrLength) {
+          res.json({
+            movies: foundMoviesArr,
+            watchlist: req.user.watchlist
+          })
+        }
+      }
+    })
+  }
+})
+
+app.get("/getWatchlist", function (req, res) {
+  console.log(req.user);
+  let watchlistArr = req.user.watchlist
+  console.log("favorites: ", watchlistArr);
+  let foundMoviesArr = []
+  //reach out and get movies by ID
+  let arrLength = watchlistArr.length
+  let counter = 0
+  console.log("arrLength:", arrLength);
+  for (var i=0; i<watchlistArr.length; i++){
+    let options = {
+      method: "GET",
+      url: `https://api.themoviedb.org/3/movie/${watchlistArr[i]}?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US`
+    }
+    console.log(options);
+    request(options, function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log("body.id: ",body.id);
+        foundMoviesArr.push(JSON.parse(body))
+        counter++
+        console.log("counter:", counter, "arrLength", arrLength);
+        if (counter === arrLength) {
+          res.json({
+            movies: foundMoviesArr,
+            favorited: req.user.favorites
+          })
+        }
+      }
+    })
+  }
+})
 
 app.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {

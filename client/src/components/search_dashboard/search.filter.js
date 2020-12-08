@@ -30,10 +30,7 @@ const SearchFilter = ({results, searchState}) => {
                       <Card number={8} search={true} content={itemm}/>
                     </Grid>
                   )
-
                 }
-
-
                 )
                 :
             null

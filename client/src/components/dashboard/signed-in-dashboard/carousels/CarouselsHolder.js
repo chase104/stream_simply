@@ -1,11 +1,51 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import CarouselOne from './CarouselOne'
 import CarouselTwo from './CarouselTwo'
 import CarouselThree from './CarouselThree'
 import CarouselFour from './CarouselFour'
 import CarouselFive from './CarouselFive'
+import axios from 'axios'
+
+
+
+
+
 
 const CarouselsHolder = () => {
+
+
+const [user, setUser] = useState(false)
+const [dataReturn, setDataReturn] = useState(false)
+  const getUserInfo = () => {
+    try{
+      console.log("axios user request");
+
+      axios({
+        method: "GET",
+        withCredentials: true,
+        url: "/userinfo"
+      }).then( (res) => {
+        console.log(res.data);
+          console.log(" rerender");
+          setUser(null)
+          setUser(res.data)
+          if (res.data === false){
+            console.log("it's false");
+            setDataReturn(true)
+          } else {
+            setDataReturn(true)
+          }
+        }).then(() => {
+          console.log(user);
+        })
+      }
+    catch (err) {
+      console.log(err.message);
+    }
+  }
+  useEffect(() => {
+      getUserInfo()
+    }, [])
 
   const genreCypher = {
     28: "Action",
@@ -29,13 +69,34 @@ const CarouselsHolder = () => {
     37: "Western",
   }
   return (
+
     <div style={{marginBottom: "300px"}}>
-      <CarouselOne />
-      <CarouselTwo />
-      <CarouselThree />
-      <CarouselFour />
-      <CarouselFive />
-    </div>
-  )
+    {
+      dataReturn == false ?
+
+      <p>loading...</p>
+
+      :
+      user == false ?
+      <div key="user-carousel">
+        <CarouselOne user={false}/>
+        <CarouselTwo user={false}/>
+        <CarouselThree  user={false}/>
+        <CarouselFour user={false}/>
+        <CarouselFive user={false}/>
+      </div>
+      :
+      <div key="user-carousel">
+        <CarouselOne user={user}/>
+        <CarouselTwo user={user}/>
+        <CarouselThree  user={user}/>
+        <CarouselFour user={user}/>
+        <CarouselFive user={user}/>
+      </div>
+    }
+  </div>
+)
 }
+
+
 export default CarouselsHolder

@@ -4,20 +4,21 @@ import {Paper, Button} from '@material-ui/core';
 import Card from './Card.js'
 import axios from "axios";
 
-const CarouselOne = () => {
+const CarouselOne = ({user}) => {
 
-  const [carouselMedia, setCarouselMedia] = useState(null)
+  const [carouselMedia, setCarouselMedia] = useState(false)
   const [fillerMedia, setFillerMedia] = useState([1,2,3,4,5,6])
 
-
+  console.log(user);
   useEffect(() => {
     async function getApi() {
       const axiosRes = await axios.get("/getTmbd/carousel_one").then(response => {
         console.log({ response });
         return response.data.results;
       });
-      setCarouselMedia(axiosRes);
+        setCarouselMedia(axiosRes);
     }
+
 
     getApi();
   }, []);
@@ -56,20 +57,24 @@ const CarouselOne = () => {
   return (
     <div>
       <h2  className="carousel-title">Popular movies</h2>
-      <Carousel breakPoints={breakPoints}>
-        {
-          !carouselMedia ? fillerMedia.map((item) => {
-            return (
-              <Card valid={false} number="1" />
-            )
-          })
-          : carouselMedia.map((item) => {
-            return (
-              <Card valid={true} number="2" content={item} />
-            )
-          })
-        }
-      </Carousel>
+      {
+        <Carousel breakPoints={breakPoints}>
+          {
+            !carouselMedia ? fillerMedia.map((item) => {
+              return (
+                <Card valid={false} number="1" key={item.id} user={user}/>
+              )
+            })
+            : carouselMedia.map((item) => {
+              return (
+                <Card valid={true} number="2" content={item} user={user} isOne={true} key={"media"+item.id}/>
+              )
+            })
+          }
+        </Carousel>
+
+      }
+
     </div>
 
   )
