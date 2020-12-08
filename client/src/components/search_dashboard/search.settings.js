@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { FormControl, Input, InputLabel, Slider, Button, FormControlLabel, Checkbox } from '@material-ui/core';
+import { FormControl, Slider, Button, FormControlLabel, Checkbox } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { PrimaryContext } from '../../PrimaryContext'
 import axios from 'axios'
@@ -7,7 +7,6 @@ import axios from 'axios'
 const SearchSettings = ({searchData, passResults, previousSearch}) => {
 
 
-  const [search, setSearch] = useState(searchData)
   const [years, setYears] = useState([1990, 2020])
   const [scoreImdb, setScoreImdb] = useState([0, 10])
   const [selectedGenres, setSelectedGenres] = useState([])

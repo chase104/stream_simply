@@ -61,6 +61,7 @@ router.post("/makeCategorySearch", async (req, res) => {
         method: "GET",
         typeOf: "previous&nogenres",
         years: req.body.years,
+        genres: req.body.genres,
         url: `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.previous_search}&page=1&with_genres=${addGenres}`
       }
     }
@@ -74,20 +75,21 @@ router.post("/makeCategorySearch", async (req, res) => {
         method: "GET",
         typeOf: "no-previous&yes-genres",
         years: req.body.years,
+        addGenres: addGenres,
         url: `https://api.themoviedb.org/3/discover/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${addGenres}`
       }
     } else  {
-      console.log("no no no no");
+      console.log("no-previous&no-genres");
       let addGenres = req.body.genres.join('|')
       options = {
         method: "GET",
+        addGenres: addGenres,
+        years: req.body.years,
+        typeOf: "no-previous&no-genres",
         url: `https://api.themoviedb.org/3/discover/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${addGenres}`
       }
     }
   }
-
-
-
       if (options.typeOf === "previous&genres") {
         console.log("previous&genres");
         console.log(options.genres);
@@ -115,7 +117,7 @@ router.post("/makeCategorySearch", async (req, res) => {
                         const date = d.getFullYear()
                         const dateMatch = (date > options.years[0] && date < options.years[1]) ? true : false;
                         console.log(item.release_date, item.genre_ids);
-                        if (options.genres.every(v => item.genre_ids.includes(v)) && dateMatch) {
+                        if (options.genres.every(v => item.genre_ids.includes(v)) && dateMatch && item.id !=265147) {
                           console.log("match");
                           moviess.push(item)
                         }
@@ -134,7 +136,6 @@ router.post("/makeCategorySearch", async (req, res) => {
 
       } else if (options.typeOf === "previous&nogenres"){
         console.log("previous&nogenres");
-
         const callLoopTwo = async () => {
           const moviess = []
           const lastCall = (movies) => {
@@ -145,7 +146,6 @@ router.post("/makeCategorySearch", async (req, res) => {
               res.send(movies)
             }
           }
-
               for (var i=1; moviess.length < 20 && i < 15; i++) {
                 options.url = `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.previous_search}&page=${i}&include_adult=false`
                 console.log(i)
@@ -159,10 +159,13 @@ router.post("/makeCategorySearch", async (req, res) => {
                       const d = new Date(item.release_date)
                       const date = d.getFullYear()
                       const dateMatch = (date > options.years[0] && date < options.years[1]) ? true : false;
-                      if (dateMatch) {
-                        console.log(date);
-                        console.log("match");
-                        moviess.push(item)
+                      let genreMatch = item.genre_ids.some(r=> options.genres.indexOf(r) >= 0)
+                      if (dateMatch && item.id != 265147) {
+                        if (genreMatch){
+                          moviess.push(item)
+                        } else {
+                          console.log("date matched, but not genre");
+                        }
                       } else {
                         console.log(date);
                         console.log("false");
@@ -202,17 +205,21 @@ router.post("/makeCategorySearch", async (req, res) => {
 
               for (var i=1; moviess.length < 20 && i < 15; i++) {
                 console.log(i)
+                options.url = `https://api.themoviedb.org/3/discover/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${i}&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${options.addGenres}`
                 console.log(options)
                 var counter = 0
                  request(options, function(error, response, body){
                     console.log("running request NUMBER:", i )
+                    counter++
+                    console.log("COUNTER COUNTER COUNTER COUNTER", counter);
+
                     console.log(options);
                     JSON.parse(body).results.map((item) => {
                       console.log(item.release_date, item.genre_ids);
                       const d = new Date(item.release_date)
                       const date = d.getFullYear()
                       const dateMatch = (date > options.years[0] && date < options.years[1]) ? true : false;
-                      if (dateMatch) {
+                      if (dateMatch && item.id != 265147) {
                         console.log(date);
                         console.log("match");
                         moviess.push(item)
@@ -222,8 +229,6 @@ router.post("/makeCategorySearch", async (req, res) => {
 
                       }
                     })
-                    counter++
-                    console.log("COUNTER COUNTER COUNTER COUNTER", counter);
                     console.log("movies length: ", moviess.length);
                     if (moviess.length >= 20 || counter >= 14) {
                       console.log("moviess length", moviess.length);
@@ -235,7 +240,56 @@ router.post("/makeCategorySearch", async (req, res) => {
       callLoopTwo()
 
 
+    } else if(options.typeOf === "no-previous&no-genres") {
+      console.log("no previous or genres");
+      const callLoopTwo = async () => {
+        const moviess = []
+        const lastCall = (movies) => {
+          if (res.headersSent){
+            console.log("null send");
+          } else {
+            console.log("sending");
+            res.send(movies)
+          }
+        }
+
+            for (var i=1; moviess.length < 20 && i < 15; i++) {
+              console.log(i)
+              options.url = `https://api.themoviedb.org/3/discover/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${i}&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${options.addGenres}`
+              console.log(options)
+              var counter = 0
+               request(options, function(error, response, body){
+                  console.log("running request NUMBER:", i )
+                  counter++
+                  console.log("COUNTER COUNTER COUNTER COUNTER", counter);
+
+                  console.log(options);
+                  JSON.parse(body).results.map((item) => {
+                    console.log(item.release_date, item.genre_ids);
+                    const d = new Date(item.release_date)
+                    const date = d.getFullYear()
+                    const dateMatch = (date > options.years[0] && date < options.years[1]) ? true : false;
+                    if (dateMatch && item.id != 265147) {
+                      console.log(date);
+                      console.log("match");
+                      moviess.push(item)
+                    } else {
+                      console.log(date);
+                      console.log("false");
+
+                    }
+                  })
+                  console.log("movies length: ", moviess.length);
+                  if (moviess.length >= 20 || counter >= 14) {
+                    console.log("moviess length", moviess.length);
+                    lastCall(moviess)
+                  }
+                })
+              }
       }
+    callLoopTwo()
+
+    }
 
 
 
@@ -246,7 +300,7 @@ router.post("/makeCategorySearch", async (req, res) => {
 router.get("/carousel_one", (req, res) => {
   const options = {
     method: "GET",
-    url: "https://api.themoviedb.org/3/movie/popular?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=1"
+    url: "https://api.themoviedb.org/3/movie/popular?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=2"
   }
   request(options, function(error, response, body) {
     if (!error && response.statusCode == 200) {

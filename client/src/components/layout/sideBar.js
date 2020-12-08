@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
+import { useHistory } from "react-router-dom";
 import IconButton from '@material-ui/core/IconButton';
 import Drawer from '@material-ui/core/Drawer';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import {AccountCircle, Email, Public, CheckCircle} from '@material-ui/icons';
+import {AccountCircle, Email, Public, CheckCircle, Favorite, Bookmark} from '@material-ui/icons';
 import {Modal, List, ListItem, ListItemIcon, ListItemText, Input, Select, FormControl, MenuItem, InputLabel, Button, Grid } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import axios from 'axios'
@@ -54,7 +55,7 @@ buttonOff: {
 
 const SideBar = ({user, rerender}) => {
   const classes = useStyles();
-
+  const history = useHistory();
   const countryCipher = {
     es: "Spain",
     us: "USA",
@@ -181,7 +182,7 @@ const SideBar = ({user, rerender}) => {
         {information.map((item) => {
           let Icon = (item == "email") ? Email : (item == "country") ? Public : PermIdentityIcon;
           return(
-            <div className="personal-info-holder">
+            <div className="personal-info-holder" key={item+"12"}>
               <Icon className="personal-icons"/>
               <div className="edit-labels">{item == "country" ? countryCipher[user.country] : user[item]}</div>
             </div>
@@ -277,6 +278,16 @@ const SideBar = ({user, rerender}) => {
     }
   }
 
+  const handleFavoritesClick = () => {
+    console.log("clicked favorite");
+    setSidebarState(false)
+    history.push("/favorites")
+
+
+  }
+  const handleBookmarkClick = () => {
+    console.log("clicked bookmark");
+  }
     const servicesBody = (
       <div className="modal-style services-modal-style">
         <h2 id="simple-modal-title">Edit Your Services</h2>
@@ -357,6 +368,18 @@ const SideBar = ({user, rerender}) => {
         </List>
         <Divider />
         <List>
+          <ListItem button key={"favorites-list"}   onClick={handleFavoritesClick} className="sidebar-list-item">
+            <ListItemIcon><Favorite /></ListItemIcon>
+            <ListItemText primary="Favorites" classname="sidebar-text"/>
+          </ListItem>
+          <ListItem button key={"bookmark-list"}  onClick={handleBookmarkClick} className="sidebar-list-item">
+            <ListItemIcon><Bookmark /></ListItemIcon>
+            <ListItemText primary="Watch List" className="sidebar-text"/>
+          </ListItem>
+
+        </List>
+        <Divider />
+        <List>
           {userServices.map((item) => (
             <ListItem button key={item + "service"} onClick={openServicesModal} className="sidebar-list-item">
               <ListItemIcon><CheckCircle style={{color: "#419f38"}}/></ListItemIcon>
@@ -374,7 +397,6 @@ const SideBar = ({user, rerender}) => {
           :
           <div>
           </div>
-
         }
         </List>
         <Modal

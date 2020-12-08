@@ -83,7 +83,7 @@ const FeaturedMovie = () => {
           <div style={{fontSize: "24px"}} className="genres-title">Geres:</div>
           </div>
           <div style={{display: "flex", flexWrap: "wrap"}}>
-            {content ? content.genre_ids.map((id) =>  (<div className="genres-li">{genreCypher[id]}</div>)) : null}
+            {content ? content.genre_ids.map((id) =>  (<div className="genres-li" key={id+content.title}>{genreCypher[id]}</div>)) : null}
           </div>
         </div>
         <div className="divider"></div>
@@ -129,12 +129,11 @@ const FeaturedMovie = () => {
   function renderShow() {
     if (!featuredMedia) return <p className="black-text">'Loading media...'</p>;
     return (
-      <Carousel interval="300000">
+      <Carousel interval="4000">
         {featuredMedia.map(content => {
-          console.log(featuredMedia)
-          console.log(content);
+
           return (
-            <div onClick={() => handleClick(content)} className="main-carousel">
+            <div onClick={() => handleClick(content)} className="main-carousel" key={content.id+content.title}>
               <div
                 style={{
                   width: "100%",

@@ -9,18 +9,24 @@ import LoggedInRoute from './logged.in.route'
 import LoggedOutRoute from './logged.out.route'
 import NavBar from './components/layout/Appbar'
 import PrimaryContextProvider from './PrimaryContext.js'
+import FavoriteDashboard from './components/dashboard/Favorite-dashboard'
+
+
 function App() {
   return (
 
   <BrowserRouter>
     <div className="App">
       <PrimaryContextProvider>
+
         <NavBar />
         <Route exact path="/" component={Dashboard} />
         <Route path="/search" component={SearchDashboard}/>
         <LoggedOutRoute  path="/signup" component={SignUp} />
         <LoggedOutRoute path='/login' component={SignIn} />
         <LoggedInRoute path='/settings' component={Settings} />
+        <LoggedInRoute path='/favorites' component={FavoriteDashboard} />
+
       </PrimaryContextProvider >
     </div>
   </BrowserRouter>

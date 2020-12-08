@@ -7,10 +7,8 @@ import axios from 'axios'
 const Search = ({props, searchFunction, searchState, fromSearch}) => {
 
   const [searchContents, setSearchContents] = useState(null)
-  console.log("search dashboard? ",fromSearch);
   const context = useContext(PrimaryContext)
 
-  console.log(context);
   const handleChange = (e) => {
     console.log(e.target.value);
     setSearchContents(e.target.value)
@@ -30,10 +28,8 @@ const Search = ({props, searchFunction, searchState, fromSearch}) => {
       withCredentials: true,
       url: '/search'
     }).then((res) => {
-      console.log(res);
       console.log("running context edit...");
       context.changeTheme({searchData: searchContents})
-      console.log(props);
       if (props.props) {
         props.props.history.push("/search")
       } else {
@@ -67,7 +63,7 @@ const Search = ({props, searchFunction, searchState, fromSearch}) => {
           </div>
 
             <Button variant="contained" className="inner-holder" style={{boxShadow: "none !important"}} onClick={handleSearch}>
-              <i class="material-icons left search-button-icon search-icon-dashboard grey-text text-darken-3">
+              <i className="material-icons left search-button-icon search-icon-dashboard grey-text text-darken-3">
                 search
               </i>
             </Button>

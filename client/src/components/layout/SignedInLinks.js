@@ -29,6 +29,7 @@ const [functionSwitch, setFunctionSwitch] = useState(true)
         withCredentials: true,
         url: "/userinfo"
       }).then((res) => {
+        console.log(res.data);
           console.log(" rerender");
           setUser(null)
           setUser(res.data)

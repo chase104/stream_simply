@@ -13,7 +13,6 @@ const SignedInDashboard = (props) => {
   const [searchContents, setSearchContents] = useState(null)
 
   const context = useContext(PrimaryContext)
-  console.log(context);
   const handleChange = (e) => {
     console.log(e.target.value);
     setSearchContents(e.target.value)
@@ -38,9 +37,9 @@ const SignedInDashboard = (props) => {
   }
   return (
     <div>
-
-        <FeaturedMovie />
         <Search props={props}/>
+        <FeaturedMovie />
+
 
       <CarouselsHolder />
     </div>

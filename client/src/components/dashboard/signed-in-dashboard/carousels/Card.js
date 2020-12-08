@@ -1,14 +1,16 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Modal} from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import axios from 'axios'
 import { Paper } from "@material-ui/core";
+import {FavoriteBorder, Favorite, BookmarkBorder, Bookmark} from '@material-ui/icons/';
 
-
-
-const Card = ({valid, number, content, genreFunction, search}) => {
+const Card = ({valid, number, content, genreFunction, search, user, isOne}) => {
   let cardClassname
   let imgUrl
+
+
+
 
   if (valid) {
     if (search) {
@@ -33,6 +35,27 @@ const returnDate = () => {
   const [movieModal, setMovieModal] = useState(false)
   const [availabilityData, setAvailabilityData] = useState(false)
   const [availabilityDataa, setAvailabilityDataa] = useState(null)
+  const [isFavorite, setIsFavorite] = useState(false)
+  const [isBookmarked, setIsBookmarked] = useState(false)
+
+  useEffect(() => {
+    console.log(user);
+    if (user && content) {
+      console.log("we have user", user)
+      console.log(content.title);
+      if (user.favorites.includes(content.id)) {
+        setIsFavorite(true)
+      }
+      if (user.watchlist.includes(content.id)){
+        setIsBookmarked(true)
+      }
+    } else if (content) {
+      console.log("we have no user", user);
+      console.log(content.title);
+    }
+  }, [])
+
+
   const genreCypher = {
     28: "Action",
     12: "Adventure",
@@ -62,13 +85,96 @@ const returnDate = () => {
 
       return <li className="genres-li">{genreCypher[genreIds[i]]}</li>
     }
+  }
+
+
+  const favoriteClassName = `favorite-container`
+
+  const handleFavoriteClick = async (boolean) => {
+    console.log("favorite clicked");
+    console.log(user);
+    if (user) {
+      let typeOf
+      if (boolean === true) {
+        console.log("false remove");
+
+        setIsFavorite(false)
+        typeOf = "REMOVE"
+      } else {
+        console.log("true add");
+
+        setIsFavorite(true)
+        typeOf = "ADD"
+      }
+      console.log(content.id);
+      await axios({
+        method: 'PUT',
+        data: {
+          favorited: true,
+          movieId: content.id,
+          typeOf: typeOf
+        },
+        withCredentials: true,
+        url: '/setfavorite'
+      }).then((res) => {
+        console.log(res);
+
+      })
+    } else {
+      console.log("Please log in");
+    }
+
 
   }
 
-  const movieModalBody = () => (
+  const handleBookmarkClick = async (boolean) => {
+    console.log("bookmark clicked");
+    console.log(user);
+    if (user) {
+      let typeOf
+      if (boolean === true) {
+        console.log("It's true, turn to false bookmark");
+        setIsBookmarked(false)
+        typeOf = "REMOVE"
+      } else {
+        console.log("It's false, change to true bookmark");
+        setIsBookmarked(true)
+        typeOf = "ADD"
+      }
+      console.log(content.id);
+      await axios({
+        method: 'PUT',
+        data: {
+          favorited: true,
+          movieId: content.id,
+          typeOf: typeOf
+        },
+        withCredentials: true,
+        url: '/setbookmark'
+      }).then((res) => {
+        console.log(res);
+
+      })
+    } else {
+      console.log("Please log in");
+    }
+
+
+  }
+
+    const movieModalBody = () => (
     <div className="modal-style" style={{marginTop: "8%", color: "white"}}>
       <div className="title-holder">
-        <h3 className="simple-modal-title" style={{maxWidth: "75%"}}>{content ? content.original_title : null}</h3>
+        <div style={{maxWidth: "75%"}}>
+          <div className="simple-modal-title" >{content ? content.original_title : null}</div>
+
+        </div>
+        <div className="favorite-container">
+        {isFavorite ? <Favorite className="favorite" onClick={() => handleFavoriteClick(true)}/> : <FavoriteBorder className="favorite-option" onClick={() => handleFavoriteClick(false)}/>}
+        </div>
+        <div className="favorite-container">
+        {isBookmarked ? <Bookmark className="favorite-bookmark" onClick={() => handleBookmarkClick(true)}/> : <BookmarkBorder className="favorite-option" onClick={() => handleBookmarkClick(false)}/>}
+        </div>
         <h3 className="simple-modal-title" style={{marginLeft: 'auto'}}>{content ? returnDate() : null}</h3>
       </div>
       <div className="containerflex">
@@ -79,7 +185,7 @@ const returnDate = () => {
           <div style={{fontSize: "24px"}} className="genres-title">Geres:</div>
           </div>
           <div style={{display: "flex", flexWrap: "wrap"}}>
-            {content ? content.genre_ids.map((id) =>  (<div className="genres-li">{genreCypher[id]}</div>)) : null}
+            {content ? content.genre_ids.map((id) =>  (<div className="genres-li" key={id+content.title}>{genreCypher[id]}</div>)) : null}
           </div>
         </div>
         <div className="divider"></div>
@@ -94,7 +200,7 @@ const returnDate = () => {
 
             availabilityData.map((item) =>
 
-            <a href={item.url} style={{marginLeft:"15px"}} target="_blank">
+            <a href={item.url} style={{marginLeft:"15px"}} target="_blank" className="serviceImg">
               <img src={item.icon} />
             </a>
           )
@@ -117,27 +223,27 @@ const returnDate = () => {
 
   const handleClick = () => {
     console.log("card clicked");
-    movieModal == true ? setMovieModal(false) : setMovieModal(true)
-    async function getApi() {
-      console.log("running api");
-      console.log(content.id);
-      const axiosRes = await axios.post("/getMovieAvailability", {
-        movieId: content.id
-      }).then(response => {
-        console.log(response.data.response.collection.locations)
-        setAvailabilityData(response.data.response.collection.locations)
-      });
-      //set usestate
+    if (movieModal == false){
+      setMovieModal(true)
     }
-    getApi()
+    // async function getApi() {
+    //   console.log("running api");
+    //   const axiosRes = await axios.post("/getMovieAvailability", {
+    //     movieId: content.id
+    //   }).then(response => {
+    //     console.log(response.data.response.collection.locations)
+    //     setAvailabilityData(response.data.response.collection.locations)
+    //   });
+    // }
+    // getApi()
   }
 
 const modal = () => (
   <Modal
     open={movieModal}
-    onClose={() => {
-      console.log("closing")
-      setMovieModal(false)}}
+    onClose={(e) => {
+    console.log(e);
+    }}
     aria-labelledby="simple-modal-title"
     aria-describedby="simple-modal-description"
   >
@@ -148,7 +254,7 @@ const modal = () => (
 
 
   return (
-    <div className={cardClassname} onClick={handleClick}>
+    <div className={cardClassname} onClick={() => {handleClick()}} >
       {content ?
         <div className="card-valid" style={{width: "100%", backgroundImage: `url(https://image.tmdb.org/t/p/original${content.poster_path})`}}>
         </div>

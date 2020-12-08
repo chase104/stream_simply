@@ -13,7 +13,6 @@ const CarouselFour = () => {
   useEffect(() => {
     async function getApi() {
       const axiosRes = await axios.get("/getTmbd/carousel_four").then(response => {
-        console.log({ response });
         return response.data.results;
       });
       setCarouselMedia(axiosRes);
@@ -59,12 +58,12 @@ const CarouselFour = () => {
         {
           !carouselMedia ? fillerMedia.map((item) => {
             return (
-              <Card valid={false} number="1"  />
+              <Card valid={false} number="1"  key={"filler"+item}/>
             )
           })
           : carouselMedia.map((item) => {
             return (
-              <Card valid={true} number="2" content={item}/>
+              <Card valid={true} number="2" content={item} key={"media"+item.id}/>
             )
           })
         }
