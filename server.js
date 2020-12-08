@@ -274,8 +274,66 @@ app.put("/setbookmark", async function(req, res){
 })
 
 app.get("/getFavorites", function (req, res) {
-  res.send(req.user)
-  
+  let favoritesArr = req.user.favorites
+  console.log("favorites: ", favoritesArr);
+  let foundMoviesArr = []
+  //reach out and get movies by ID
+  let arrLength = favoritesArr.length
+  let counter = 0
+  console.log("arrLength:", arrLength);
+  for (var i=0; i<favoritesArr.length; i++){
+    let options = {
+      method: "GET",
+      url: `https://api.themoviedb.org/3/movie/${favoritesArr[i]}?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US`
+    }
+    console.log(options);
+    request(options, function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log("body.id: ",body.id);
+        foundMoviesArr.push(JSON.parse(body))
+        counter++
+        console.log("counter:", counter, "arrLength", arrLength);
+        if (counter === arrLength) {
+          res.json({
+            movies: foundMoviesArr,
+            watchlist: req.user.watchlist
+          })
+        }
+      }
+    })
+  }
+})
+
+app.get("/getWatchlist", function (req, res) {
+  console.log(req.user);
+  let watchlistArr = req.user.watchlist
+  console.log("favorites: ", watchlistArr);
+  let foundMoviesArr = []
+  //reach out and get movies by ID
+  let arrLength = watchlistArr.length
+  let counter = 0
+  console.log("arrLength:", arrLength);
+  for (var i=0; i<watchlistArr.length; i++){
+    let options = {
+      method: "GET",
+      url: `https://api.themoviedb.org/3/movie/${watchlistArr[i]}?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US`
+    }
+    console.log(options);
+    request(options, function(error, response, body) {
+      if (!error && response.statusCode == 200) {
+        console.log("body.id: ",body.id);
+        foundMoviesArr.push(JSON.parse(body))
+        counter++
+        console.log("counter:", counter, "arrLength", arrLength);
+        if (counter === arrLength) {
+          res.json({
+            movies: foundMoviesArr,
+            favorited: req.user.favorites
+          })
+        }
+      }
+    })
+  }
 })
 
 app.post("/login", (req, res, next) => {

@@ -4,7 +4,7 @@ import {Paper, Button} from '@material-ui/core';
 import Card from './Card.js'
 import axios from "axios";
 
-const CarouselThree = () => {
+const CarouselThree = ({user}) => {
 
   const [carouselMedia, setCarouselMedia] = useState(null)
   const [fillerMedia, setFillerMedia] = useState([1,2,3,4,5,6])
@@ -63,7 +63,7 @@ const CarouselThree = () => {
           })
           : carouselMedia.map((item) => {
             return (
-              <Card valid={true} number="2" content={item} key={"media"+item.id}/>
+              <Card valid={true} number="2" content={item} user={user} key={"media"+item.id}/>
             )
           })
         }

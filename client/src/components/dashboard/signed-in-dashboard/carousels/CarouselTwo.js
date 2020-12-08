@@ -5,7 +5,7 @@ import Card from './Card.js'
 import axios from "axios";
 
 const CarouselTwo = ({user}) => {
-
+ 
   const [carouselMedia, setCarouselMedia] = useState(null)
   const [fillerMedia, setFillerMedia] = useState([1,2,3,4,5,6])
 

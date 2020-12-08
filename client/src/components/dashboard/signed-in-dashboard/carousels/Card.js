@@ -5,10 +5,14 @@ import axios from 'axios'
 import { Paper } from "@material-ui/core";
 import {FavoriteBorder, Favorite, BookmarkBorder, Bookmark} from '@material-ui/icons/';
 
-const Card = ({valid, number, content, genreFunction, search, user, isOne}) => {
+const Card = ({valid, number, content, genreFunction, search, user, isOne, favoritedMovie, watchList}) => {
   let cardClassname
   let imgUrl
-
+  if (favoritedMovie || watchList){
+    console.log("card content:", content);
+    console.log("watchlist:", watchList);
+    console.log("favortied: ", favoritedMovie);
+  }
 
 
 
@@ -170,10 +174,10 @@ const returnDate = () => {
 
         </div>
         <div className="favorite-container">
-        {isFavorite ? <Favorite className="favorite" onClick={() => handleFavoriteClick(true)}/> : <FavoriteBorder className="favorite-option" onClick={() => handleFavoriteClick(false)}/>}
+        {isFavorite || favoritedMovie ? <Favorite className="favorite" onClick={() => handleFavoriteClick(true)}/> : <FavoriteBorder className="favorite-option" onClick={() => handleFavoriteClick(false)}/>}
         </div>
         <div className="favorite-container">
-        {isBookmarked ? <Bookmark className="favorite-bookmark" onClick={() => handleBookmarkClick(true)}/> : <BookmarkBorder className="favorite-option" onClick={() => handleBookmarkClick(false)}/>}
+        {isBookmarked || watchList ? <Bookmark className="favorite-bookmark" onClick={() => handleBookmarkClick(true)}/> : <BookmarkBorder className="favorite-option" onClick={() => handleBookmarkClick(false)}/>}
         </div>
         <h3 className="simple-modal-title" style={{marginLeft: 'auto'}}>{content ? returnDate() : null}</h3>
       </div>
@@ -185,7 +189,14 @@ const returnDate = () => {
           <div style={{fontSize: "24px"}} className="genres-title">Geres:</div>
           </div>
           <div style={{display: "flex", flexWrap: "wrap"}}>
-            {content ? content.genre_ids.map((id) =>  (<div className="genres-li" key={id+content.title}>{genreCypher[id]}</div>)) : null}
+            { content ?
+              content.genre_ids ?
+              content.genre_ids.map((id) =>  (<div className="genres-li" key={id+content.title}>{genreCypher[id]}</div>))
+              :
+              content.genres.map((id) =>  (<div className="genres-li" key={id+content.title}>{id.name}</div>))
+              :
+              null
+            }
           </div>
         </div>
         <div className="divider"></div>

@@ -282,11 +282,11 @@ const SideBar = ({user, rerender}) => {
     console.log("clicked favorite");
     setSidebarState(false)
     history.push("/favorites")
-
-
   }
   const handleBookmarkClick = () => {
     console.log("clicked bookmark");
+    setSidebarState(false)
+    history.push("/watchlist")
   }
     const servicesBody = (
       <div className="modal-style services-modal-style">
