@@ -6,9 +6,9 @@ import Drawer from '@material-ui/core/Drawer';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import SideBar from './SideBar'
+import SideBar from './SideBar.js'
 
- 
+
 
 
 const SignedInLinks = ({classes}) => {
