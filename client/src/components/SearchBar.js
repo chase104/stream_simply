@@ -31,8 +31,8 @@ const SearchBar = ({props, searchFunction, searchState, fromSearch}) => {
     }).then((res) => {
       console.log("running context edit...");
       context.changeTheme({searchData: searchContents})
-      if (props.props) {
-        props.props.history.push("/search")
+      if (searchContents) {
+        props.history.push("/search")
       } else {
         if (searchState === false) {
           searchFunction(true)
