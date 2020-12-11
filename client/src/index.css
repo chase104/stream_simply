@@ -49,7 +49,12 @@ code {
     font-size: 1.28rem;
 
 }
-
+.quicksand-font{
+  font-family: Quicksand, sans-serif
+}
+.yellow-font{
+  color: 	#cb861a !important;
+}
 .service-button{
   padding: 10px;
   background-color: grey;

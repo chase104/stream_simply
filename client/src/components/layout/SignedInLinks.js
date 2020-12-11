@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
-import Modal from './ModalCheck'
 import {IconButton, Button} from '@material-ui/core';
 import Drawer from '@material-ui/core/Drawer';
 import { makeStyles } from '@material-ui/core/styles';
