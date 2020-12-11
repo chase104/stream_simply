@@ -30,7 +30,7 @@ code {
   padding: 6px 16px !important;
 }
 .appbar-button:hover{
-  filter: brightness(105%)
+  filter: brightness(120%)
 }
 .edit-personal-button:hover{
   filter: brightness(105%)
@@ -331,6 +331,7 @@ code {
   align-items: center;
   justify-content: center;
 }
+
 .inner-holder {
   display: flex;
   align-items: center;
@@ -599,7 +600,7 @@ code {
   cursor: pointer;
 }
 .loading-card{
-  background-color: green !important;
+  background-color: #666666 !important;
 }
 .card-valid{
   background-size: 100% 100%;

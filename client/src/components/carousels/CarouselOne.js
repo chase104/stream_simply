@@ -1,6 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import Carousel from 'react-elastic-carousel';
 import {Paper, Button} from '@material-ui/core';
+import { PrimaryContext } from '../../PrimaryContext'
+
 import Card from '../Card.js'
 import axios from "axios";
 
@@ -9,8 +11,11 @@ const CarouselOne = ({user}) => {
   const [carouselMedia, setCarouselMedia] = useState(false)
   const [fillerMedia, setFillerMedia] = useState([1,2,3,4,5,6])
 
+  const context = useContext(PrimaryContext)
+
   console.log(user);
   useEffect(() => {
+    console.log(context);
     async function getApi() {
       const axiosRes = await axios.get("/getTmbd/carousel_one").then(response => {
         console.log({ response });
@@ -30,27 +35,7 @@ const CarouselOne = ({user}) => {
     {width: 1500, itemsToShow: 6}
   ]
 
-  const genreCypher = {
-    28: "Action",
-    12: "Adventure",
-    16: "Animation",
-    35: "Comedy",
-    80: "Crime",
-    99: "Documentary",
-    18: "Drama",
-    10751: "Family",
-    14: "Fantasy",
-    36: "History",
-    27: "Horror",
-    10402: "Music",
-    9648: "Mystery",
-    10749: "Romance",
-    878: "Science Fiction",
-    10770: "TV Movie",
-    53: "Thriller",
-    10752: "War",
-    37: "Western",
-  }
+
 
 
 

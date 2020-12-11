@@ -12,6 +12,7 @@ const PrimaryDashboard = (props) => {
   const [searchContents, setSearchContents] = useState(null)
 
   const context = useContext(PrimaryContext)
+  
   const handleChange = (e) => {
     console.log(e.target.value);
     setSearchContents(e.target.value)

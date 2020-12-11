@@ -1,11 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Modal} from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import axios from 'axios'
+import { PrimaryContext } from '../PrimaryContext'
 import { Paper } from "@material-ui/core";
 import {FavoriteBorder, Favorite, BookmarkBorder, Bookmark} from '@material-ui/icons/';
 
-const Card = ({valid, number, content, genreFunction, search, user, isOne, favoritedMovie, watchList}) => {
+const Card = ({valid, content, genreFunction, search, user, isOne, favoritedMovie, watchList}) => {
+
+  const context = useContext(PrimaryContext)
+  const genreCypher = context.genreCypher
   let cardClassname
   let imgUrl
   if (favoritedMovie || watchList){
@@ -44,6 +48,7 @@ const returnDate = () => {
   const [logInModal, setLogInModal] = useState(false)
   useEffect(() => {
     console.log(user);
+    console.log(context);
     if (user && content) {
       console.log("we have user", user)
       console.log(content.title);
@@ -60,27 +65,6 @@ const returnDate = () => {
   }, [])
 
 
-  const genreCypher = {
-    28: "Action",
-    12: "Adventure",
-    16: "Animation",
-    35: "Comedy",
-    80: "Crime",
-    99: "Documentary",
-    18: "Drama",
-    10751: "Family",
-    14: "Fantasy",
-    36: "History",
-    27: "Horror",
-    10402: "Music",
-    9648: "Mystery",
-    10749: "Romance",
-    878: "Science Fiction",
-    10770: "TV Movie",
-    53: "Thriller",
-    10752: "War",
-    37: "Western",
-  }
 
 
   const getGenres = (genreIds) => {
@@ -126,6 +110,7 @@ const returnDate = () => {
       })
     } else {
       console.log("Please log in");
+      alert("Please log in to use this feature")
       setLogInModal(true)
     }
 
@@ -162,6 +147,8 @@ const returnDate = () => {
       })
     } else {
       console.log("Please log in");
+      alert("Please log in to use this feature")
+
       setLogInModal(true)
     }
 
@@ -236,16 +223,16 @@ const returnDate = () => {
     if (movieModal == false){
       setMovieModal(true)
     }
-    // async function getApi() {
-    //   console.log("running api");
-    //   const axiosRes = await axios.post("/getMovieAvailability", {
-    //     movieId: content.id
-    //   }).then(response => {
-    //     console.log(response.data.response.collection.locations)
-    //     setAvailabilityData(response.data.response.collection.locations)
-    //   });
-    // }
-    // getApi()
+    async function getApi() {
+      console.log("running api");
+      const axiosRes = await axios.post("/getMovieAvailability", {
+        movieId: content.id
+      }).then(response => {
+        console.log(response.data.response.collection.locations)
+        setAvailabilityData(response.data.response.collection.locations)
+      });
+    }
+    getApi()
   }
 
 const modal = () => (
@@ -283,7 +270,7 @@ const LogInModal = () => (
         </div>
 
        :
-        <div>{number}</div>
+        <div></div>
       }
       <Modal
         open={movieModal}

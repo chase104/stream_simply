@@ -9,6 +9,8 @@ const FeaturedMovie = () => {
   let [featuredMedia, setFeaturedMedia] = useState(false);
   const [movieModal, setMovieModal] = useState(false)
   const [availabilityData, setAvailabilityData] = useState(false)
+  const [timer, setTimer] = useState(3000)
+
 
   useEffect(() => {
     async function getApi() {
@@ -46,20 +48,26 @@ const FeaturedMovie = () => {
   const handleClick = (content) => {
     console.log("card clicked");
     movieModal == true ? setMovieModal(false) : setMovieModal(true)
+    if (timer === 3000) {
+      setTimer(300000)
+    }
     async function getApi() {
       console.log("running api");
       console.log(content.id);
-      // const axiosRes = await axios.post("/getMovieAvailability", {
-      //   movieId: content.id
-      // }).then(response => {
-      //   console.log(response.data.response.collection.locations)
-      //   setAvailabilityData(response.data.response.collection.locations)
-      // });
-      //set usestate
+      const axiosRes = await axios.post("/getMovieAvailability", {
+        movieId: content.id
+      }).then(response => {
+        console.log(response.data.response.collection.locations)
+        setAvailabilityData(response.data.response.collection.locations)
+      });
     }
     getApi()
   }
 
+  const handleModalClose = () => {
+    setMovieModal(false)
+    setTimer(3000)
+  }
   const returnDate = (content) => {
     const d = new Date(content.release_date)
     return d.getFullYear()
@@ -127,7 +135,7 @@ const FeaturedMovie = () => {
   function renderShow() {
     if (!featuredMedia) return <p className="black-text">'Loading media...'</p>;
     return (
-      <Carousel interval="4000">
+      <Carousel interval={timer}>
         {featuredMedia.map(content => {
 
           return (
@@ -156,7 +164,7 @@ const FeaturedMovie = () => {
               <h5 style={{ textAlign: "center", fontSize: "2.64rem", maxWidth: "50vw", color: "white"}}>{content.title}</h5>
               <Modal
                 open={movieModal}
-                onClose={() => setMovieModal(false)}
+                onClose={() => handleModalClose()}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
               >

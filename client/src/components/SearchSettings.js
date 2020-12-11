@@ -4,8 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import { PrimaryContext } from '../PrimaryContext'
 import axios from 'axios'
 
-const SearchSettings = ({searchData, passResults, previousSearch}) => {
 
+
+const SearchSettings = ({searchData, passResults, previousSearch}) => {
 
   const [years, setYears] = useState([1990, 2020])
   const [scoreImdb, setScoreImdb] = useState([0, 10])
@@ -18,6 +19,7 @@ const SearchSettings = ({searchData, passResults, previousSearch}) => {
 console.log("include previous: ",includePrevious);
 console.log("genres: ",genresCheckbox);
 console.log("previous search: ", previousSearch);
+
   const genreCypher = {
     28: "Action",
     12: "Adventure",
@@ -86,15 +88,11 @@ console.log("previous search: ", previousSearch);
         console.log(res);
         if (res.data.results) {
           passResults(res.data.results)
-
         } else {
           passResults(res.data)
         }
-
       })
   }
-
-
 
   const handleSliderChange = (event, newValue) => {
     setYears(newValue)
@@ -103,7 +101,6 @@ console.log("previous search: ", previousSearch);
     setScoreImdb(newValue)
     console.log(scoreImdb);
   }
-
   const handleGenreClick = (e, key) => {
     console.log(e.target);
     if (selectedGenres.includes(key)) {
@@ -111,13 +108,10 @@ console.log("previous search: ", previousSearch);
         selectedGenres.splice(index, 1);
         console.log(selectedGenres);
         e.target.classList.remove("genre-border")
-
     } else  {
       selectedGenres.push(key)
       console.log(selectedGenres);
       e.target.classList.add("genre-border")
-
-
     }
   }
 
@@ -131,7 +125,6 @@ const searchLabel = previousSearch ? `Include Last Search ("${previousSearch}")`
       <FormControl    >
         <div className="form-all-container">
           <div className="form-left-container">
-
             <div style={{width: "200px"}}>
               <Typography id="range-slider" gutterBottom>
                 Year range
@@ -168,13 +161,8 @@ const searchLabel = previousSearch ? `Include Last Search ("${previousSearch}")`
                 return <div className="genre-button" onClick={(e) => handleGenreClick(e, key)}>{genreCypher[key]}</div>
               }))}
               <div className="submit-button-holder">
-
-
-
               </div>
-
             </div>
-
           </div>
         </div>
 
