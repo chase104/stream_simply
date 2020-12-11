@@ -115,7 +115,7 @@ app.post("/getMovieAvailability", function (req, res) {
     url: 'https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup',
     params: {source_id: req.body.movieId, source: 'tmdb', country: 'us'},
     headers: {
-    'x-rapidapi-key': '12e1e06344mshbbfb57c2be00fdfp16c653jsnc7ee0c0aab1d',
+    'x-rapidapi-key': process.env.REACT_APP_UTELLY_API_KEY,
     'x-rapidapi-host': 'utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com'
   }
 }

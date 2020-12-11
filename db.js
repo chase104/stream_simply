@@ -9,6 +9,7 @@ const client = new Client({
   }
 });
 
+
 client.connect(function(error) {
   console.log("connected to db");
 });
