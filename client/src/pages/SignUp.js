@@ -49,23 +49,23 @@ const SignUp = () => {
             </div>
             <div className="input-field">
               <label for="firstname">First Name</label>
-              <input className="black-text" type="text" id="firstname" onChange={handleChange}/>
+              <input className="white-text" type="text" id="firstname" onChange={handleChange}/>
             </div>
             <div className="input-field">
               <label for="lastname">Last Name</label>
-              <input className="black-text" type="text" id="lastname" onChange={handleChange}/>
+              <input className="white-text" type="text" id="lastname" onChange={handleChange}/>
             </div>
             <div className="input-field">
               <label for="email">Email</label>
-              <input className="black-text" type="email" id="email" onChange={handleChange}/>
+              <input className="white-text" type="email" id="email" onChange={handleChange}/>
             </div>
             <div className="input-field">
               <label for="password">Password</label>
-              <input className="black-text" type="password" id="password" onChange={handleChange}/>
+              <input className="white-text" type="password" id="password" onChange={handleChange}/>
             </div>
             <div className="input-field">
               <label for="confirmpassword">Confirm Password</label>
-              <input className="black-text" type="password" id="confirmpassword" onChange={handleChange}/>
+              <input className="white-text" type="password" id="confirmpassword" onChange={handleChange}/>
             </div>
             <div className="input-field">
               <button className="btn z-depth-0 signup-btn">Continue</button>

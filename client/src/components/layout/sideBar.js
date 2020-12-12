@@ -11,7 +11,7 @@ import axios from 'axios'
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
- 
+
 const useStyles = makeStyles({
 list: {
   width: 400,
@@ -70,7 +70,7 @@ const SideBar = ({user, rerender}) => {
   const [userServices, setUserServices] = useState(user.services)
   const [filteredServices, setFilteredServices] = useState(null)
   const nonServices = ["Netflix", "Amazon Prime", "Disney+", "HBO", "Hulu", "Google Play", "Youtube Premium"]
-  const [editedServices, setEditedServices] = useState([...userServices])
+  const [editedServices, setEditedServices] = useState(userServices ? [...userServices] : [])
 
 
 
@@ -162,6 +162,7 @@ const SideBar = ({user, rerender}) => {
   }
 
   useEffect(() => {
+    userServices != null ?
     setFilteredServices(
       nonServices.filter(
         function(e){
@@ -170,6 +171,8 @@ const SideBar = ({user, rerender}) => {
         userServices
       )
     )
+    :
+    setFilteredServices(nonServices)
     }, [])
 
     const information=["firstname", "lastname", "email", "country"]
@@ -295,7 +298,7 @@ const SideBar = ({user, rerender}) => {
           <Grid container spacing={2}>
             <Grid item xs={12} s={12}>
               <Grid container justify="center" spacing={2}>
-              {userServices.map((service) =>
+              {userServices != null ? userServices.map((service) =>
                   <Grid key={service+"item"} id={service} item className={`on-hover button-on ${classes.gridServices}`} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} onMouseOut={handleMouseOut}>
                   <div  style={{width: "100%"}}>
                     <CheckCircle  className="check-circle" />
@@ -303,7 +306,10 @@ const SideBar = ({user, rerender}) => {
                   </div>
                   </Grid>
 
-              )}
+              )
+              :
+              null
+            }
               {
                 filteredServices ?
                 filteredServices.map((item) => (
@@ -380,12 +386,15 @@ const SideBar = ({user, rerender}) => {
         </List>
         <Divider />
         <List>
-          {userServices.map((item) => (
+          {userServices != null ? userServices.map((item) => (
             <ListItem button key={item + "service"} onClick={openServicesModal} className="sidebar-list-item">
               <ListItemIcon><CheckCircle style={{color: "#419f38"}}/></ListItemIcon>
               <ListItemText primary={item} classname="sidebar-text"/>
             </ListItem>
-          ))}
+          ))
+          :
+          null
+        }
           {
             filteredServices ?
             filteredServices.map((item) => (

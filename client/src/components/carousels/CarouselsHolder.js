@@ -16,6 +16,7 @@ const CarouselsHolder = () => {
 
 const [user, setUser] = useState(false)
 const [dataReturn, setDataReturn] = useState(false)
+
   const getUserInfo = () => {
     try{
       console.log("axios user request");

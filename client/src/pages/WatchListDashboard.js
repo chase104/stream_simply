@@ -11,6 +11,8 @@ const WatchListDashboard = () => {
 
 
   const [watchList, setWatchList] = useState(false)
+  const [user, setUser] = useState(false)
+  const [dataReturn, setDataReturn] = useState(false)
 
   useEffect(() => {
     async function getWatchList() {
@@ -27,6 +29,37 @@ const WatchListDashboard = () => {
     getWatchList()
   }, [])
 
+      const getUserInfo = () => {
+        try{
+          console.log("axios user request");
+
+          axios({
+            method: "GET",
+            withCredentials: true,
+            url: "/userinfo"
+          }).then( (res) => {
+            console.log(res.data);
+              console.log(" rerender");
+              setUser(null)
+              setUser(res.data)
+              if (res.data === false){
+                console.log("it's false");
+                setDataReturn(true)
+              } else {
+                setDataReturn(true)
+              }
+            }).then(() => {
+              console.log(user);
+            })
+          }
+        catch (err) {
+          console.log(err.message);
+        }
+      }
+      useEffect(() => {
+          getUserInfo()
+        }, [])
+
   return (
     <div>
       <SearchBar />
@@ -42,7 +75,7 @@ const WatchListDashboard = () => {
                   {watchList.movies.map((movie) =>
 
                     <Grid item xs={2}>
-                      <Card content={movie} favoritedMovie={watchList.favorited.includes(movie.id) ? true : false} watchList={true}/>
+                      <Card content={movie} favoritedMovie={watchList.favorited.includes(movie.id) ? true : false} watchList={true} user={user}/>
                     </Grid>
                   )}
                 </Grid>

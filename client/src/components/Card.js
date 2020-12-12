@@ -46,18 +46,23 @@ const returnDate = () => {
   const [isFavorite, setIsFavorite] = useState(false)
   const [isBookmarked, setIsBookmarked] = useState(false)
   const [logInModal, setLogInModal] = useState(false)
+
   useEffect(() => {
     console.log(user);
     console.log(context);
     if (user && content) {
       console.log("we have user", user)
       console.log(content.title);
-      if (user.favorites.includes(content.id)) {
-        setIsFavorite(true)
-      }
-      if (user.watchlist.includes(content.id)){
-        setIsBookmarked(true)
-      }
+        if (user.favorites) {
+          if (user.favorites.includes(content.id)) {
+            setIsFavorite(true)
+          }
+        }
+        if (user.watchlist) {
+          if (user.watchlist.includes(content.id)){
+            setIsBookmarked(true)
+          }
+        }
     } else if (content) {
       console.log("we have no user", user);
       console.log(content.title);
@@ -180,7 +185,7 @@ const returnDate = () => {
           <div style={{display: "flex", flexWrap: "wrap"}}>
             { content ?
               content.genre_ids ?
-              content.genre_ids.map((id) =>  (<div className="genres-li" key={id+content.title}>{genreCypher[id]}</div>))
+              content.genre_ids.map((id) =>  (<div className="genres-li" key={id+content.title+1}>{genreCypher[id]}</div>))
               :
               content.genres.map((id) =>  (<div className="genres-li" key={id+content.title}>{id.name}</div>))
               :
