@@ -6,6 +6,7 @@ import SignIn from './pages/SignIn'
 import LoggedInRoute from './routes/LoggedInRoute'
 import LoggedOutRoute from './routes/LoggedOutRoute'
 import NavBar from './components/layout/Navbar'
+import Footer from './components/layout/Footer'
 import PrimaryDashboard from './pages/PrimaryDashboard'
 import SearchDashboard from './pages/SearchDashboard.js'
 import FavoriteDashboard from './pages/FavoriteDashboard'
@@ -16,16 +17,20 @@ function App() {
   return (
 
   <BrowserRouter>
-    <div className="App">
-      <PrimaryContextProvider>
-        <NavBar />
-        <Route exact path="/" component={PrimaryDashboard} />
-        <Route path="/search" component={SearchDashboard}/>
-        <LoggedOutRoute  path="/signup" component={SignUp} />
-        <LoggedOutRoute path='/login' component={SignIn} />
-        <LoggedInRoute path='/favorites' component={FavoriteDashboard} />
-        <LoggedInRoute path='/watchlist' component={WatchListDashboard} />
-      </PrimaryContextProvider >
+    <div className="App full-app">
+      <div className="content-wrap">
+        <PrimaryContextProvider>
+
+          <NavBar />
+          <Route exact path="/" component={PrimaryDashboard} />
+          <Route path="/search" component={SearchDashboard}/>
+          <LoggedOutRoute  path="/signup" component={SignUp} />
+          <LoggedOutRoute path='/login' component={SignIn} />
+          <LoggedInRoute path='/favorites' component={FavoriteDashboard} />
+          <LoggedInRoute path='/watchlist' component={WatchListDashboard} />
+          <Footer />
+        </PrimaryContextProvider >
+      </div>
     </div>
   </BrowserRouter>
   );

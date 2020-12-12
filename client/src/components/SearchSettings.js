@@ -12,7 +12,7 @@ const SearchSettings = ({searchData, passResults, previousSearch}) => {
   const [scoreImdb, setScoreImdb] = useState([0, 10])
   const [selectedGenres, setSelectedGenres] = useState([])
   const [includePrevious, setIncludePrevious] = useState(false)
-  const [genresCheckbox, setGenreCheckbox] = useState(false)
+  const [genresCheckbox, setGenreCheckbox] = useState(true)
 
   const context = useContext(PrimaryContext)
 

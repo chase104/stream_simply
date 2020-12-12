@@ -60,6 +60,18 @@ const WatchListDashboard = () => {
           getUserInfo()
         }, [])
 
+    const checkIfFavorite = (movie) => {
+      if (watchList.favorited != null) {
+        if (watchList.favorited.includes(movie.id)) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
+    }
+
   return (
     <div>
       <SearchBar />
@@ -75,7 +87,7 @@ const WatchListDashboard = () => {
                   {watchList.movies.map((movie) =>
 
                     <Grid item xs={2}>
-                      <Card content={movie} favoritedMovie={watchList.favorited.includes(movie.id) ? true : false} watchList={true} user={user}/>
+                      <Card content={movie} favoritedMovie={checkIfFavorite(movie)} watchList={true} user={user}/>
                     </Grid>
                   )}
                 </Grid>
