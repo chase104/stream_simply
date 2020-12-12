@@ -168,10 +168,10 @@ const returnDate = () => {
 
         </div>
         <div className="favorite-container">
-        {isFavorite || favoritedMovie ? <Favorite className="favorite" onClick={() => handleFavoriteClick(true)}/> : <FavoriteBorder className="favorite-option" onClick={() => handleFavoriteClick(false)}/>}
+        {isFavorite  ? <Favorite className="favorite" onClick={() => handleFavoriteClick(true)}/> : <FavoriteBorder className="favorite-option" onClick={() => handleFavoriteClick(false)}/>}
         </div>
         <div className="favorite-container">
-        {isBookmarked || watchList ? <Bookmark className="favorite-bookmark" onClick={() => handleBookmarkClick(true)}/> : <BookmarkBorder className="favorite-option" onClick={() => handleBookmarkClick(false)}/>}
+        {isBookmarked ? <Bookmark className="favorite-bookmark" onClick={() => handleBookmarkClick(true)}/> : <BookmarkBorder className="favorite-option" onClick={() => handleBookmarkClick(false)}/>}
         </div>
         <h3 className="simple-modal-title" style={{marginLeft: 'auto'}}>{content ? returnDate() : null}</h3>
       </div>

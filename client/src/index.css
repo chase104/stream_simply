@@ -26,16 +26,25 @@ code {
 
 }
 .footer-title{
-  color: white
+  color: #cb861a
+}
+.footer-link{
+ color: #ffdb84
+}
+.column-holder{
+  display: flex;
+  flex-direction: row;
+  justify-content: center
 }
 .footer-column{
-  margin: 0px 15px
-}
-.list-unstyled{
+  margin: 0px 32px;
   display: flex;
-flex-direction: column;
-align-items: center;
-font-size: 24px
+  flex-direction: column;
+  font-size: 24px
+}
+
+.list-unstyled{
+  margin-top: 0px;
 }
 .check-circle{
   color: #66b8aa;
@@ -51,7 +60,8 @@ font-size: 24px
   padding: 6px 16px !important;
 }
 .appbar-button:hover{
-  filter: brightness(120%)
+  background-color:  #47506b !important
+
 }
 .edit-personal-button:hover{
   filter: brightness(105%)
@@ -303,6 +313,9 @@ font-size: 24px
   margin-top: 7px !important;
   margin-bottom: 5px !important;
   margin-left: 0px !important;
+}
+.sidebar-button:hover{
+  background:   #667399 !important;
 }
 
 .title-header{

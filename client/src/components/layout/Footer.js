@@ -1,25 +1,26 @@
 import React from 'react'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const Footer = () => {
   return (
-    <div style={{backgroundColor: "#181b24", display: "flex"}} className="main-footer">
+    <div style={{backgroundColor: "#181b24", display: "flex", marginTop: "80px"}} className="main-footer">
       <div className="container">
-        <div className="" style={{display: "flex"}}>
+        <div className="column-holder" >
           <div className="footer-column">
-            <h5 className="footer-title">APP Created By Chase Van Halen</h5>
+            <h5 className="footer-title">APP By Chase Van Halen</h5>
             <ul className="list-unstyled">
               <li>chase.vanhalen88@gmail.com</li>
-              <li><a href="https://www.linkedin.com/in/chase-van-halen-8068a5108/">LinkedIn</a></li>
-              <li><a href="https://github.com/chase104">GitHub</a></li>
+              <li><a href="https://www.linkedin.com/in/chase-van-halen-8068a5108/" target="_blank" className="footer-link">LinkedIn <ExitToAppIcon /></a> </li>
+              <li><a href="https://github.com/chase104" target="_blank">GitHub <ExitToAppIcon /></a></li>
             </ul>
           </div>
           <div className="footer-column">
             <h5  className="footer-title">Other Apps By Chase</h5>
-            <ul>
-            <li><a href="https://github.com/chase104">FreeFinance</a></li>
-            <li><a href="https://github.com/chase104">A Kitchen's Cookbook</a></li>
-            <li><a href="https://github.com/chase104">CodingParadise</a></li>
-            <li><a href="https://github.com/chase104">Local Business Hub</a></li>
+            <ul className="list-unstyled">
+            <li><a href="https://github.com/chase104" target="_blank">FreeFinance <ExitToAppIcon /></a></li>
+            <li><a href="https://github.com/chase104" target="_blank">A Kitchen's Cookbook <ExitToAppIcon /></a></li>
+            <li><a href="https://github.com/chase104" target="_blank">CodingParadise <ExitToAppIcon /></a></li>
+            <li><a href="https://github.com/chase104" target="_blank">Local Business Hub <ExitToAppIcon /></a></li>
             </ul>
           </div>
           <div className="footer-column">
