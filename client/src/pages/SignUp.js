@@ -8,11 +8,11 @@ const SignUp = () => {
     return signUpState
   }
 
-  const handleSubmit = async (e) => {
+  const handleSubmit =  (e) => {
     e.preventDefault()
     if (signUpState.password === signUpState.confirmpassword && signUpState.email) {
       console.log(signUpState);
-      await axios({
+       axios({
         method: "POST",
         data: {
           ...signUpState

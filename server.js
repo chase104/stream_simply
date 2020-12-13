@@ -153,7 +153,7 @@ app.post("/signup", async function(req, res) {
     exists: false,
     newUser: newUser
   });
-  client.end();
+  
 });
 
 app.put("/servicesupdate", async function(req, res){
