@@ -126,9 +126,10 @@ const searchLabel = previousSearch ? `Include Last Search ("${previousSearch}")`
         <div className="form-all-container">
           <div className="form-left-container">
             <div style={{width: "200px"}}>
-              <Typography id="range-slider" gutterBottom>
-                Year range
-              </Typography>
+            <Typography id="range-slider" gutterBottom>
+              Year range
+            </Typography>
+              <div>
               <Slider
                 value={years}
                 onChange={handleSliderChange}
@@ -139,19 +140,9 @@ const searchLabel = previousSearch ? `Include Last Search ("${previousSearch}")`
                 max={2020}
                 step={5}
                 />
-                <Typography id="Imdb-slider" gutterBottom>
-                  IMDB Score
-                </Typography>
-                <Slider
-                  value={scoreImdb}
-                  onChange={handleImdbChange}
-                  valueLabelDisplay="auto"
-                  aria-labelledby="Imdb-slider"
-                  getAriaValueText={getYears}
-                  min={0}
-                  max={10}
-                  step={0.1}
-                  />
+              </div>
+
+
             </div>
           </div>
           <div className="form-right-container">

@@ -33,6 +33,16 @@ code {
  padding: 4px;
  border-radius: 5px;
 }
+.MuiSlider-rail{
+  height: 4px !important;
+}
+.MuiSlider-track{
+  height: 4px !important;
+}
+.MuiSlider-valueLabel{
+  width: 2vw !important;
+  height: 2vw !important;
+}
 .footer-hover:hover{
   background-color: 	#27383e;
 }

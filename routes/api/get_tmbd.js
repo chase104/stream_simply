@@ -56,14 +56,26 @@ router.post("/makeCategorySearch", async (req, res) => {
       }
     } else  {
       let addGenres = req.body.genres.join('|')
+      console.log("addgenres", addGenres);
       console.log("include previous no genres");
-      options = {
-        method: "GET",
-        typeOf: "previous&nogenres",
-        years: req.body.years,
-        genres: req.body.genres,
-        url: `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.previous_search}&page=1&with_genres=${addGenres}`
+      if (addGenres != null || addGenres != undefined) {
+        options = {
+          method: "GET",
+          typeOf: "previous&nogenres",
+          years: req.body.years,
+          genres: req.body.genres,
+          url: `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.previous_search}&page=1&with_genres=${addGenres}`
+        }
+      } else {
+        options = {
+          method: "GET",
+          typeOf: "previous&nogenres",
+          years: req.body.years,
+          genres: req.body.genres,
+          url: `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.previous_search}&page=1`
+        }
       }
+
     }
   } else {
     if (req.body.include_genres) {
@@ -90,7 +102,13 @@ router.post("/makeCategorySearch", async (req, res) => {
       }
     }
   }
-      if (options.typeOf === "previous&genres") {
+
+
+
+
+
+
+  if (options.typeOf === "previous&genres") {
         console.log("previous&genres");
         console.log(options.genres);
           const callLoop = async () => {
@@ -143,6 +161,8 @@ router.post("/makeCategorySearch", async (req, res) => {
               console.log("null send");
             } else {
               console.log("sending");
+              console.log(options);
+              console.log("movies", movies);
               res.send(movies)
             }
           }
@@ -159,7 +179,12 @@ router.post("/makeCategorySearch", async (req, res) => {
                       const d = new Date(item.release_date)
                       const date = d.getFullYear()
                       const dateMatch = (date > options.years[0] && date < options.years[1]) ? true : false;
-                      let genreMatch = item.genre_ids.some(r=> options.genres.indexOf(r) >= 0)
+                      let genreMatch
+                      if (options.genres.length > 0) {
+                         genreMatch = item.genre_ids.some(r=> options.genres.indexOf(r) >= 0)
+                      } else {
+                         genreMatch = true
+                      }
                       if (dateMatch && item.id != 265147) {
                         if (genreMatch){
                           moviess.push(item)

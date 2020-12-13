@@ -44,15 +44,16 @@ const Footer = () => {
             </ul>
           </div>
           <div className="footer-column">
-          <h5  className="footer-title">Is Chase Looking For A Job?</h5>
+          <h5  className="footer-title">Is Chase Available For A Job?</h5>
           <div className="blinker-holder">
             {blinkerState ? <FlareIcon  className="blinker-icon"/> : <RemoveIcon className="blinker-icon"/>}
             <div className="available-color">Yes</div>
           </div>
           <ul className="list-unstyled">
-            <li style={{color: "#ffdb84"}}>Full Stack Developer</li>
-            <li style={{color: "#ffdb84"}}>Front End Developer</li>
-            <li style={{color: "#ffdb84"}}>Backend Developer</li>
+            <li style={{color: "#ffdb84", paddingLeft: "4px"}}>Full Stack Developer</li>
+            <li style={{color: "#ffdb84", paddingLeft: "4px"}}>Front-End / Back-End Developer</li>
+            <li><a href="https://github.com/chase104" target="_blank" className="footer-link footer-hover">Portfolio <ExitToAppIcon /></a></li>
+
           </ul>
           </div>
         </div>
