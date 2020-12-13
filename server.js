@@ -153,7 +153,7 @@ app.post("/signup", async function(req, res) {
     exists: false,
     newUser: newUser
   });
-  
+
 });
 
 app.put("/servicesupdate", async function(req, res){
@@ -284,7 +284,7 @@ app.get("/getFavorites", function (req, res) {
   for (var i=0; i<favoritesArr.length; i++){
     let options = {
       method: "GET",
-      url: `https://api.themoviedb.org/3/movie/${favoritesArr[i]}?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US`
+      url: `https://api.themoviedb.org/3/movie/${favoritesArr[i]}?api_key=${process.env.TMDB_KEY}&language=en-US`
     }
     console.log(options);
     request(options, function(error, response, body) {
@@ -316,7 +316,7 @@ app.get("/getWatchlist", function (req, res) {
   for (var i=0; i<watchlistArr.length; i++){
     let options = {
       method: "GET",
-      url: `https://api.themoviedb.org/3/movie/${watchlistArr[i]}?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US`
+      url: `https://api.themoviedb.org/3/movie/${watchlistArr[i]}?api_key=${process.env.TMDB_KEY}&language=en-US`
     }
     console.log(options);
     request(options, function(error, response, body) {
