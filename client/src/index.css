@@ -29,7 +29,26 @@ code {
   color: #cb861a
 }
 .footer-link{
- color: #ffdb84
+ color: #ffdb84;
+ padding: 4px;
+ border-radius: 5px;
+}
+.footer-hover:hover{
+  background-color: 	#27383e;
+}
+.blinker-icon{
+  color: green;
+  width: 2vw !important;
+  height: 2vw !important;
+}
+.available-color{
+  color: green;
+  font-size:  2rem
+}
+.blinker-holder{
+  display: flex;
+  flex-direction: row;
+  align-items: center
 }
 .column-holder{
   display: flex;

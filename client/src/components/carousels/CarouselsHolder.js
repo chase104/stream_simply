@@ -71,7 +71,7 @@ const [dataReturn, setDataReturn] = useState(false)
   }
   return (
 
-    <div style={{marginBottom: "300px"}}>
+    <div >
     {
       dataReturn == false ?
 
