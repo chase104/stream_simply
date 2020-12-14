@@ -1,14 +1,21 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import {PrimaryContext} from '../PrimaryContext'
 import Button from "@material-ui/core/Button";
 
 
 import axios from 'axios'
 
-const SearchBar = ({props, searchFunction, searchState, fromSearch}) => {
+const SearchBar = ({props, searchFunction, searchState, fromSearch, searchFromSettings}) => {
 
   const [searchContents, setSearchContents] = useState(null)
   const context = useContext(PrimaryContext)
+
+
+  useEffect(() => {
+    console.log("this is SearchBar!");
+    console.log(props.history);
+    console.log(props.history.location.pathname);
+  }, [])
 
   const handleChange = (e) => {
     console.log(e.target.value);
@@ -20,27 +27,33 @@ const SearchBar = ({props, searchFunction, searchState, fromSearch}) => {
   }
   const handleSearch = async (e) => {
     e.preventDefault()
-    console.log(searchContents);
-    await axios({
-      method: 'POST',
-      data: {
-        input: searchContents
-      },
-      withCredentials: true,
-      url: '/search'
-    }).then((res) => {
-      console.log("running context edit...");
-      context.changeTheme({searchData: searchContents})
-      if (searchContents) {
-        props.history.push("/search")
-      } else {
-        if (searchState === false) {
-          searchFunction(true)
+    if (props.history.location.pathname == "/search"){
+      console.log("running setting search");
+      searchFromSettings(searchContents)
+    } else {
+      console.log("running normal search");
+      console.log(searchContents);
+      await axios({
+        method: 'POST',
+        data: {
+          input: searchContents
+        },
+        withCredentials: true,
+        url: '/search'
+      }).then((res) => {
+        console.log("running context edit...");
+        context.changeTheme({searchData: searchContents})
+        if (searchContents) {
+          props.history.push("/search")
         } else {
-          searchFunction(false)
+          if (searchState === false) {
+            searchFunction(true)
+          } else {
+            searchFunction(false)
+          }
         }
-      }
-    })
+      })
+    }
   }
   return (
     <div>

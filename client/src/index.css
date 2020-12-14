@@ -46,6 +46,11 @@ code {
 .footer-hover:hover{
   background-color: 	#27383e;
 }
+.card-genre-match{
+  border: 3px solid green;
+border-radius: 5px;
+padding: 4px;
+}
 .blinker-icon{
   color: green;
   width: 2vw !important;

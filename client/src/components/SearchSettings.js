@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { FormControl, Slider, Button, FormControlLabel, Checkbox } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { PrimaryContext } from '../PrimaryContext'
@@ -6,7 +6,7 @@ import axios from 'axios'
 
 
 
-const SearchSettings = ({searchData, passResults, previousSearch}) => {
+const SearchSettings = ({searchData, passResults, previousSearch, searchBoolean, searchContents}) => {
 
   const [years, setYears] = useState([1990, 2020])
   const [scoreImdb, setScoreImdb] = useState([0, 10])
@@ -14,8 +14,18 @@ const SearchSettings = ({searchData, passResults, previousSearch}) => {
   const [includePrevious, setIncludePrevious] = useState(false)
   const [genresCheckbox, setGenreCheckbox] = useState(true)
 
+
   const context = useContext(PrimaryContext)
 
+
+  const searchFromBar = () => {
+    context.changeTheme({
+      ...context,
+      settingsInformation: {}
+    })
+  }
+
+  console.log(context);
 console.log("include previous: ",includePrevious);
 console.log("genres: ",genresCheckbox);
 console.log("previous search: ", previousSearch);
@@ -70,7 +80,17 @@ console.log("previous search: ", previousSearch);
   }
 
   const submitSearch = async (e) => {
-    e.preventDefault()
+    console.log("submitting search");
+
+    let previousSearchBoolean = includePrevious
+    if (searchContents){
+      previousSearchBoolean = true
+    }
+    console.log(previousSearchBoolean);
+    console.log(previousSearch);
+    if (e) {
+      e.preventDefault()
+    }
     console.log(genresCheckbox);
       await axios({
         method: 'POST',
@@ -78,7 +98,7 @@ console.log("previous search: ", previousSearch);
           genres: selectedGenres.map(x => +x),
           imdb: scoreImdb,
           years: years,
-          include_previous: includePrevious,
+          include_previous: previousSearchBoolean,
           include_genres: genresCheckbox,
           previous_search: previousSearch,
         },
@@ -93,6 +113,17 @@ console.log("previous search: ", previousSearch);
         }
       })
   }
+  useEffect(() => {
+    "searching from settings now"
+    console.log(searchContents);
+    if (searchContents) {
+      setIncludePrevious(true)
+      previousSearch = searchContents
+    }
+    submitSearch()
+  }, [searchBoolean])
+
+
 
   const handleSliderChange = (event, newValue) => {
     setYears(newValue)

@@ -237,7 +237,7 @@ const returnDate = () => {
         setAvailabilityData(response.data.response.collection.locations)
       });
     }
-    getApi()
+    // getApi()
   }
 
 const modal = () => (
