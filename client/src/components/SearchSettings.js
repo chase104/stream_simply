@@ -83,7 +83,7 @@ console.log("previous search: ", previousSearch);
     console.log("submitting search");
 
     let previousSearchBoolean = includePrevious
-    if (searchContents){
+    if (searchContents && e != undefined){
       previousSearchBoolean = true
     }
     console.log(previousSearchBoolean);
