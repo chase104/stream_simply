@@ -81,10 +81,20 @@ console.log("previous search: ", previousSearch);
 
   const submitSearch = async (e) => {
     console.log("submitting search");
-
+    console.log("search Contents: ", searchContents );
     let previousSearchBoolean = includePrevious
-    if (searchContents && e != undefined){
+    let searchInformation = previousSearch
+    if (searchContents && e == undefined){
       previousSearchBoolean = true
+      previousSearch = searchContents
+      searchInformation = searchContents
+    } else {
+      if (searchContents){
+        searchInformation = searchContents
+      } else {
+        searchInformation = previousSearch
+
+      }
     }
     console.log(previousSearchBoolean);
     console.log(previousSearch);
@@ -100,7 +110,7 @@ console.log("previous search: ", previousSearch);
           years: years,
           include_previous: previousSearchBoolean,
           include_genres: genresCheckbox,
-          previous_search: previousSearch,
+          previous_search: searchInformation,
         },
         withCredentials: true,
         url: '/getTmbd/makeCategorySearch'
@@ -113,6 +123,7 @@ console.log("previous search: ", previousSearch);
         }
       })
   }
+
   useEffect(() => {
     "searching from settings now"
     console.log(searchContents);
@@ -147,7 +158,7 @@ console.log("previous search: ", previousSearch);
   }
 
 
-const searchLabel = previousSearch ? `Include Last Search ("${previousSearch}")` : null
+const searchLabel = previousSearch ? `Include Last Search ("${searchContents ? searchContents : previousSearch}")` : null
 
  const previousDisplay = previousSearch ? "inline-flex" : "none"
 

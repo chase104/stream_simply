@@ -703,7 +703,7 @@ padding: 4px;
 }
 .closed-menu:hover{
   cursor: pointer;
-  filter: brightness(105%) !important;
+  filter: brightness(120%) !important;
 
 }
 .expand-icon{

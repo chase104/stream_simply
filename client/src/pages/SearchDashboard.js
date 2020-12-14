@@ -45,10 +45,12 @@ const SearchDashboard = (props) => {
 
 
 
-const searchFunction = (boolean) => {
-  if (boolean === false) {
+const searchFunction = (data) => {
+  if (data.boolean === false) {
+    setContentsOfSearch(data.searchContents)
     setSearchResults(true)
   } else {
+    setContentsOfSearch(data.searchContents)
     setSearchState(false)
   }
 }

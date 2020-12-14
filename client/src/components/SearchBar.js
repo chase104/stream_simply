@@ -47,9 +47,15 @@ const SearchBar = ({props, searchFunction, searchState, fromSearch, searchFromSe
           props.history.push("/search")
         } else {
           if (searchState === false) {
-            searchFunction(true)
+            searchFunction({
+              searchContents: searchContents,
+              boolean: true
+            })
           } else {
-            searchFunction(false)
+            searchFunction({
+              searchContents: searchContents,
+              boolean: false
+            })
           }
         }
       })
