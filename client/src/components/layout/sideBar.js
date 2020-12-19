@@ -69,7 +69,7 @@ const SideBar = ({user, rerender}) => {
   const [country, setCountry] = useState(user.country)
   const [userServices, setUserServices] = useState(user.services)
   const [filteredServices, setFilteredServices] = useState(null)
-  const nonServices = ["Netflix", "Amazon Prime", "Disney+", "HBO", "Hulu", "Google Play", "Youtube Premium"]
+  const nonServices = ["Netflix", "Amazon Prime", "Disney+", "HBO", "Hulu", "Google Play", "Youtube Premium", "FandangoMoviesIVAUS"]
   const [editedServices, setEditedServices] = useState(userServices ? [...userServices] : [])
 
 
@@ -156,6 +156,7 @@ const SideBar = ({user, rerender}) => {
     }).then((res) => {
       console.log(res);
       const sent = true;
+      console.log("sending rerender from sidebar");
       rerender(sent)
 
     })

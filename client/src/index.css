@@ -762,6 +762,11 @@ margin-top: 10px;
   filter: brightness(105%);
   cursor: pointer
 }
+.highlight-genres{
+  border: 3px solid #cb861a;
+  border-radius: 5px;
+  padding: 0 5px
+}
 .search-submit-button{
   background-color: 	#ffdb84 !important;
   border-radius: 10px !important;

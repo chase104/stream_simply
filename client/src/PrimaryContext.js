@@ -27,6 +27,8 @@ class PrimaryContextProvider extends Component {
       10752: "War",
       37: "Western",
     },
+    selectedGenres: null,
+    rerender: false
   }
 
   changeTheme = (edits) => {

@@ -21,10 +21,9 @@ const SearchSettings = ({searchData, passResults, previousSearch, searchBoolean,
   const searchFromBar = () => {
     context.changeTheme({
       ...context,
-      settingsInformation: {}
+      selectedGenres: selectedGenres 
     })
   }
-
   console.log(context);
 console.log("include previous: ",includePrevious);
 console.log("genres: ",genresCheckbox);
@@ -81,6 +80,8 @@ console.log("previous search: ", previousSearch);
 
   const submitSearch = async (e) => {
     console.log("submitting search");
+    searchFromBar()
+
     console.log("search Contents: ", searchContents );
     let previousSearchBoolean = includePrevious
     let searchInformation = previousSearch

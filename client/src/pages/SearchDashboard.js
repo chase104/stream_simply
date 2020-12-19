@@ -88,11 +88,18 @@ const handleMenuClick = (e) => {
             <div className="search-title">Search Settings</div>
           </div>
           <div className="search-settings search-settings-hidden" id="search-settings">
-            <SearchSettings searchData={context.searchData} passResults={(res) => passResults(res)} previousSearch={context.searchData} searchBoolean={searchBoolean} searchContents={contentsOfSearch}/>
+
+            <SearchSettings searchData={context.searchData}
+              passResults={(res) => passResults(res)}
+              previousSearch={context.searchData}
+              searchBoolean={searchBoolean}
+              searchContents={contentsOfSearch}/>
+
           </div>
         </div>
       </div>
-      <SearchResultsDisplay results={searchResults} searchState={searchState}/>
+      <SearchResultsDisplay results={searchResults} searchState={searchState} highlightGenres={context.selectedGenres} 
+/>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axios from "axios";
 import Button from "@material-ui/core/Button";
 import { PrimaryContext } from '../PrimaryContext'
@@ -12,7 +12,16 @@ const PrimaryDashboard = (props) => {
 
   const [searchContents, setSearchContents] = useState(null)
 
+
   const context = useContext(PrimaryContext)
+
+  useEffect(() => {
+    context.changeTheme({
+      ...context,
+      selectedGenres: []
+    })  }, [])
+
+
 
   const handleChange = (e) => {
     console.log(e.target.value);

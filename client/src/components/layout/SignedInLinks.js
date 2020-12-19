@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import {IconButton, Button} from '@material-ui/core';
@@ -7,11 +7,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import SideBar from './sideBar.js'
-
+import { PrimaryContext } from '../../PrimaryContext'
 
 
 
 const SignedInLinks = ({classes}) => {
+  const context = useContext(PrimaryContext)
 
 
 const [user, setUser] = useState(null)
@@ -29,10 +30,8 @@ const [functionSwitch, setFunctionSwitch] = useState(true)
         url: "/userinfo"
       }).then((res) => {
         console.log(res.data);
-          console.log(" rerender");
           setUser(null)
           setUser(res.data)
-
         })
       }
     catch (err) {
@@ -62,7 +61,12 @@ const [functionSwitch, setFunctionSwitch] = useState(true)
   }
 
   const callUserRerender = (sent) => {
-    console.log("rerendering!");
+    console.log("rerender hit links");
+    console.log(context.rerender);
+    context.changeTheme({
+      ...context,
+      rerender: !context.rerender
+    })
     getUserInfo(sent)
   }
 

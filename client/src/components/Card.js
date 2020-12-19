@@ -6,16 +6,14 @@ import { PrimaryContext } from '../PrimaryContext'
 import { Paper } from "@material-ui/core";
 import {FavoriteBorder, Favorite, BookmarkBorder, Bookmark} from '@material-ui/icons/';
 
-const Card = ({valid, content, genreFunction, search, user, isOne, favoritedMovie, watchList}) => {
+const Card = ({valid, content, genreFunction, search, user, isOne, favoritedMovie, watchList, selectedGenres}) => {
 
   const context = useContext(PrimaryContext)
   const genreCypher = context.genreCypher
   let cardClassname
   let imgUrl
   if (favoritedMovie || watchList){
-    console.log("card content:", content);
-    console.log("watchlist:", watchList);
-    console.log("favortied: ", favoritedMovie);
+
   }
 
 
@@ -33,7 +31,6 @@ const Card = ({valid, content, genreFunction, search, user, isOne, favoritedMovi
   }
 
 
-
 const returnDate = () => {
   const d = new Date(content.release_date)
   return d.getFullYear()
@@ -48,11 +45,9 @@ const returnDate = () => {
   const [logInModal, setLogInModal] = useState(false)
 
   useEffect(() => {
-    console.log(user);
-    console.log(context);
+
     if (user && content) {
       console.log("we have user", user)
-      console.log(content.title);
         if (user.favorites) {
           if (user.favorites.includes(content.id)) {
             setIsFavorite(true)
@@ -65,7 +60,6 @@ const returnDate = () => {
         }
     } else if (content) {
       console.log("we have no user", user);
-      console.log(content.title);
     }
   }, [])
 
@@ -73,7 +67,6 @@ const returnDate = () => {
 
 
   const getGenres = (genreIds) => {
-    console.log(genreIds);
     for(var i=0; i<2; i++) {
 
       return <li className="genres-li">{genreCypher[genreIds[i]]}</li>
@@ -84,22 +77,17 @@ const returnDate = () => {
   const favoriteClassName = `favorite-container`
 
   const handleFavoriteClick = async (boolean) => {
-    console.log("favorite clicked");
-    console.log(user);
     if (user) {
       let typeOf
       if (boolean === true) {
-        console.log("false remove");
 
         setIsFavorite(false)
         typeOf = "REMOVE"
       } else {
-        console.log("true add");
 
         setIsFavorite(true)
         typeOf = "ADD"
       }
-      console.log(content.id);
       await axios({
         method: 'PUT',
         data: {
@@ -110,11 +98,9 @@ const returnDate = () => {
         withCredentials: true,
         url: '/setfavorite'
       }).then((res) => {
-        console.log(res);
 
       })
     } else {
-      console.log("Please log in");
       alert("Please log in to use this feature")
       setLogInModal(true)
     }
@@ -123,20 +109,16 @@ const returnDate = () => {
   }
 
   const handleBookmarkClick = async (boolean) => {
-    console.log("bookmark clicked");
-    console.log(user);
+
     if (user) {
       let typeOf
       if (boolean === true) {
-        console.log("It's true, turn to false bookmark");
         setIsBookmarked(false)
         typeOf = "REMOVE"
       } else {
-        console.log("It's false, change to true bookmark");
         setIsBookmarked(true)
         typeOf = "ADD"
       }
-      console.log(content.id);
       await axios({
         method: 'PUT',
         data: {
@@ -147,11 +129,9 @@ const returnDate = () => {
         withCredentials: true,
         url: '/setbookmark'
       }).then((res) => {
-        console.log(res);
 
       })
     } else {
-      console.log("Please log in");
       alert("Please log in to use this feature")
 
       setLogInModal(true)
@@ -178,16 +158,28 @@ const returnDate = () => {
       <div className="containerflex">
       {content ?       <img src={`https://image.tmdb.org/t/p/original${content.poster_path}`} className="modal-img"/> : null}
       <div style={{display: "flex", flexDirection: "column", marginLeft: "10px"}}>
-        <div style={{display: "flex"}}>
+        <div style={{display: "flex", paddingBottom: "5px"}}>
           <div style={{display: "flex", flexDirection: "column"}}>
           <div style={{fontSize: "24px"}} className="genres-title">Geres:</div>
           </div>
           <div style={{display: "flex", flexWrap: "wrap"}}>
             { content ?
               content.genre_ids ?
-              content.genre_ids.map((id) =>  (<div className="genres-li" key={id+content.title+1}>{genreCypher[id]}</div>))
+              content.genre_ids.map((id) =>  {
+                const idCheck = id.toString()
+                if (selectedGenres != null && selectedGenres != undefined) {
+                  if (selectedGenres.includes(idCheck)) {
+                    return (<div className="genres-li highlight-genres" key={id+content.title+1}>{genreCypher[id]}</div>)
+                  } else {
+                    return (<div className="genres-li" key={id+content.title+1}>{genreCypher[id]}</div>)
+                  }
+                } else {
+                  return (<div className="genres-li" key={id+content.title+1}>{genreCypher[id]}</div>)
+
+                }
+              })
               :
-              content.genres.map((id) =>  (<div className="genres-li" key={id+content.title}>{id.name}</div>))
+              content.genres.map((id) => (<div className="genres-li" key={id+content.title}>{id.name}</div>))
               :
               null
             }
@@ -200,10 +192,25 @@ const returnDate = () => {
           <h5>Included in Subscription on:</h5>
           <div style={{display: "flex", flexWrap: "wrap"}}>
           { availabilityData != false ? availabilityData == undefined ? <div className="not-available">Not Available Via Subscription</div> :
-            availabilityData.map((item) =>
-            <a href={item.url} style={{marginLeft:"15px"}} target="_blank" className="serviceImg">
-              <img src={item.icon} />
-            </a>
+            availabilityData.map((item) => {
+              let classnames = null
+
+              if (user.services != undefined && user.services != null) {
+                console.log("have user", user);
+                if (user.services.includes(item.display_name)){
+                  classnames = "serviceImg highlight-genres"
+                } else {
+                  classnames = "serviceImg"
+                }
+              } else {
+                classnames = "serviceImg"
+              }
+              return (
+                <a href={item.url} style={{marginLeft:"15px"}} target="_blank" className={classnames}>
+                  <img src={item.icon} />
+                </a>
+              )
+            }
           )
           :
           <div style={{display: "flex"}}>
@@ -224,32 +231,27 @@ const returnDate = () => {
     </div>
   )
   const handleClick = () => {
-    console.log("card clicked");
     if (movieModal == false){
       setMovieModal(true)
     }
     async function getApi() {
-      console.log("running api");
       const axiosRes = await axios.post("/getMovieAvailability", {
         movieId: content.id
       }).then(response => {
-        console.log(response.data.response.collection.locations)
         setAvailabilityData(response.data.response.collection.locations)
       });
     }
-    // getApi()
+    getApi()
   }
 
 const modal = () => (
   <Modal
     open={movieModal}
     onClose={(e) => {
-    console.log(e);
     }}
     aria-labelledby="simple-modal-title"
     aria-describedby="simple-modal-description"
   >
-    {console.log("movie modal")}
     {movieModalBody()}
   </Modal>
 )
@@ -257,13 +259,11 @@ const LogInModal = () => (
   <Modal
     open={logInModal}
     onClose={(e) => {
-    console.log(e);
     setLogInModal(false)
     }}
     aria-labelledby="simple-modal-title"
     aria-describedby="simple-modal-description"
   >
-    {console.log("please log in modal")}
     {logInModalBody()}
   </Modal>
 )

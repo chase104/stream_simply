@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
 
-const SearchResultsDisplay = ({results, searchState}) => {
+const SearchResultsDisplay = ({results, searchState, highlightGenres}) => {
 
   const [filterState, setFilterState] = useState(false)
   const [user, setUser] = useState(false)
@@ -19,6 +19,8 @@ const SearchResultsDisplay = ({results, searchState}) => {
     }
   }, searchState)
 
+console.log(highlightGenres);
+console.log(searchState);
   const getUserInfo = () => {
     try{
       console.log("axios user request");
@@ -62,7 +64,7 @@ const SearchResultsDisplay = ({results, searchState}) => {
                   if(itemm.poster_path)
                   return(
                     <Grid key={itemm.id} item xs={2}>
-                      <Card number={8} search={true} content={itemm} user={user}/>
+                      <Card number={8} search={true} content={itemm} user={user} selectedGenres={highlightGenres}/>
                     </Grid>
                   )
                 }

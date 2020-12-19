@@ -1,10 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import CarouselOne from './CarouselOne'
 import CarouselTwo from './CarouselTwo'
 import CarouselThree from './CarouselThree'
 import CarouselFour from './CarouselFour'
 import CarouselFive from './CarouselFive'
+import { PrimaryContext } from '../../PrimaryContext'
 
 
 
@@ -13,6 +14,7 @@ import CarouselFive from './CarouselFive'
 
 const CarouselsHolder = () => {
 
+  const context = useContext(PrimaryContext)
 
 const [user, setUser] = useState(false)
 const [dataReturn, setDataReturn] = useState(false)
@@ -20,7 +22,6 @@ const [dataReturn, setDataReturn] = useState(false)
   const getUserInfo = () => {
     try{
       console.log("axios user request");
-
       axios({
         method: "GET",
         withCredentials: true,
@@ -28,7 +29,6 @@ const [dataReturn, setDataReturn] = useState(false)
       }).then( (res) => {
         console.log(res.data);
           console.log(" rerender");
-          setUser(null)
           setUser(res.data)
           if (res.data === false){
             console.log("it's false");
@@ -45,8 +45,9 @@ const [dataReturn, setDataReturn] = useState(false)
     }
   }
   useEffect(() => {
+    console.log("rerendering from holder");
       getUserInfo()
-    }, [])
+    }, [context.rerender])
 
   const genreCypher = {
     28: "Action",
