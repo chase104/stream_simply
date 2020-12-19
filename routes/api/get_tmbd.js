@@ -15,13 +15,13 @@ router.post("/makeSearch", (req, res) => {
   if (req.body.data == undefined || null) {
      options = {
       method: "GET",
-      url: "https://api.themoviedb.org/3/movie/popular?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=2&include_adult=false"
+      url: `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=2&include_adult=false`
     }
   } else {
     console.log("it's valid");
      options = {
       method: "GET",
-      url: `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.data}&page=1&include_adult=false`
+      url: `https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&language=en-US&query=${req.body.data}&page=1&include_adult=false`
     }
   }
 
@@ -52,18 +52,30 @@ router.post("/makeCategorySearch", async (req, res) => {
         typeOf: "previous&genres",
         genres: req.body.genres,
         years: req.body.years,
-        url: `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.previous_search}&page=1&include_adult=false`
+        url: `https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&language=en-US&query=${req.body.previous_search}&page=1&include_adult=false`
       }
     } else  {
       let addGenres = req.body.genres.join('|')
+      console.log("addgenres", addGenres);
       console.log("include previous no genres");
-      options = {
-        method: "GET",
-        typeOf: "previous&nogenres",
-        years: req.body.years,
-        genres: req.body.genres,
-        url: `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.previous_search}&page=1&with_genres=${addGenres}`
+      if (addGenres != null || addGenres != undefined) {
+        options = {
+          method: "GET",
+          typeOf: "previous&nogenres",
+          years: req.body.years,
+          genres: req.body.genres,
+          url: `https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&language=en-US&query=${req.body.previous_search}&page=1&with_genres=${addGenres}`
+        }
+      } else {
+        options = {
+          method: "GET",
+          typeOf: "previous&nogenres",
+          years: req.body.years,
+          genres: req.body.genres,
+          url: `https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&language=en-US&query=${req.body.previous_search}&page=1`
+        }
       }
+
     }
   } else {
     if (req.body.include_genres) {
@@ -76,7 +88,7 @@ router.post("/makeCategorySearch", async (req, res) => {
         typeOf: "no-previous&yes-genres",
         years: req.body.years,
         addGenres: addGenres,
-        url: `https://api.themoviedb.org/3/discover/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${addGenres}`
+        url: `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${addGenres}`
       }
     } else  {
       console.log("no-previous&no-genres");
@@ -86,11 +98,17 @@ router.post("/makeCategorySearch", async (req, res) => {
         addGenres: addGenres,
         years: req.body.years,
         typeOf: "no-previous&no-genres",
-        url: `https://api.themoviedb.org/3/discover/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${addGenres}`
+        url: `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${addGenres}`
       }
     }
   }
-      if (options.typeOf === "previous&genres") {
+
+
+
+
+
+
+  if (options.typeOf === "previous&genres") {
         console.log("previous&genres");
         console.log(options.genres);
           const callLoop = async () => {
@@ -104,7 +122,7 @@ router.post("/makeCategorySearch", async (req, res) => {
               }
             }
                 for (var i=1; moviess.length < 20 && i < 10; i++) {
-                  options.url = `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.previous_search}&page=${i}&include_adult=false`
+                  options.url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&language=en-US&query=${req.body.previous_search}&page=${i}&include_adult=false`
                   console.log(i)
                   console.log(options)
                   var counter = 0
@@ -143,11 +161,13 @@ router.post("/makeCategorySearch", async (req, res) => {
               console.log("null send");
             } else {
               console.log("sending");
+              console.log(options);
+              console.log("movies", movies);
               res.send(movies)
             }
           }
               for (var i=1; moviess.length < 20 && i < 15; i++) {
-                options.url = `https://api.themoviedb.org/3/search/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&query=${req.body.previous_search}&page=${i}&include_adult=false`
+                options.url = `https://api.themoviedb.org/3/search/movie?api_key=${process.env.TMDB_KEY}&language=en-US&query=${req.body.previous_search}&page=${i}&include_adult=false`
                 console.log(i)
                 console.log(options)
                 var counter = 0
@@ -159,7 +179,12 @@ router.post("/makeCategorySearch", async (req, res) => {
                       const d = new Date(item.release_date)
                       const date = d.getFullYear()
                       const dateMatch = (date > options.years[0] && date < options.years[1]) ? true : false;
-                      let genreMatch = item.genre_ids.some(r=> options.genres.indexOf(r) >= 0)
+                      let genreMatch
+                      if (options.genres.length > 0) {
+                         genreMatch = item.genre_ids.some(r=> options.genres.indexOf(r) >= 0)
+                      } else {
+                         genreMatch = true
+                      }
                       if (dateMatch && item.id != 265147) {
                         if (genreMatch){
                           moviess.push(item)
@@ -205,7 +230,7 @@ router.post("/makeCategorySearch", async (req, res) => {
 
               for (var i=1; moviess.length < 20 && i < 15; i++) {
                 console.log(i)
-                options.url = `https://api.themoviedb.org/3/discover/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${i}&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${options.addGenres}`
+                options.url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${i}&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${options.addGenres}`
                 console.log(options)
                 var counter = 0
                  request(options, function(error, response, body){
@@ -255,7 +280,7 @@ router.post("/makeCategorySearch", async (req, res) => {
 
             for (var i=1; moviess.length < 20 && i < 15; i++) {
               console.log(i)
-              options.url = `https://api.themoviedb.org/3/discover/movie?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${i}&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${options.addGenres}`
+              options.url = `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.TMDB_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${i}&release_date.gte=${gteDate}&release_date.lte=${lteDate}&with_genres=${options.addGenres}`
               console.log(options)
               var counter = 0
                request(options, function(error, response, body){
@@ -300,7 +325,7 @@ router.post("/makeCategorySearch", async (req, res) => {
 router.get("/carousel_one", (req, res) => {
   const options = {
     method: "GET",
-    url: "https://api.themoviedb.org/3/movie/popular?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=2"
+    url: `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=2`
   }
   request(options, function(error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -312,7 +337,7 @@ router.get("/carousel_one", (req, res) => {
 router.get("/carousel_two", (req, res) => {
   const options = {
     method: "GET",
-    url: "https://api.themoviedb.org/3/movie/now_playing?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=2"
+    url: `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.TMDB_KEY}&language=en-US&page=2`
   }
   request(options, function(error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -324,7 +349,7 @@ router.get("/carousel_two", (req, res) => {
 router.get("/carousel_three", (req, res) => {
   const options = {
     method: "GET",
-    url: "https://api.themoviedb.org/3/movie/popular?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=2&with_genres=28"
+    url: `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.TMDB_KEY}&language=en-US&page=2&with_genres=28`
   }
   request(options, function(error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -336,7 +361,7 @@ router.get("/carousel_three", (req, res) => {
 router.get("/carousel_four", (req, res) => {
   const options = {
     method: "GET",
-    url: "https://api.themoviedb.org/3/movie/top_rated?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=1"
+    url: `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
   }
   request(options, function(error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -347,7 +372,7 @@ router.get("/carousel_four", (req, res) => {
 router.get("/carousel_five", (req, res) => {
   const options = {
     method: "GET",
-    url: "https://api.themoviedb.org/3/trending/movie/week?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US&page=1"
+    url: `https://api.themoviedb.org/3/trending/movie/week?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
   }
   request(options, function(error, response, body) {
     if (!error && response.statusCode == 200) {

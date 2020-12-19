@@ -115,7 +115,7 @@ app.post("/getMovieAvailability", function (req, res) {
     url: 'https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup',
     params: {source_id: req.body.movieId, source: 'tmdb', country: 'us'},
     headers: {
-    'x-rapidapi-key': '12e1e06344mshbbfb57c2be00fdfp16c653jsnc7ee0c0aab1d',
+    'x-rapidapi-key': process.env.REACT_APP_UTELLY_API_KEY,
     'x-rapidapi-host': 'utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com'
   }
 }
@@ -153,7 +153,7 @@ app.post("/signup", async function(req, res) {
     exists: false,
     newUser: newUser
   });
-  client.end();
+
 });
 
 app.put("/servicesupdate", async function(req, res){
@@ -284,7 +284,7 @@ app.get("/getFavorites", function (req, res) {
   for (var i=0; i<favoritesArr.length; i++){
     let options = {
       method: "GET",
-      url: `https://api.themoviedb.org/3/movie/${favoritesArr[i]}?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US`
+      url: `https://api.themoviedb.org/3/movie/${favoritesArr[i]}?api_key=${process.env.TMDB_KEY}&language=en-US`
     }
     console.log(options);
     request(options, function(error, response, body) {
@@ -316,7 +316,7 @@ app.get("/getWatchlist", function (req, res) {
   for (var i=0; i<watchlistArr.length; i++){
     let options = {
       method: "GET",
-      url: `https://api.themoviedb.org/3/movie/${watchlistArr[i]}?api_key=4a0f0029d366912b50a509d879bc1675&language=en-US`
+      url: `https://api.themoviedb.org/3/movie/${watchlistArr[i]}?api_key=${process.env.TMDB_KEY}&language=en-US`
     }
     console.log(options);
     request(options, function(error, response, body) {

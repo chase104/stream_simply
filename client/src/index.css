@@ -16,6 +16,70 @@ code {
 .MuiAppBar-colorPrimary {
   background-color: rgb(24,27,36) !important;
 }
+.full-app{
+
+}
+.content-wrap{
+
+}
+.main-footer{
+
+}
+.footer-title{
+  color: #cb861a
+}
+.footer-link{
+ color: #ffdb84;
+ padding: 4px;
+ border-radius: 5px;
+}
+.MuiSlider-rail{
+  height: 4px !important;
+}
+.MuiSlider-track{
+  height: 4px !important;
+}
+.MuiSlider-valueLabel{
+  width: 2vw !important;
+  height: 2vw !important;
+}
+.footer-hover:hover{
+  background-color: 	#27383e;
+}
+.card-genre-match{
+  border: 3px solid green;
+border-radius: 5px;
+padding: 4px;
+}
+.blinker-icon{
+  color: green;
+  width: 2vw !important;
+  height: 2vw !important;
+}
+.available-color{
+  color: green;
+  font-size:  2rem
+}
+.blinker-holder{
+  display: flex;
+  flex-direction: row;
+  align-items: center
+}
+.column-holder{
+  display: flex;
+  flex-direction: row;
+  justify-content: center
+}
+.footer-column{
+  margin: 0px 32px;
+  display: flex;
+  flex-direction: column;
+  font-size: 24px
+}
+
+.list-unstyled{
+  margin-top: 0px;
+}
 .check-circle{
   color: #66b8aa;
 }
@@ -30,7 +94,8 @@ code {
   padding: 6px 16px !important;
 }
 .appbar-button:hover{
-  filter: brightness(105%)
+  background-color:  #47506b !important
+
 }
 .edit-personal-button:hover{
   filter: brightness(105%)
@@ -49,7 +114,12 @@ code {
     font-size: 1.28rem;
 
 }
-
+.quicksand-font{
+  font-family: Quicksand, sans-serif
+}
+.yellow-font{
+  color: 	#cb861a !important;
+}
 .service-button{
   padding: 10px;
   background-color: grey;
@@ -278,6 +348,9 @@ code {
   margin-bottom: 5px !important;
   margin-left: 0px !important;
 }
+.sidebar-button:hover{
+  background:   #667399 !important;
+}
 
 .title-header{
     display: flex;
@@ -326,6 +399,7 @@ code {
   align-items: center;
   justify-content: center;
 }
+
 .inner-holder {
   display: flex;
   align-items: center;
@@ -594,7 +668,7 @@ code {
   cursor: pointer;
 }
 .loading-card{
-  background-color: green !important;
+  background-color: #666666 !important;
 }
 .card-valid{
   background-size: 100% 100%;
@@ -629,7 +703,7 @@ code {
 }
 .closed-menu:hover{
   cursor: pointer;
-  filter: brightness(105%) !important;
+  filter: brightness(120%) !important;
 
 }
 .expand-icon{
@@ -687,6 +761,11 @@ margin-top: 10px;
 .genre-button:hover{
   filter: brightness(105%);
   cursor: pointer
+}
+.highlight-genres{
+  border: 3px solid #cb861a;
+  border-radius: 5px;
+  padding: 0 5px
 }
 .search-submit-button{
   background-color: 	#ffdb84 !important;

@@ -1,24 +1,43 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState, useEffect} from 'react';
+import axios from 'axios'
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
-import Popcorn from '../../popcorn.png'
-import axios from 'axios'
+import {NavLink} from 'react-router-dom'
+import Grid from '@material-ui/core/Grid'
 
-// -----------------Material UI IMPORTS --------------------//
-import  Appbar from '@material-ui/core/Appbar'
-import  Toolbar from '@material-ui/core/Toolbar'
-import  MenuIcon from '@material-ui/icons/Menu'
-import  IconButton from '@material-ui/core/IconButton'
-import  Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import  Grid from '@material-ui/core/Grid'
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    width: '3rem',
+    height: '3rem'
+  },
+  toolbar:{
+    paddingLeft: '0px !important',
+  },
+  title:{
+    fontSize: '3vw',
+    textAlign: 'center',
+    marginTop: '5px',
+    marginBottom: '5px',
+    fontFamily: "'Quicksand', sans-serif"
+  }
+}));
 
-
-const Navbar = () => {
+export default function NavBar() {
+  const classes = useStyles();
 
   const [loggedIn, setLoggedIn] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+
 
   const getStatus = async () => {
     try{
@@ -27,7 +46,6 @@ const Navbar = () => {
         withCredentials: true,
         url: "/checkUser"
       }).then((res) => {
-        console.log(res);
         setLoggedIn(res.data.loggedIn)
       })
     }catch (err) {
@@ -37,47 +55,31 @@ const Navbar = () => {
 
   useEffect(() => {
       getStatus()
-      console.log(loggedIn);
-    })
+      console.log("logged in?", loggedIn);
+    }, [])
 
-  return(
+  return (
+    <div className={classes.root}>
+      <AppBar position="static" >
+        <Toolbar classname='toolbar'>
+          <Grid container justify="center">
+            <Grid item xs={4}>
+            </Grid>
+            <Grid item xs={4}>
+              <Typography variant="h3" className={classes.title} >
+                <NavLink to="/" style={{color: 'white', textAlign: 'center'}}>
+                Stream Simply
+                </NavLink>
+              </Typography>
+            </Grid>
+            <Grid item xs={4}>
+              {loggedIn != null ? loggedIn == true ? <SignedInLinks classes={classes} user={userInfo} /> : <SignedOutLinks /> : null  }
 
-    <Appbar>
-      <Toolbar>
-      <Grid type="container">
+            </Grid>
+          </Grid>
 
-        <IconButton  >
-          <AccountBoxIcon />
-        </IconButton>
-        <Typography variant="h6">
-        StreamSimply
-        </Typography>
-        </Grid>
-      </Toolbar>
-
-    </Appbar>
-
-
-
-
-
-
-    // <nav className="nav-wrapper">
-    //     <div className="logo-holder">
-    //       <Link to="/"><img src={Popcorn} className="popcorn-img left"/></Link>
-    //       <Link className="brand-logo title-logo primary-brand" to="/">Stream Simply</Link>
-    //     </div>
-    //     <div className="right links">
-    //     {loggedIn == true ?
-    //     <SignedInLinks /> :
-    //     loggedIn == false ?
-    //     <SignedOutLinks /> : null
-    //       }
-    //     </div>
-    //
-    // </nav>
-  )
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
-
-
-export default Navbar
