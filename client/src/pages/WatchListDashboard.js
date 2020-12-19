@@ -7,7 +7,7 @@ import axios from 'axios'
 
 
 
-const WatchListDashboard = () => {
+const WatchListDashboard = (props) => {
 
 
   const [watchList, setWatchList] = useState(false)
@@ -74,7 +74,7 @@ const WatchListDashboard = () => {
 
   return (
     <div>
-      <SearchBar />
+      <SearchBar props={props}/>
         <div className="favorites-holder">
           <div className="favorites-title" style={{fontFamily: "'Quicksand', sans-serif"}}>Watch List</div>
           <div className="favorite-card-holder" style={{marginBottom: "10vw"}}>

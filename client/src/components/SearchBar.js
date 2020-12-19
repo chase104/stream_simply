@@ -13,6 +13,7 @@ const SearchBar = ({props, searchFunction, searchState, fromSearch, searchFromSe
 
   useEffect(() => {
     console.log("this is SearchBar!");
+    console.log(props);
     console.log(props.history);
     console.log(props.history.location.pathname);
   }, [])

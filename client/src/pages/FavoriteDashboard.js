@@ -7,7 +7,7 @@ import Card from '../components/Card'
 
 
 
-const FavoriteDashboard = () => {
+const FavoriteDashboard = (props) => {
 
   const [favoriteMovies, setFavoriteMovies] = useState(false)
   const [user, setUser] = useState(false)
@@ -72,7 +72,7 @@ const watchListCheck = (movie) => {
 }
   return (
     <div>
-      <SearchBar />
+      <SearchBar props={props}/>
         <div className="favorites-holder">
           <div className="favorites-title" style={{fontFamily: "'Quicksand', sans-serif"}}>Favorited Movies</div>
           <div className="favorite-card-holder" style={{marginBottom: "10vw"}}>
