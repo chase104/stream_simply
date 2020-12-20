@@ -46,7 +46,7 @@ const SignIn = () => {
     return(
       <div className="container">
         <div className="container">
-          <form onSubmit={handleSubmit} className="signup">
+          <form onSubmit={handleSubmit} className="signup" autocomplete="off">
             <div className="title-header">
               <h5 className=" quicksand-font yellow-font" style={{fontSize: "3rem"}}>Login</h5>
               <i class="material-icons grey-text arrow-icon yellow-font">arrow_forward</i>

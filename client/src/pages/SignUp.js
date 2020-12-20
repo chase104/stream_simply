@@ -40,7 +40,7 @@ const SignUp = () => {
     return(
       <div className="container">
         <div className="container">
-          <form onSubmit={handleSubmit} className="signup">
+          <form onSubmit={handleSubmit} className="signup" autocomplete="off">
             <div className="title-header">
               <h5 className="black-text text-darken-1 quicksand-font yellow-font" style={{fontSize: "3rem"}}>Sign Up</h5>
               <i class="material-icons black-text arrow-icon yellow-font">arrow_forward</i>
