@@ -64,8 +64,8 @@ const SearchBar = ({props, searchFunction, searchState, fromSearch, searchFromSe
   }
   return (
     <div>
-      <form id="form-id" onSubmit={handleSearch}>
-        <div id="search-div" className="container">
+      <form id="form-id" autocomplete="off" onSubmit={handleSearch}>
+        <div id="search-div" className="container ">
           <div className="input-search-container">
             <input
               type="text"
