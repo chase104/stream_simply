@@ -20,14 +20,12 @@ initializePassport(
       "SELECT * FROM users WHERE email = $1",
       [email]
     );
-    console.log(findUser);
     return findUser;
   },
   async id => {
     const findUser = await client.query("SELECT * FROM users WHERE id = $1", [
       id
     ]);
-    console.log(findUser);
     return findUser;
   }
 );
@@ -60,16 +58,13 @@ app.use(passport.session());
 
 //check if user is logged in
 app.get('/checkUser', function(req,res) {
-  console.log("checking user");
   if(req.user) {
-    console.log(req.user);
     res.json({
       loggedIn: true,
       user: req.user
     })
 
   } else {
-    console.log("finished");
     res.json({
       loggedIn: false
     });
@@ -78,14 +73,10 @@ app.get('/checkUser', function(req,res) {
 
 //get user
 app.get("/getuser", (req, res) => {
-  console.log(req.body);
-  console.log(req.user);
   res.json(req.user);
 });
 
 app.get("/userinfo", (req, res) => {
-  console.log("req:", req);
-  console.log("user:", req.user);
   if (!req.user){
     res.json(false)
   } else {
@@ -109,7 +100,6 @@ app.use("/getTmbd", getTmbd)
 
 
 app.post("/getMovieAvailability", function (req, res) {
-  console.log("id?", req.body.movieId);
   const options = {
     method: "GET",
     url: 'https://utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com/idlookup',
@@ -119,9 +109,7 @@ app.post("/getMovieAvailability", function (req, res) {
     'x-rapidapi-host': 'utelly-tv-shows-and-movies-availability-v1.p.rapidapi.com'
   }
 }
-console.log("options set");
       axios.request(options).then(function (response) {
-      	console.log(response.data);
         res.json({
           response: response.data
         })
@@ -131,7 +119,6 @@ console.log("options set");
   })
 
 app.post("/search", function (req, res) {
-  console.log("running search");
   res.send("search results")
 })
 
@@ -140,9 +127,6 @@ app.use(express.static(path.join(__dirname, "client", "build")));
 
 //Get user db route
 app.post("/signup", async function(req, res) {
-  console.log("running registration");
-  console.log(req);
-  console.log(req.body);
   let hashedPassword = await bcrypt.hash(req.body.password, 10);
   const newUser = await client.query(
     "INSERT INTO users(firstname, lastname, email, password) VALUES($1, $2, $3, $4) RETURNING *",
@@ -157,9 +141,6 @@ app.post("/signup", async function(req, res) {
 });
 
 app.put("/servicesupdate", async function(req, res){
-  console.log("running services update...");
-  console.log(req.body);
-  console.log(req.user);
   const servicesUpdate = await client.query(
     "UPDATE users SET services = $1 WHERE id = $2", [req.body.services, req.user.id]
   )
@@ -168,18 +149,13 @@ app.put("/servicesupdate", async function(req, res){
   })
 })
 
-
-
-
 app.put("/personalupdate", async function(req, res){
-  console.log("running personal update...");
   const format = require('pg-format')
   const columnStatements = []
   const infoStatements = []
     for (var prop in req.body) {
       try {
         const sqlStatement = format('UPDATE users SET %I = %L where id = %L', `${prop}`, `${req.body[prop]}`, `${req.user.id}`)
-        console.log(sqlStatement);
          const query = await client.query(
            sqlStatement
          )
@@ -191,17 +167,12 @@ app.put("/personalupdate", async function(req, res){
       }
     }
 })
+
 app.put("/setfavorite", async function(req, res){
-  console.log("running favorite update...");
-  console.log(req.body);
-  console.log(req.user);
+
   const format = require('pg-format')
    if (req.body.typeOf == "ADD") {
-
-      console.log("have user");
-      console.log("type of ADD");
       const sqlStatement = format('UPDATE users SET %I = %s WHERE id = %L', "favorites", `favorites || '{${req.body.movieId}}'`, `${req.user.id}`)
-      console.log(sqlStatement);
       try {
         const favoritesUpdate = await client.query(
           sqlStatement
@@ -210,14 +181,10 @@ app.put("/setfavorite", async function(req, res){
           update: favoritesUpdate
         })
       } catch (error) {
-        console.log("have error");
         console.log(error);
       }
     } else if (req.body.typeOf == "REMOVE"){
-      console.log("have user");
-      console.log("type of REMOVE");
       const sqlStatement = format('UPDATE users SET %I = %s WHERE id = %L', "favorites", `array_remove(favorites, ${req.body.movieId})`, `${req.user.id}`)
-      console.log(sqlStatement);
       try {
         const favoritesUpdate = await client.query(
           sqlStatement
@@ -226,23 +193,15 @@ app.put("/setfavorite", async function(req, res){
           update: favoritesUpdate
         })
       } catch (error) {
-        console.log("have error");
         console.log(error);
       }
     }
 })
 
 app.put("/setbookmark", async function(req, res){
-  console.log("running bookmark update...");
-  console.log(req.body);
-  console.log(req.user);
   const format = require('pg-format')
    if (req.body.typeOf == "ADD") {
-
-      console.log("have user");
-      console.log("type of ADD");
       const sqlStatement = format('UPDATE users SET %I = %s WHERE id = %L', "watchlist", `watchlist || '{${req.body.movieId}}'`, `${req.user.id}`)
-      console.log(sqlStatement);
       try {
         const watchlistUpdate = await client.query(
           sqlStatement
@@ -251,14 +210,10 @@ app.put("/setbookmark", async function(req, res){
           update: watchlistUpdate
         })
       } catch (error) {
-        console.log("have error");
         console.log(error);
       }
     } else if (req.body.typeOf == "REMOVE"){
-      console.log("have user");
-      console.log("type of REMOVE");
       const sqlStatement = format('UPDATE users SET %I = %s WHERE id = %L', "watchlist", `array_remove(watchlist, ${req.body.movieId})`, `${req.user.id}`)
-      console.log(sqlStatement);
       try {
         const watchlistUpdate = await client.query(
           sqlStatement
@@ -267,7 +222,6 @@ app.put("/setbookmark", async function(req, res){
           update: watchlistUpdate
         })
       } catch (error) {
-        console.log("have error");
         console.log(error);
       }
     }
@@ -275,24 +229,19 @@ app.put("/setbookmark", async function(req, res){
 
 app.get("/getFavorites", function (req, res) {
   let favoritesArr = req.user.favorites
-  console.log("favorites: ", favoritesArr);
   let foundMoviesArr = []
   //reach out and get movies by ID
   let arrLength = favoritesArr.length
   let counter = 0
-  console.log("arrLength:", arrLength);
   for (var i=0; i<favoritesArr.length; i++){
     let options = {
       method: "GET",
       url: `https://api.themoviedb.org/3/movie/${favoritesArr[i]}?api_key=${process.env.TMDB_KEY}&language=en-US`
     }
-    console.log(options);
     request(options, function(error, response, body) {
       if (!error && response.statusCode == 200) {
-        console.log("body.id: ",body.id);
         foundMoviesArr.push(JSON.parse(body))
         counter++
-        console.log("counter:", counter, "arrLength", arrLength);
         if (counter === arrLength) {
           res.json({
             movies: foundMoviesArr,

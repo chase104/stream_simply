@@ -37,7 +37,7 @@ const Footer = () => {
           <div className="footer-column">
             <h5  className="footer-title">Other Apps By Chase</h5>
             <ul className="list-unstyled">
-            <li><a href="https://github.com/chase104" target="_blank" className="footer-link footer-hover">FreeFinance <ExitToAppIcon /></a></li>
+            <li><a href="https://github.com/chase104" target="_blank" className="no-decoration">FreeFinance <ExitToAppIcon /></a></li>
             <li><a href="https://github.com/chase104" target="_blank" className="footer-link footer-hover">A Kitchen's Cookbook <ExitToAppIcon /></a></li>
             <li><a href="https://github.com/chase104" target="_blank" className="footer-link footer-hover">CodingParadise <ExitToAppIcon /></a></li>
             <li><a href="https://github.com/chase104" target="_blank" className="footer-link footer-hover">Local Business Hub <ExitToAppIcon /></a></li>
