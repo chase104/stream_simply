@@ -195,12 +195,13 @@ const returnDate = () => {
             availabilityData.map((item) => {
               let classnames = null
 
-              if (user.services != undefined && user.services != null) {
-                console.log("have user", user);
-                if (user.services.includes(item.display_name)){
-                  classnames = "serviceImg highlight-genres"
-                } else {
-                  classnames = "serviceImg"
+              if (user != undefined) {
+                if (user.services != undefined && user.services != null) {
+                  if (user.services.includes(item.display_name)){
+                    classnames = "serviceImg highlight-genres"
+                  } else {
+                    classnames = "serviceImg"
+                  }
                 }
               } else {
                 classnames = "serviceImg"

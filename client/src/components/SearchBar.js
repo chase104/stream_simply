@@ -71,7 +71,7 @@ const SearchBar = ({props, searchFunction, searchState, fromSearch, searchFromSe
               type="text"
               className="black-text input-field main-search quicksand-font"
               id="dashboard-search"
-              placeholder="Search movie..."
+              placeholder="Search by title..."
               onChange={handleChange}
             />
 
@@ -91,11 +91,22 @@ const SearchBar = ({props, searchFunction, searchState, fromSearch, searchFromSe
           </div>
         </div>
       </form>
+      {
+        props.history.location.pathname == "/search" ?
+        null :
+        <div className="or-holder">
+          <div className="or-divider"></div>
+          <div className="quicksand-font" style={{color: "white", fontSize: "24px"}}>Or</div>
+          <div className="or-divider"></div>
+        </div>
+      }
+
       <div className="container browse-button-holder">
-      <Button size="large" style={{padding: "10px", backgroundColor: "#cb861a"}}
+      <Button size="large" style={{padding: "10px", backgroundColor: "#cb861a", borderRadius: "4px"}}
         className="quicksand-font"
         onClick={handleBrowseClick}
-        >Browse By Category
+        >
+        {props.history.location.pathname == "/search" ? "Reset Search" : "Search By Category"}
       </Button>
       </div>
     </div>

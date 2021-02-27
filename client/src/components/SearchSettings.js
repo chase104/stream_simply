@@ -21,7 +21,7 @@ const SearchSettings = ({searchData, passResults, previousSearch, searchBoolean,
   const searchFromBar = () => {
     context.changeTheme({
       ...context,
-      selectedGenres: selectedGenres 
+      selectedGenres: selectedGenres
     })
   }
   console.log(context);
@@ -202,7 +202,7 @@ const searchLabel = previousSearch ? `Include Last Search ("${searchContents ? s
 
       </FormControl>
       <FormControl style={{width: "100%", display: "flex", flexDirection: "row-reverse"}}>
-          <Button className="search-submit-button" onClick={submitSearch}>Submit</Button>
+          <Button className="search-submit-button" onClick={submitSearch}>Search</Button>
 
           <FormControlLabel
 

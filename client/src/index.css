@@ -115,7 +115,7 @@ padding: 4px;
 
 }
 .quicksand-font{
-  font-family: Quicksand, sans-serif
+  font-family: Quicksand, sans-serif !important;
 }
 .yellow-font{
   color: 	#cb861a !important;
@@ -832,7 +832,17 @@ justify-content: center;
 .save-color {
   margin-top: 5px;
 }
-
+.or-holder{
+  margin: 12px 0px;
+  display: flex;
+  justify-content: center;
+}
+.or-divider{
+  height: 1px;
+  width: 50px;
+  border: 1px solid white;
+  margin: auto 12px;
+}
 .close-icon {
   cursor: pointer;
 }
