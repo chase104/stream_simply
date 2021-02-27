@@ -180,7 +180,7 @@ const SideBar = ({user, rerender}) => {
 
     const personalBody = (
     <div className="modal-style">
-      <h2 id="simple-modal-title">Edit Personal Information</h2>
+      <h2 id="simple-modal-title" className="quicksand-font" style={{color: "white"}}>Edit Personal Information</h2>
       <div className="edit-holder">
       <div className="display-personal">
         {information.map((item) => {
@@ -294,7 +294,7 @@ const SideBar = ({user, rerender}) => {
   }
     const servicesBody = (
       <div className="modal-style services-modal-style">
-        <h2 id="simple-modal-title">Edit Your Services</h2>
+        <h2 id="simple-modal-title" className="quicksand-font" style={{color: "white"}}>Edit Your Services</h2>
         <div className="edit-holder">
           <Grid container spacing={2}>
             <Grid item xs={12} s={12}>

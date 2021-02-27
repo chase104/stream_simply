@@ -171,6 +171,14 @@ padding: 4px;
   margin-top: 8%;
   padding: 15px;
   background-color: #27383e;
+  max-height: 70vh;
+  overflow: auto;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.modal-style::-webkit-scrollbar {
+  display: none;
 }
 .carousel-title{
   color: white;
@@ -214,6 +222,7 @@ padding: 4px;
 .simple-modal-title{
   margin-top: 0px;
   font-size: 3rem;
+  color: white;
 }
 .favorite-container{
   display: flex;
@@ -265,11 +274,13 @@ padding: 4px;
 }
 .edit-labels{
   margin-left: 10px;
-  font-size: 1.5rem
+  font-size: 1.5rem;
+  color: white
 }
 .personal-icons{
   height: 100%;
     width: 2.5vw;
+    color: white;
 }
 .personal-info-holder{
   display: flex;

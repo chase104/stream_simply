@@ -194,8 +194,10 @@ const returnDate = () => {
           { availabilityData != false ? availabilityData == undefined ? <div className="not-available">Not Available Via Subscription</div> :
             availabilityData.map((item) => {
               let classnames = null
-
-              if (user != undefined) {
+              console.log(user);
+              if (user == undefined || user == false) {
+                classnames = "serviceImg"
+              } else {
                 if (user.services != undefined && user.services != null) {
                   if (user.services.includes(item.display_name)){
                     classnames = "serviceImg highlight-genres"
@@ -203,9 +205,8 @@ const returnDate = () => {
                     classnames = "serviceImg"
                   }
                 }
-              } else {
-                classnames = "serviceImg"
               }
+              console.log(classnames);
               return (
                 <a href={item.url} style={{marginLeft:"15px"}} target="_blank" className={classnames}>
                   <img src={item.icon} />
