@@ -188,7 +188,7 @@ const returnDate = () => {
         <div className="divider"></div>
         <div style={{fontSize: "1.7rem"}}>{content ? content.overview : null}</div>
         <div className="divider"></div>
-        <div style={{display: "flex", flexDirection: "column", marginTop: "15px"}}>
+        <div className="available-holder">
           <h5>Included in Subscription on:</h5>
           <div style={{display: "flex", flexWrap: "wrap"}}>
           { availabilityData != false ? availabilityData == undefined ? <div className="not-available">Not Available Via Subscription</div> :

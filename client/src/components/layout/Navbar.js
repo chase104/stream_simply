@@ -11,7 +11,7 @@ import SignedInLinks from './SignedInLinks'
 import SignedOutLinks from './SignedOutLinks'
 import {NavLink} from 'react-router-dom'
 import Grid from '@material-ui/core/Grid'
-
+import popcorn from '../../assets/popcorn.png'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -29,6 +29,15 @@ const useStyles = makeStyles((theme) => ({
     marginTop: '5px',
     marginBottom: '5px',
     fontFamily: "'Quicksand', sans-serif"
+  },
+  titleHolder:{
+    display: "flex",
+    maxHeight: "10vh",
+    alignItems: "center",
+  },
+  popcornImage: {
+    margin: "4px 0px",
+    maxHeight: "inherit",
   }
 }));
 
@@ -66,15 +75,17 @@ export default function NavBar() {
             <Grid item xs={4}>
             </Grid>
             <Grid item xs={4}>
-              <Typography variant="h3" className={classes.title} >
-                <NavLink to="/" style={{color: 'white', textAlign: 'center'}}>
-                Stream Simply
-                </NavLink>
-              </Typography>
+              <NavLink to="/" style={{color: 'white', textAlign: 'center'}}>
+                <div className={classes.titleHolder}>
+                  <img className={classes.popcornImage} src={popcorn} />
+                  <Typography variant="h3" className={classes.title} >
+                    Stream Simply
+                  </Typography>
+                </div>
+              </NavLink>
             </Grid>
             <Grid item xs={4}>
               {loggedIn != null ? loggedIn == true ? <SignedInLinks classes={classes} user={userInfo} /> : <SignedOutLinks /> : null  }
-
             </Grid>
           </Grid>
 

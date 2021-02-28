@@ -84,7 +84,6 @@ padding: 4px;
   color: #66b8aa;
 }
 .appbar-button{
-  background-color: rgb(24,27,36) !important;
   border: 0px !important;
   font-family: 'Quicksand', sans-serif !important;
   color: white !important;
@@ -92,10 +91,20 @@ padding: 4px;
   font-size: 100% !important;
   box-shadow: none !important;
   padding: 6px 16px !important;
+  height: -webkit-fill-available;
 }
 .appbar-button:hover{
   background-color:  #47506b !important
 
+}
+.available-holder{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+.available-holder a{
+  display: flex;
+  align-items: center
 }
 .edit-personal-button:hover{
   filter: brightness(105%)
@@ -406,6 +415,7 @@ padding: 4px;
 }
 
 .vertical-align-holder {
+  background-color: rgb(24,27,36) !important;
   display: flex;
   align-items: center;
   justify-content: center;
